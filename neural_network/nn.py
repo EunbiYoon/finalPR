@@ -8,14 +8,14 @@ from propagation import backpropagation_vectorized, forward_propagation, cost_fu
 import debug_text
 
 # === Setting ===
-DATASET_NAME = "parkinsons"  # Name of the dataset
+DATASET_NAME = "digits"  # Name of the dataset
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
 BATCH_SIZE = 64
-ALPHA=0.5
+ALPHA=0.1
 # === Stopping Criteria ===
-STOP_CRITERIA = "J"
-M_SIZE = 3000000000000000            
+STOP_CRITERIA = "M"
+M_SIZE = 50            
 J_SIZE=0.1
 
 # === FILE_NAME Setting ===

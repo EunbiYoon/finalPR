@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import re
 
 DATASET_NAME="digits"
+ITERATION_COUNT=21
 
 # separate attribute and class in data
 def attribute_class(data):
@@ -38,8 +39,6 @@ def load_data():
     data_file=data_file.drop(index=0)
     data_file=data_file.reset_index(drop=True)
 
-    print(data_file)
- 
     return data_file
 
 # Prepared train_data, test_data
@@ -65,10 +64,12 @@ def shuffle_normalization(data_file):
     print("--> Separated attribute and class in each test_data and train_data...")
 
     # normalize only attribute
+    print("normalization train data")
     train_attribute_normalized=normalization_forumla(train_attribute)
+    print("normalization test data")
     test_attribute_normalized=normalization_forumla(test_attribute)
-    train_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_train_attribute.xlsx')
-    test_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_test_attribute.xlsx')
+    train_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_trainatt.xlsx')
+    test_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_testatt.xlsx')
     # message
     print("--> Normalized attributes_data in both test_data and train_data...")
 
@@ -144,9 +145,27 @@ def calculate_accuracy(actual_series, predicted_seires):
         # return accuracy value
         return accuracy_value
 
+def calculate_f1score(actual_series, predicted_series):
+    actual = np.array(actual_series.tolist(), dtype=int)
+    predicted = np.array(predicted_series.tolist(), dtype=int)
+
+    # TP, FP, FN 정의
+    TP = np.sum((actual == 1) & (predicted == 1))
+    FP = np.sum((actual == 0) & (predicted == 1))
+    FN = np.sum((actual == 1) & (predicted == 0))
+
+    # Precision, Recall 계산
+    precision = TP / (TP + FP) if (TP + FP) > 0 else 0
+    recall = TP / (TP + FN) if (TP + FN) > 0 else 0
+
+    # F1 Score 계산
+    if precision + recall == 0:
+        return 0.0
+    f1 = 2 * precision * recall / (precision + recall)
+    return f1
                                         
 # KNN algorithm using Euclidian Matrix
-def knn_algorithm(k, test_euclidean, predicted_class, actual_class, data_info, try_count, accuracy_table):
+def knn_algorithm(k, test_euclidean, predicted_class, actual_class, data_info, try_count, accuracy_f1_table):
     predicted_table=pd.DataFrame()
     # Iterate over k values : 1~51 odd number
     for k_num in range(1,k+1,2): 
@@ -169,18 +188,22 @@ def knn_algorithm(k, test_euclidean, predicted_class, actual_class, data_info, t
         
         # accuracy check
         accuracy_value=calculate_accuracy(actual_class, predicted_table["k="+str(k_num)])
-        accuracy_table.at["try="+str(try_count),"accuracy (k="+str(k_num)+")"]=accuracy_value
-        print("\n*** Accuracy table ==> "+str(data_info)+" dataset ***")
-        print(accuracy_table)
-    return accuracy_table
+        f1score_value=calculate_f1score(actual_class, predicted_table["k="+str(k_num)])
+        accuracy_f1_table.at["try="+str(try_count),"accuracy (k="+str(k_num)+")"]=accuracy_value
+        accuracy_f1_table.at["try="+str(try_count),"f1score (k="+str(k_num)+")"]=f1score_value
+        print("\n*** Evaluation table ==> "+str(data_info)+" dataset ***")
+        print(accuracy_f1_table)
+    return accuracy_f1_table
 
 # calculate average and standard deviation of accuracy
-def accuracy_avg_std(accuracy_table, data_info):
+def accuracy_avg_std(accuracy_f1_table, data_info):
     # add mean and std bottom of the each column (same k, different try)
-    meanstd = accuracy_table.agg(['mean', 'std'])
+    meanstd = accuracy_f1_table.agg(['mean', 'std'])
     
-    # merge accuracy_table with meanstd table 
-    graph_table=pd.concat([accuracy_table,meanstd])
+    # merge accuracy_f1_table with std table 
+    graph_table=pd.concat([accuracy_f1_table, meanstd])
+    print("graph_table")
+    print(graph_table)
 
     # message
     print("\n--> Calcuate mean and standard deviation of each k value : "+str(data_info)+"...")
@@ -189,7 +212,10 @@ def accuracy_avg_std(accuracy_table, data_info):
 
 
 # Graph created with k
-def draw_graph(accuracy_table, title):
+def draw_graph(accuracy_f1_table, title):
+    # get only accuracy_table
+    accuracy_table=accuracy_f1_table[[col for col in accuracy_f1_table.columns if "accuracy" in col]]
+
     # Extract integer k values from the column names using regex
     k_values = []
     for col in accuracy_table.columns:
@@ -200,8 +226,8 @@ def draw_graph(accuracy_table, title):
             k_values.append(col)  # if the pattern is not found, keep the original name
 
     # Get mean and std rows from the DataFrame
-    mean_values = accuracy_table.loc['mean']
-    std_values =accuracy_table.loc['std']
+    mean_values = accuracy_table.loc['mean'].tolist()
+    std_values =accuracy_table.loc['std'].tolist()
 
     # plot the data
     plt.figure(figsize=(6, 4))
@@ -216,10 +242,6 @@ def draw_graph(accuracy_table, title):
     # formatting 
     plt.xlabel("(Value of k)")
     plt.ylabel("(Accuracy over "+title+" data")
-    if title=="training":
-        plt.title("[Figure 1]")
-    if title=="testing":
-        plt.title("[Figure 2]")
     plt.savefig(f'evaluation/{DATASET_NAME}_'+title+".png",dpi=300, bbox_inches='tight')
 
     # message
@@ -231,7 +253,7 @@ def main():
     test_accuracy=pd.DataFrame()
     data_file=load_data()
     # iterate try = 1 ~ 20 
-    for try_count in range(1,21):
+    for try_count in range(1,ITERATION_COUNT+1):
         # message
         print("\n================================================================================")
         print(f"[[ try = {try_count} ]]")
@@ -257,8 +279,8 @@ def main():
     draw_graph(test_graph_table,"testing")
 
     # draw table
-    train_graph_table.to_excel(f"evaluation/{DATASET_NAME}_train_graph_table.xlsx")
-    test_graph_table.to_excel(f"evaluation/{DATASET_NAME}_test_graph_table.xlsx")
+    train_graph_table.to_excel(f"evaluation/{DATASET_NAME}_train.xlsx")
+    test_graph_table.to_excel(f"evaluation/{DATASET_NAME}_test.xlsx")
 
     # message
     print("\n[[ Complete task! ]]\n")
