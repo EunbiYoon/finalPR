@@ -1,20 +1,49 @@
-# Step 1: Create virtual environment
-`python -m venv venv`
+## 🧪 Setup & Run Instructions
 
-# Step 2: Activate the virtual environment
-```# On macOS/Linux:
+### ✅ Step 1: Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+---
+
+### ✅ Step 2: Activate the Virtual Environment
+
+**On macOS/Linux:**
+
+```bash
 source venv/bin/activate
-## On Windows:
-venv\Scripts\activate```
+```
 
-# Step 3: Install Library
-```pip install -r requirements.txt```
+**On Windows:**
 
-# Step 4 : Run Script
-```run neural network
-cd neurnal_network
-python nn.py```
+```bash
+venv\Scripts\activate
+```
 
-## run the knn algorithm
-```cd knn_algorithm
-python knn.py```
+---
+
+### ✅ Step 3: Install Required Libraries
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### ✅ Step 4: Run Neural Network
+
+```bash
+cd neural_network
+python nn.py
+```
+
+---
+
+### ✅ Step 5: Run k-NN Algorithm
+
+```bash
+cd knn_algorithm
+python knn.py
+```
