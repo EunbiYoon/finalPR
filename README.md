@@ -47,3 +47,12 @@ python nn.py
 cd knn_algorithm
 python knn.py
 ```
+
+---
+
+### ✅ Step 6: Run Random Forest Algorithm
+
+```bash
+cd random_forest
+python tree.py
+```
