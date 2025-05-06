@@ -1,0 +1,111 @@
+{
+    "feature": "MDVP:Shimmer",
+    "threshold": 0.030233032258064514,
+    "children": {
+        "<=": {
+            "feature": "D2",
+            "threshold": 2.322319875,
+            "children": {
+                "<=": {
+                    "feature": "Jitter:DDP",
+                    "threshold": 0.005895849056603774,
+                    "children": {
+                        "<=": {
+                            "feature": "MDVP:RAP",
+                            "threshold": 0.001444864864864865,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Jitter(Abs)",
+                                    "threshold": 1.8833333333333335e-05,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "feature": "MDVP:Jitter(Abs)",
+                                    "threshold": 2.5789473684210532e-05,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        ">": {
+                            "feature": "DFA",
+                            "threshold": 0.7269274375,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:RAP",
+                                    "threshold": 0.0029837500000000003,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                ">": {
+                    "feature": "DFA",
+                    "threshold": 0.6977361162790697,
+                    "children": {
+                        "<=": {
+                            "feature": "MDVP:Jitter(%)",
+                            "threshold": 0.00633047619047619,
+                            "children": {
+                                "<=": {
+                                    "feature": "RPDE",
+                                    "threshold": 0.43892138461538466,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "feature": "DFA",
+                                    "threshold": 0.638394625,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        ">": {
+                            "label": 1
+                        }
+                    }
+                }
+            }
+        },
+        ">": {
+            "label": 1
+        }
+    }
+}

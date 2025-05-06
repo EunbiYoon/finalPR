@@ -1,0 +1,120 @@
+{
+    "feature": "MDVP:Fhi(Hz)",
+    "threshold": 206.28309677419355,
+    "children": {
+        "<=": {
+            "feature": "Shimmer:APQ3",
+            "threshold": 0.015678260869565218,
+            "children": {
+                "<=": {
+                    "feature": "D2",
+                    "threshold": 2.1950645283018866,
+                    "children": {
+                        "<=": {
+                            "feature": "DFA",
+                            "threshold": 0.7347489,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Flo(Hz)",
+                                    "threshold": 105.30506249999999,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "feature": "HNR",
+                                    "threshold": 24.07507142857143,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        ">": {
+                            "label": 1
+                        }
+                    }
+                },
+                ">": {
+                    "label": 1
+                }
+            }
+        },
+        ">": {
+            "feature": "Shimmer:APQ5",
+            "threshold": 0.019586349206349208,
+            "children": {
+                "<=": {
+                    "feature": "spread2",
+                    "threshold": 0.18121913333333334,
+                    "children": {
+                        "<=": {
+                            "label": 0
+                        },
+                        ">": {
+                            "feature": "spread2",
+                            "threshold": 0.24325783333333337,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Fhi(Hz)",
+                                    "threshold": 229.59618181818186,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                ">": {
+                    "feature": "DFA",
+                    "threshold": 0.7242686666666667,
+                    "children": {
+                        "<=": {
+                            "feature": "Shimmer:APQ3",
+                            "threshold": 0.033139999999999996,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Jitter(Abs)",
+                                    "threshold": 2.5e-05,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        },
+                        ">": {
+                            "label": 1
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

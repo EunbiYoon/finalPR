@@ -1,0 +1,111 @@
+{
+    "feature": "MDVP:Fo(Hz)",
+    "threshold": 159.80928387096773,
+    "children": {
+        "<=": {
+            "feature": "HNR",
+            "threshold": 21.62622619047619,
+            "children": {
+                "<=": {
+                    "label": 1
+                },
+                ">": {
+                    "feature": "Shimmer:APQ5",
+                    "threshold": 0.011570930232558138,
+                    "children": {
+                        "<=": {
+                            "feature": "NHR",
+                            "threshold": 0.013133793103448274,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Jitter(%)",
+                                    "threshold": 0.0037036363636363634,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        },
+                        ">": {
+                            "label": 1
+                        }
+                    }
+                }
+            }
+        },
+        ">": {
+            "feature": "spread1",
+            "threshold": -6.112770464788732,
+            "children": {
+                "<=": {
+                    "feature": "spread1",
+                    "threshold": -6.938538268292682,
+                    "children": {
+                        "<=": {
+                            "feature": "MDVP:Fhi(Hz)",
+                            "threshold": 229.57157142857142,
+                            "children": {
+                                "<=": {
+                                    "label": 0
+                                },
+                                ">": {
+                                    "label": 0
+                                }
+                            }
+                        },
+                        ">": {
+                            "feature": "DFA",
+                            "threshold": 0.69880725,
+                            "children": {
+                                "<=": {
+                                    "label": 0
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                ">": {
+                    "feature": "HNR",
+                    "threshold": 17.99196666666667,
+                    "children": {
+                        "<=": {
+                            "label": 1
+                        },
+                        ">": {
+                            "feature": "DFA",
+                            "threshold": 0.6978901874999999,
+                            "children": {
+                                "<=": {
+                                    "feature": "NHR",
+                                    "threshold": 0.027438571428571427,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
