@@ -12,7 +12,12 @@ def load_dataset():
     # Add target to the dataframe
     X['label'] = y
 
+    X = X.dropna(axis=1, how='all')                 # drop all-NaN columns
+    X = X.loc[:, ~(X == 0).all()]                  # drop all-0 columns
+
+
     return X  # Return DataFrame with features + label
+
 
 if __name__ == "__main__":
     df = load_dataset()

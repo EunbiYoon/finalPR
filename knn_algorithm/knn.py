@@ -4,39 +4,46 @@ import sklearn as sk
 import matplotlib.pyplot as plt
 import re
 
-DATASET_NAME="parkinsons"
-TOTAL_TRY=2
+DATASET_NAME="digits"
 
 # separate attribute and class in data
 def attribute_class(data):
     # separate attributes and class
     attribute_data=data.iloc[:,:-1]
     class_data=data.iloc[:, -1]
-    print("attribute")
-    print(attribute_data)
     return attribute_data, class_data
 
-def normalization_formula(data):
-    # 모든 값을 숫자로 변환하고, 문자열은 NaN 처리
-    data_numeric = data.apply(pd.to_numeric, errors='coerce')
-
-    # 그런 다음 NumPy 배열로 변환
-    data_numpy = data_numeric.to_numpy()
+def normalization_forumla(data):
+    data_numpy=data.to_numpy()
     normalized_numpy = (data_numpy - np.min(data_numpy, axis=0)) / (np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0))
+    
+    #check which one is the problem
+    diff = np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0)
+    print("Zero-variance columns (same value for all rows):", np.where(diff == 0))
+
+
     # change normalized data to pandas dataframe
     normalized_data = pd.DataFrame(normalized_numpy, columns=data.columns)
     return normalized_data
-    
-# Prepared train_data, test_data
-def process_dataset():
+
+
+def load_data():
     # read CSV file
     data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)
-    if DATASET_NAME=="parkinsons":
-        data_file = data_file.drop(index=0)
-        data_file = data_file.reset_index(drop=True)
-        data_file.columns = list(range(data_file.shape[1]))
-    print("load_dataset")
+    
+    # if you have columnn -> maybe recognize as string
+    data_file = data_file.apply(pd.to_numeric, errors='coerce')
+    
+    # attribute become another row -> need to remove
+    data_file=data_file.drop(index=0)
+    data_file=data_file.reset_index(drop=True)
+
     print(data_file)
+ 
+    return data_file
+
+# Prepared train_data, test_data
+def shuffle_normalization(data_file):
     # shuffle the DataFrame
     shuffled_data = sk.utils.shuffle(data_file)
 
@@ -58,10 +65,10 @@ def process_dataset():
     print("--> Separated attribute and class in each test_data and train_data...")
 
     # normalize only attribute
-    train_attribute_normalized=normalization_formula(train_attribute)
-    test_attribute_normalized=normalization_formula(test_attribute)
-    train_attribute_normalized.to_excel('train_attribute_normalized.xlsx')
-    test_attribute_normalized.to_excel('test_attribute_normalized.xlsx')
+    train_attribute_normalized=normalization_forumla(train_attribute)
+    test_attribute_normalized=normalization_forumla(test_attribute)
+    train_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_train_attribute.xlsx')
+    test_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_test_attribute.xlsx')
     # message
     print("--> Normalized attributes_data in both test_data and train_data...")
 
@@ -213,7 +220,7 @@ def draw_graph(accuracy_table, title):
         plt.title("[Figure 1]")
     if title=="testing":
         plt.title("[Figure 2]")
-    plt.savefig(title+".png",dpi=300, bbox_inches='tight')
+    plt.savefig(f'evaluation/{DATASET_NAME}_'+title+".png",dpi=300, bbox_inches='tight')
 
     # message
     print("--> saved graph image file : "+str(title)+"...")
@@ -222,15 +229,15 @@ def draw_graph(accuracy_table, title):
 def main():
     train_accuracy=pd.DataFrame()
     test_accuracy=pd.DataFrame()
-
+    data_file=load_data()
     # iterate try = 1 ~ 20 
-    for try_count in range(1,TOTAL_TRY):
+    for try_count in range(1,21):
         # message
         print("\n================================================================================")
         print(f"[[ try = {try_count} ]]")
         
         # preprocess dataset
-        train_attribute, train_class, test_attribute, test_class=process_dataset()
+        train_attribute, train_class, test_attribute, test_class=shuffle_normalization(data_file)
 
         # make euclidean matrix 
         train_euclidean=euclidean_matrix(train_attribute, train_attribute, "train")
@@ -250,8 +257,8 @@ def main():
     draw_graph(test_graph_table,"testing")
 
     # draw table
-    train_graph_table.to_excel("train_graph_table.xlsx")
-    test_graph_table.to_excel("test_graph_table.xlsx")
+    train_graph_table.to_excel(f"evaluation/{DATASET_NAME}_train_graph_table.xlsx")
+    test_graph_table.to_excel(f"evaluation/{DATASET_NAME}_test_graph_table.xlsx")
 
     # message
     print("\n[[ Complete task! ]]\n")
