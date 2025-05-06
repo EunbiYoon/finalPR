@@ -6,24 +6,23 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import OneHotEncoder
 from propagation import backpropagation_vectorized, forward_propagation, cost_function
 import debug_text
-import sys
-
-# Add the parent directory to sys.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-from datasets import load_digits  # Now you can import
 
 # === Setting ===
-SAVE_FILE = "digits"
-M_SIZE = 300            
-DEBUG_MODE = True        
-TRAIN_MODE = "mini-batch"    
+DATASET_NAME = "parkinsons"  # Name of the dataset
+DEBUG_MODE = True         # If True, run debugging routine at the end
+TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
 BATCH_SIZE = 64
+ALPHA=0.5
+# === Stopping Criteria ===
+STOP_CRITERIA = "J"
+M_SIZE = 3000000000000000            
+J_SIZE=0.1
 
 # === FILE_NAME Setting ===
 if TRAIN_MODE=="batch":
-    FILE_NAME = SAVE_FILE
+    FILE_NAME = DATASET_NAME
 elif TRAIN_MODE=="mini-batch":
-    FILE_NAME = SAVE_FILE+"_minibatch"
+    FILE_NAME = DATASET_NAME+"_minibatch"
 else:
     print("choose mini-batch or batch in TRAIN_MODE")
 
@@ -96,21 +95,32 @@ class NeuralNetwork:
 
             # Print intermediate results
             prefix = f"[Fold {fold_index}] " if fold_index is not None else ""
-            model_info = f"Hidden={self.layer_sizes[1:-1]}, λ={self.lambda_reg}, dataset={SAVE_FILE}"
+            model_info = f"Hidden={self.layer_sizes[1:-1]}, λ={self.lambda_reg}, dataset={DATASET_NAME}"
             if m_size % 10 == 0:
                 print(f"{prefix}Epoch {m_size} - Cost: {final_cost:.8f} - {model_info}")
 
             # Stop training if max m_size reached
-            if m_size == stopping_J:
-                print(f"{prefix}Stopping at m_size {m_size} - Final Cost J: {final_cost:.8f}")
-                # save for debug
-                self.last_A = A
-                self.last_Z = Z
-                self.finalized_D = finalized_D
-                self.final_cost = final_cost
-                break
+            if STOP_CRITERIA=="M":
+                if m_size == stopping_J:
+                    print(f"{prefix}Stopping at m_size {m_size} - Final Cost J: {final_cost:.8f}")
+                    # save for debug
+                    self.last_A = A
+                    self.last_Z = Z
+                    self.finalized_D = finalized_D
+                    self.final_cost = final_cost
+                    break
 
-            m_size += 1
+                m_size += 1
+            elif STOP_CRITERIA=="J":
+                if final_cost == stopping_J:
+                    print(f"{prefix}Stopping at m_size {m_size} - Final Cost J: {final_cost:.8f}")
+                    # save for debug
+                    self.last_A = A
+                    self.last_Z = Z
+                    self.finalized_D = finalized_D
+                    self.final_cost = final_cost
+                    break
+                m_size += 1
 
     def predict(self, X):
         # Return output layer activation as prediction
@@ -118,25 +128,35 @@ class NeuralNetwork:
         return A[-1]
 
 # === Load dataset and apply preprocessing ===
-def load_dataset(df):
+def load_dataset():
+    # Load dataset from CSV file
+    DATA_PATH = f"../datasets/{DATASET_NAME}.csv"
+    df = pd.read_csv(DATA_PATH)
+
+    # Use 'diagnosis' column if 'label' doesn't exist
+    if 'label' not in df.columns:
+        if 'Diagnosis' in df.columns:
+            df = df.rename(columns={'Diagnosis': 'label'})
+            print("🛈 Renamed 'Diagnosis' to 'label' for compatibility.")
+        else:
+            raise ValueError("Dataset must contain a 'label' or 'diagnosis' column.")
+
     y = df['label'].copy()
     X = df.drop(columns=['label'])
 
-    # Check the first row's value type per column
+    # Normalize numeric columns and one-hot encode categorical columns
     for col in X.columns:
-        first_value = X[col].iloc[0]
-        if isinstance(first_value, (int, float)):  # Numeric column
+        if col.endswith("_num"):
             mean = X[col].mean()
             std = X[col].std()
             X[col] = (X[col] - mean) / std
-        else:  # Categorical column
+        elif col.endswith("_cat"):
             encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
             encoded = encoder.fit_transform(X[[col]])
             encoded_df = pd.DataFrame(encoded, columns=[f"{col}_{i}" for i in range(encoded.shape[1])])
             X = pd.concat([X.drop(columns=[col]), encoded_df], axis=1)
 
     return X.values, y.values.reshape(-1, 1)
-
 
 # === Stratified K-Fold Split ===
 def stratified_k_fold_split(X, y, k=5):
@@ -175,7 +195,7 @@ def my_f1_score(y_true, y_pred):
     return 2 * (precision * recall) / (precision + recall)
 
 # === Plot Best Model's Learning Curve ===
-def plot_best_learning_curve(results, SAVE_FILE, save_folder):
+def plot_best_learning_curve(results, dataset_name, save_folder):
     # Identify model with lowest final cost
     best_key = min(results, key=lambda k: results[k]['model'].cost_history[-1])
     best_info = results[best_key]
@@ -199,7 +219,7 @@ def plot_best_learning_curve(results, SAVE_FILE, save_folder):
 
     plt.figure()
     plt.plot(x_vals, y_vals, marker='o')
-    plt.title(f"{SAVE_FILE.capitalize()} BEST Learning Curve\n{info_text}", fontsize=11)
+    plt.title(f"{dataset_name.capitalize()} BEST Learning Curve\n{info_text}", fontsize=11)
     plt.xlabel("Training Instances (m x Train Set)")
     plt.ylabel("Cost (J)")
     plt.grid(True)
@@ -213,7 +233,7 @@ def plot_best_learning_curve(results, SAVE_FILE, save_folder):
 # === Save Metrics Table as Image ===
 def save_metrics_table(results_by_dataset, save_folder):
     os.makedirs("evaluation", exist_ok=True)
-    for SAVE_FILE, dataset_results in results_by_dataset.items():
+    for dataset_name, dataset_results in results_by_dataset.items():
         fig, ax = plt.subplots()
         ax.axis('off')
 
@@ -254,7 +274,7 @@ def save_metrics_table(results_by_dataset, save_folder):
         table.set_fontsize(11)
         table.scale(1.1, 1.6)
 
-        plt.title(f"{SAVE_FILE} Model Performance", fontweight='bold')
+        plt.title(f"{dataset_name} Model Performance", fontweight='bold')
         plt.tight_layout()
         filename = f"{save_folder}/{FILE_NAME.lower()}_table.png"
         plt.savefig(filename)
@@ -264,16 +284,16 @@ def save_metrics_table(results_by_dataset, save_folder):
 
 # === Neural Network Execution Wrapper ===
 def neural_network():
-    df=load_digits.load_dataset()
-    X, y = load_dataset(df)  # Load data and labels
+    X, y = load_dataset()  # Load data and labels
     folds = stratified_k_fold_split(X, y, k=5)  # Create 5-fold split
 
     lambda_reg_list = [0.1, 0.000001]  # List of λ values to test
     hidden_layers = [[32], [32, 16], [32, 16, 8], [32, 16, 8, 4]]  # Layer architectures to test
-    alpha = 0.1            # Learning rate
+    alpha = ALPHA            # Learning rate
     batch_size = BATCH_SIZE        # Size of mini-batches
     mode = TRAIN_MODE        # Training mode
 
+    dataset_name = DATASET_NAME
     results = {}  # Dictionary to collect evaluation metrics
 
     for h_idx, hidden in enumerate(hidden_layers):
@@ -291,13 +311,18 @@ def neural_network():
                     lambda_reg=lambda_reg
                 )
 
+                if STOP_CRITERIA=="M":
+                    stopping_J=M_SIZE
+                elif STOP_CRITERIA=="J":
+                    stopping_J=J_SIZE
+                        
                 # Train the model
                 model.fit(
                     X_train, y_train,
                     batch_size=batch_size,
                     fold_index=i,
                     mode=mode,
-                    stopping_J=M_SIZE
+                    stopping_J=stopping_J
                 )
 
                 # Make predictions
@@ -322,8 +347,8 @@ def neural_network():
                 }
 
     # Save performance table and learning curve
-    save_metrics_table({SAVE_FILE: results}, "evaluation")
-    plot_best_learning_curve(results, SAVE_FILE, "evaluation")
+    save_metrics_table({dataset_name: results}, "evaluation")
+    plot_best_learning_curve(results, dataset_name, "evaluation")
 
     # Run debugging output if flag is enabled
     if DEBUG_MODE == True:
