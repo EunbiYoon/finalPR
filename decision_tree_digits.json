@@ -1,9 +1,0 @@
-{
-    "feature": 0,
-    "children": {
-        "nan": {
-            "feature": 1,
-            "children": {}
-        }
-    }
-}
