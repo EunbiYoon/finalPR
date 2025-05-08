@@ -8,18 +8,24 @@ from propagation import backpropagation_vectorized, forward_propagation, cost_fu
 import debug_text
 
 # === Setting ===
-DATASET_NAME = "parkinsons_labeled"  # Name of the dataset
+DATASET_NAME = "digits"  # Name of the dataset
+K_FOLD_SIZE=10
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 ALPHA=0.1
+
 # === Stopping Criteria ===
 STOP_CRITERIA = "M"
-M_SIZE = 2000            
+M_SIZE = 50            
 J_SIZE=0.1
+
 # === Hyper Parameter ===
-LAMBDA_REG=[5, 1, 0.5, 0.1]
-HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]
+LAMBDA_REG=[0.1, 0.001, 0.000001]
+HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]
+# parkinsons
+# LAMBDA_REG=[5, 1, 0.5, 0.1]
+# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]
 
 # === FILE_NAME Setting ===
 if TRAIN_MODE=="batch":
@@ -29,18 +35,60 @@ elif TRAIN_MODE=="mini-batch":
 else:
     print("choose mini-batch or batch in TRAIN_MODE")
 
-# === info_text Setting ===
-def info_text(lambda_reg,hidden_layer,alpha,mode, batch_size):
-    info = f"{DATASET_NAME.capitalize()} BEST Learning Curve\n λ={lambda_reg},  Hidden={hidden_layer}, \nα={alpha}, Mode={mode}"
-    if mode == "mini-batch":
-        info += f", Batch Size={batch_size}\n"
-    else:
-        info += f"\n"
-    if STOP_CRITERIA=="M":
-        info += f"Stopping Criteria=m size [{M_SIZE}]"   
-    elif STOP_CRITERIA=="J":
-        info += f"Stopping Criteria=Final Cost(J)[{J_SIZE}]"   
-    return info
+
+# === Load dataset and apply preprocessing ===
+def load_dataset():
+    # Load dataset from CSV file
+    df = pd.read_csv(f"../datasets/{DATASET_NAME}.csv")
+    
+    # === parkinsons --> customize datset ===
+    if DATASET_NAME=="parkinsons":
+        # change last column as label
+        df.rename(columns={"Diagnosis": "label"}, inplace=True)
+
+
+    # Use 'diagnosis' column if 'label' doesn't exist
+    if 'label' not in df.columns:
+        if 'Diagnosis' in df.columns:
+            df = df.rename(columns={'Diagnosis': 'label'})
+            print("🛈 Renamed 'Diagnosis' to 'label' for compatibility.")
+        else:
+            raise ValueError("Dataset must contain a 'label' or 'diagnosis' column.")
+
+    y = df['label'].copy()
+    X = df.drop(columns=['label'])
+
+    # Normalize numeric columns and one-hot encode categorical columns
+    for col in X.columns:
+        if col.endswith("_num"):
+            mean = X[col].mean()
+            std = X[col].std()
+            X[col] = (X[col] - mean) / std
+        elif col.endswith("_cat"):
+            encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
+            encoded = encoder.fit_transform(X[[col]])
+            encoded_df = pd.DataFrame(encoded, columns=[f"{col}_{i}" for i in range(encoded.shape[1])])
+            X = pd.concat([X.drop(columns=[col]), encoded_df], axis=1)
+
+    return X.values, y.values.reshape(-1, 1)
+
+# === Stratified K-Fold Split ===
+def stratified_k_fold_split(X, y, k):
+    # Create stratified folds with equal class distribution
+    df = pd.DataFrame(X)
+    df['label'] = y.ravel()
+    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)
+    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)
+    folds = []
+    for i in range(k):
+        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]
+        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]
+        test_df = pd.concat([c0, c1]).sample(frac=1).reset_index(drop=True)
+        remaining_c0 = pd.concat([class_0.iloc[:int(len(class_0)*i/k)], class_0.iloc[int(len(class_0)*(i+1)/k):]])
+        remaining_c1 = pd.concat([class_1.iloc[:int(len(class_1)*i/k)], class_1.iloc[int(len(class_1)*(i+1)/k):]])
+        train_df = pd.concat([remaining_c0, remaining_c1]).sample(frac=1).reset_index(drop=True)
+        folds.append((train_df, test_df))
+    return folds
 
 # === Neural Network Class ===
 class NeuralNetwork:
@@ -148,55 +196,6 @@ class NeuralNetwork:
         A, _, _, _ = forward_propagation(self.weights, X)
         return A[-1]
 
-# === Load dataset and apply preprocessing ===
-def load_dataset():
-    # Load dataset from CSV file
-    DATA_PATH = f"../datasets/{DATASET_NAME}.csv"
-    df = pd.read_csv(DATA_PATH)
-
-    # Use 'diagnosis' column if 'label' doesn't exist
-    if 'label' not in df.columns:
-        if 'Diagnosis' in df.columns:
-            df = df.rename(columns={'Diagnosis': 'label'})
-            print("🛈 Renamed 'Diagnosis' to 'label' for compatibility.")
-        else:
-            raise ValueError("Dataset must contain a 'label' or 'diagnosis' column.")
-
-    y = df['label'].copy()
-    X = df.drop(columns=['label'])
-
-    # Normalize numeric columns and one-hot encode categorical columns
-    for col in X.columns:
-        if col.endswith("_num"):
-            mean = X[col].mean()
-            std = X[col].std()
-            X[col] = (X[col] - mean) / std
-        elif col.endswith("_cat"):
-            encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')
-            encoded = encoder.fit_transform(X[[col]])
-            encoded_df = pd.DataFrame(encoded, columns=[f"{col}_{i}" for i in range(encoded.shape[1])])
-            X = pd.concat([X.drop(columns=[col]), encoded_df], axis=1)
-
-    return X.values, y.values.reshape(-1, 1)
-
-# === Stratified K-Fold Split ===
-def stratified_k_fold_split(X, y, k=5):
-    # Create stratified folds with equal class distribution
-    df = pd.DataFrame(X)
-    df['label'] = y.ravel()
-    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)
-    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)
-    folds = []
-    for i in range(k):
-        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]
-        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]
-        test_df = pd.concat([c0, c1]).sample(frac=1).reset_index(drop=True)
-        remaining_c0 = pd.concat([class_0.iloc[:int(len(class_0)*i/k)], class_0.iloc[int(len(class_0)*(i+1)/k):]])
-        remaining_c1 = pd.concat([class_1.iloc[:int(len(class_1)*i/k)], class_1.iloc[int(len(class_1)*(i+1)/k):]])
-        train_df = pd.concat([remaining_c0, remaining_c1]).sample(frac=1).reset_index(drop=True)
-        folds.append((train_df, test_df))
-    return folds
-
 # === Accuracy Calculation ===
 def my_accuracy(y_true, y_pred):
     correct = np.sum(y_true == y_pred)
@@ -214,6 +213,19 @@ def my_f1_score(y_true, y_pred):
     if precision + recall == 0:
         return 0.0
     return 2 * (precision * recall) / (precision + recall)
+
+# === info_text Setting ===
+def info_text(lambda_reg,hidden_layer,alpha,mode, batch_size):
+    info = f"{DATASET_NAME.capitalize()} BEST Learning Curve\n λ={lambda_reg},  Hidden={hidden_layer}, \nα={alpha}, Mode={mode}"
+    if mode == "mini-batch":
+        info += f", Batch Size={batch_size}\n"
+    else:
+        info += f"\n"
+    if STOP_CRITERIA=="M":
+        info += f"Stopping Criteria=m size [{M_SIZE}]"   
+    elif STOP_CRITERIA=="J":
+        info += f"Stopping Criteria=Final Cost(J)[{J_SIZE}]"   
+    return info
 
 # === Plot Best Model's Learning Curve ===
 def plot_best_learning_curve(results, save_folder):
@@ -253,7 +265,7 @@ def plot_best_learning_curve(results, save_folder):
 def save_metrics_table(results, save_folder):
     os.makedirs("evaluation", exist_ok=True)
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(10, 8))
     ax.axis('off')
 
     # Determine table columns based on whether mini-batch was used
@@ -314,7 +326,7 @@ def save_metrics_table(results, save_folder):
 # === Neural Network Execution Wrapper ===
 def neural_network():
     X, y = load_dataset()  # Load data and labels
-    folds = stratified_k_fold_split(X, y, k=5)  # Create 5-fold split
+    folds = stratified_k_fold_split(X, y, k=K_FOLD_SIZE)  # Create 10-fold split
 
     lambda_reg_list = LAMBDA_REG  # List of λ values to test
     hidden_layers = HIDDEN_LAYER  # Layer architectures to test
