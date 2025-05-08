@@ -8,15 +8,18 @@ from propagation import backpropagation_vectorized, forward_propagation, cost_fu
 import debug_text
 
 # === Setting ===
-DATASET_NAME = "digits"  # Name of the dataset
+DATASET_NAME = "parkinsons_labeled"  # Name of the dataset
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 ALPHA=0.1
 # === Stopping Criteria ===
 STOP_CRITERIA = "M"
-M_SIZE = 50            
+M_SIZE = 2000            
 J_SIZE=0.1
+# === Hyper Parameter ===
+LAMBDA_REG=[5, 1, 0.5, 0.1]
+HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]
 
 # === FILE_NAME Setting ===
 if TRAIN_MODE=="batch":
@@ -25,6 +28,19 @@ elif TRAIN_MODE=="mini-batch":
     FILE_NAME = DATASET_NAME+"_minibatch"
 else:
     print("choose mini-batch or batch in TRAIN_MODE")
+
+# === info_text Setting ===
+def info_text(lambda_reg,hidden_layer,alpha,mode, batch_size):
+    info = f"{DATASET_NAME.capitalize()} BEST Learning Curve\n λ={lambda_reg},  Hidden={hidden_layer}, \nα={alpha}, Mode={mode}"
+    if mode == "mini-batch":
+        info += f", Batch Size={batch_size}\n"
+    else:
+        info += f"\n"
+    if STOP_CRITERIA=="M":
+        info += f"Stopping Criteria=m size [{M_SIZE}]"   
+    elif STOP_CRITERIA=="J":
+        info += f"Stopping Criteria=Final Cost(J)[{J_SIZE}]"   
+    return info
 
 # === Neural Network Class ===
 class NeuralNetwork:
@@ -90,6 +106,11 @@ class NeuralNetwork:
 
             # Compute cost on full dataset
             A, _, _, _ = forward_propagation(self.weights, X)
+            # print("A_final.shape:", A.shape)
+            # print("Y.shape:", y.shape)
+            # m = y.shape[0]
+            # if m == 0:
+            #     raise ValueError("Empty input: Y is empty, check your data pipeline or batch generation")
             _, final_cost = cost_function(A[-1], y, self.weights, self.lambda_reg)
             self.cost_history.append(final_cost)
 
@@ -195,7 +216,7 @@ def my_f1_score(y_true, y_pred):
     return 2 * (precision * recall) / (precision + recall)
 
 # === Plot Best Model's Learning Curve ===
-def plot_best_learning_curve(results, dataset_name, save_folder):
+def plot_best_learning_curve(results, save_folder):
     # Identify model with lowest final cost
     best_key = min(results, key=lambda k: results[k]['model'].cost_history[-1])
     best_info = results[best_key]
@@ -213,13 +234,11 @@ def plot_best_learning_curve(results, dataset_name, save_folder):
     x_vals = [i * train_size for i in range(len(model.cost_history))]
     y_vals = model.cost_history
 
-    info_text = f"λ={lambda_reg},  Hidden={hidden_layer}, α={alpha}, Mode={mode}"
-    if mode == "mini-batch":
-        info_text += f", Batch Size={batch_size}"
+    info=info_text(lambda_reg,hidden_layer,alpha,mode, batch_size)
 
     plt.figure()
     plt.plot(x_vals, y_vals, marker='o')
-    plt.title(f"{dataset_name.capitalize()} BEST Learning Curve\n{info_text}", fontsize=11)
+    plt.title(info, fontsize=11)
     plt.xlabel("Training Instances (m x Train Set)")
     plt.ylabel("Cost (J)")
     plt.grid(True)
@@ -231,55 +250,65 @@ def plot_best_learning_curve(results, dataset_name, save_folder):
     plt.close()
 
 # === Save Metrics Table as Image ===
-def save_metrics_table(results_by_dataset, save_folder):
+def save_metrics_table(results, save_folder):
     os.makedirs("evaluation", exist_ok=True)
-    for dataset_name, dataset_results in results_by_dataset.items():
-        fig, ax = plt.subplots()
-        ax.axis('off')
 
-        # Determine table columns based on whether mini-batch was used
-        if any(val['mode'] == 'mini-batch' for val in dataset_results.values()):
-            col_labels = ["Layer & Neuron", "Lambda", "Alpha", "Batch Size", "Mode", "Avg Accuracy", "Avg F1 Score"]
-            show_batch_size = True
-        else:
-            col_labels = ["Layer & Neuron", "Lambda", "Alpha", "Mode", "Avg Accuracy", "Avg F1 Score"]
-            show_batch_size = False
+    fig, ax = plt.subplots()
+    ax.axis('off')
 
-        cell_data = []
-        grouped = {}
+    # Determine table columns based on whether mini-batch was used
+    if any(val['mode'] == 'mini-batch' for val in results.values()):
+        col_labels = ["Layer & Neuron", "Lambda", "Alpha", "Batch Size", "Mode", "Avg Accuracy", "Avg F1 Score"]
+        show_batch_size = True
+    else:
+        col_labels = ["Layer & Neuron", "Lambda", "Alpha", "Mode", "Avg Accuracy", "Avg F1 Score"]
+        show_batch_size = False
 
-        # Group by configuration for averaging
-        for key, val in dataset_results.items():
-            h = tuple(val['hidden'])
-            l = val['lambda_reg']
-            a = val['alpha']
-            b = val['batch_size']
-            m = val['mode']
-            grouped.setdefault((h, l, a, b, m), []).append((val['acc'], val['f1']))
+    cell_data = []
+    grouped = {}
 
-        for (h, l, a, b, m), metrics in grouped.items():
-            accs = [m[0] for m in metrics]
-            f1s = [m[1] for m in metrics]
-            avg_acc = np.mean(accs)
-            avg_f1 = np.mean(f1s)
+    # Group by configuration for averaging
+    for key, val in results.items():
+        h = tuple(val['hidden'])
+        l = val['lambda_reg']
+        a = val['alpha']
+        b = val['batch_size']
+        m = val['mode']
+        grouped.setdefault((h, l, a, b, m), []).append((val['acc'], val['f1']))
 
-            row = [str(h), f"{l}", f"{a:.3f}"]
-            if show_batch_size:
-                row.append(str(b))
-            row.extend([m, f"{avg_acc:.4f}", f"{avg_f1:.4f}"])
-            cell_data.append(row)
+    for (h, l, a, b, m), metrics in grouped.items():
+        accs = [m[0] for m in metrics]
+        f1s = [m[1] for m in metrics]
+        avg_acc = np.mean(accs)
+        avg_f1 = np.mean(f1s)
 
-        table = ax.table(cellText=cell_data, colLabels=col_labels, loc='center', cellLoc='center')
-        table.auto_set_font_size(False)
-        table.set_fontsize(11)
-        table.scale(1.1, 1.6)
+        row = [str(h), f"{l}", f"{a:.3f}"]
+        if show_batch_size:
+            row.append(str(b))
+        row.extend([m, f"{avg_acc:.4f}", f"{avg_f1:.4f}"])
+        cell_data.append(row)
 
-        plt.title(f"{dataset_name} Model Performance", fontweight='bold')
-        plt.tight_layout()
-        filename = f"{save_folder}/{FILE_NAME.lower()}_table.png"
-        plt.savefig(filename)
-        print(f"📋 Saved metrics table: {filename}")
-        plt.close()
+    table = ax.table(cellText=cell_data, colLabels=col_labels, loc='center', cellLoc='center')
+    table.auto_set_font_size(False)
+    table.set_fontsize(11)
+    table.scale(1.1, 1.6)
+
+    # Use best model for title
+    best_key = min(results, key=lambda k: results[k]['model'].cost_history[-1])
+    best_info = results[best_key]
+    hidden_layer = best_info['hidden']
+    lambda_reg = best_info['lambda_reg']
+    alpha = best_info['alpha']
+    mode = best_info['mode']
+    batch_size = best_info['batch_size']
+    info = info_text(lambda_reg, hidden_layer, alpha, mode, batch_size)
+
+    plt.title(info, fontweight='bold')
+    plt.tight_layout()
+    filename = f"{save_folder}/{FILE_NAME.lower()}_table.png"
+    plt.savefig(filename)
+    print(f"📋 Saved metrics table: {filename}")
+    plt.close()
 
 
 # === Neural Network Execution Wrapper ===
@@ -287,8 +316,8 @@ def neural_network():
     X, y = load_dataset()  # Load data and labels
     folds = stratified_k_fold_split(X, y, k=5)  # Create 5-fold split
 
-    lambda_reg_list = [0.1, 0.000001]  # List of λ values to test
-    hidden_layers = [[32], [32, 16], [32, 16, 8], [32, 16, 8, 4]]  # Layer architectures to test
+    lambda_reg_list = LAMBDA_REG  # List of λ values to test
+    hidden_layers = HIDDEN_LAYER  # Layer architectures to test
     alpha = ALPHA            # Learning rate
     batch_size = BATCH_SIZE        # Size of mini-batches
     mode = TRAIN_MODE        # Training mode
@@ -347,8 +376,8 @@ def neural_network():
                 }
 
     # Save performance table and learning curve
-    save_metrics_table({dataset_name: results}, "evaluation")
-    plot_best_learning_curve(results, dataset_name, "evaluation")
+    save_metrics_table(results, "evaluation")
+    plot_best_learning_curve(results, "evaluation")
 
     # Run debugging output if flag is enabled
     if DEBUG_MODE == True:
