@@ -4,7 +4,7 @@ import sklearn as sk
 import matplotlib.pyplot as plt
 import re
 
-DATASET_NAME="digits"
+DATASET_NAME="ecommerce_labeled"
 ITERATION_COUNT=21
 
 # separate attribute and class in data

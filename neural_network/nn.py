@@ -11,14 +11,14 @@ import debug_text
 DATASET_NAME = "parkinsons_labeled"  # Name of the dataset
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
-BATCH_SIZE = 64
-ALPHA=0.05
+BATCH_SIZE = 32
+ALPHA=0.1
 # === Stopping Criteria ===
 STOP_CRITERIA = "M"
-M_SIZE = 200            
+M_SIZE = 2000            
 J_SIZE=0.1
 # === Hyper Parameter ===
-LAMBDA_REG=[0.5]
+LAMBDA_REG=[5, 1, 0.5, 0.1]
 HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]
 
 # === FILE_NAME Setting ===
