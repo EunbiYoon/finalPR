@@ -4,8 +4,9 @@ import sklearn as sk
 import matplotlib.pyplot as plt
 import re
 
-DATASET_NAME="ecommerce_labeled"
+DATASET_NAME="parkinsons_labeled"
 ITERATION_COUNT=21
+MAX_K=51
 
 # separate attribute and class in data
 def attribute_class(data):
@@ -68,7 +69,7 @@ def shuffle_normalization(data_file):
     train_attribute_normalized=normalization_forumla(train_attribute)
     print("normalization test data")
     test_attribute_normalized=normalization_forumla(test_attribute)
-    train_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_trainatt.xlsx')
+    #train_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_trainatt.xlsx')
     test_attribute_normalized.to_excel(f'normalization/{DATASET_NAME}_testatt.xlsx')
     # message
     print("--> Normalized attributes_data in both test_data and train_data...")
@@ -268,8 +269,8 @@ def main():
         #test_euclidean.to_excel('test_euclidean.xlsx')
 
         # knn algoritm
-        train_accuracy=knn_algorithm(51, train_euclidean, train_class, train_class, "train", try_count, train_accuracy)
-        test_accuracy=knn_algorithm(51, test_euclidean, train_class, test_class, "test", try_count, test_accuracy)
+        train_accuracy=knn_algorithm(MAX_K, train_euclidean, train_class, train_class, "train", try_count, train_accuracy)
+        test_accuracy=knn_algorithm(MAX_K, test_euclidean, train_class, test_class, "test", try_count, test_accuracy)
 
     # draw graph
     train_graph_table=accuracy_avg_std(train_accuracy, "train_data")
@@ -279,7 +280,7 @@ def main():
     draw_graph(test_graph_table,"testing")
 
     # draw table
-    train_graph_table.to_excel(f"evaluation/{DATASET_NAME}_train.xlsx")
+    #train_graph_table.to_excel(f"evaluation/{DATASET_NAME}_train.xlsx")
     test_graph_table.to_excel(f"evaluation/{DATASET_NAME}_test.xlsx")
 
     # message
