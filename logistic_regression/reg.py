@@ -62,7 +62,9 @@ def load_dataset(DATASET_NAME):
 
     if DATASET_NAME == "parkinsons":
         df.rename(columns={"Diagnosis": "label"}, inplace=True)
-
+    elif DATASET_NAME=="rice":
+        df["label"] = df["label"].astype("category").cat.codes
+    
     if 'label' not in df.columns:
         if 'Diagnosis' in df.columns:
             df = df.rename(columns={'Diagnosis': 'label'})

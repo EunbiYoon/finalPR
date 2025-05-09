@@ -19,6 +19,9 @@ def load_and_preprocess_data(DATASET_NAME):
     data = data.rename(columns={"class": "label"})
     if DATASET_NAME == "parkinsons":
         data.rename(columns={"Diagnosis": "label"}, inplace=True)
+    elif DATASET_NAME=="rice":
+        data["label"] = data["label"].astype("category").cat.codes
+
     for col in data.columns:
         if col == "label":
             continue

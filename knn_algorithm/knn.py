@@ -16,7 +16,9 @@ def load_data(DATASET_NAME):
     data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)
     if DATASET_NAME == "parkinsons":
         data_file.rename(columns={"Diagnosis": "label"}, inplace=True)
-
+    elif DATASET_NAME=="rice":
+        data_file["label"] = data_file["label"].astype("category").cat.codes
+    
     data_file = data_file.apply(pd.to_numeric, errors='coerce')
     data_file = data_file.drop(index=0).reset_index(drop=True)
     return data_file

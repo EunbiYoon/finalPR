@@ -6,8 +6,20 @@ import math
 import random
 from sklearn.preprocessing import OneHotEncoder
 
-
+# --- hyper parameter
 K_FOLD_SIZE = 10
+
+KNN_NEAREST_K=5
+
+NTREES=40
+MAX_DEPTH=5
+MIN_INFO_GAIN=0.00001
+
+HIDDEN_LAYER = [64] 
+ALPHA=0.1
+LAMBDA_REG=1e-6
+BATCH_SIZE=64
+M_SIZE=50
 
 # === Stratified K-Fold Split Function ===
 def stratified_k_fold_split(X, y, k):
@@ -69,7 +81,7 @@ def load_dataset(DATASET_NAME):
 
     return X.values, y.values.reshape(-1, 1)
 
-# === Stratified K-Fold Split ===
+
 # === Min-Max Normalization ===
 def normalize_train_test(train_df, test_df):
     features = train_df.drop(columns=['label', 'original_index']).columns
@@ -93,7 +105,7 @@ def majority_vote(votes):
     return Counter(votes).most_common(1)[0][0]
 
 # === KNN Fold Runner ===
-def run_knn_single_fold(X_train, y_train, X_test, k=5):
+def run_knn_single_fold(X_train, y_train, X_test, k=KNN_NEAREST_K):
     def euclidean(x1, x2):
         return np.sqrt(np.sum((x1 - x2) ** 2))
 
@@ -110,7 +122,7 @@ def run_knn_single_fold(X_train, y_train, X_test, k=5):
     return predictions
 
 # === Random Forest Fold Runner ===
-def run_tree_single_fold(X_train, y_train, X_test, ntrees=50):
+def run_tree_single_fold(X_train, y_train, X_test, ntrees=NTREES):
     class Node:
         def __init__(self, feature=None, threshold=None, label=None, children=None):
             self.feature = feature
@@ -123,7 +135,7 @@ def run_tree_single_fold(X_train, y_train, X_test, ntrees=50):
         return -np.sum(probabilities * np.log2(probabilities))
 
     def build_tree(X, y, features, depth=0):
-        if len(y.unique()) == 1 or len(features) == 0 or depth == 5:
+        if len(y.unique()) == 1 or len(features) == 0 or depth == MAX_DEPTH:
             return Node(label=y.mode()[0])
         m = int(math.sqrt(len(features)))
         selected_features = random.sample(list(features), m)
@@ -144,7 +156,7 @@ def run_tree_single_fold(X_train, y_train, X_test, ntrees=50):
                 gain = entropy(y) - weighted_entropy
                 if gain > best_gain:
                     best_feature, best_gain, best_threshold = feature, gain, threshold
-        if best_gain < 1e-5 or best_feature is None:
+        if best_gain < MIN_INFO_GAIN or best_feature is None:
             return Node(label=y.mode()[0])
         tree = Node(feature=best_feature, threshold=best_threshold)
         if best_threshold is None:
@@ -218,7 +230,7 @@ def run_nn_single_fold(X_train, y_train, X_test):
                 A.append(np.hstack([np.ones((Z.shape[0], 1)), 1 / (1 + np.exp(-Z))]))
             return A[-1][:, 1:]
 
-        def fit(self, X, y, batch_size=32, max_iter=50):
+        def fit(self, X, y, batch_size=BATCH_SIZE, max_iter=M_SIZE):
             m = X.shape[0]
             for epoch in range(max_iter):
                 indices = np.arange(m)
@@ -235,9 +247,11 @@ def run_nn_single_fold(X_train, y_train, X_test):
             return (A_final >= 0.5).astype(int).ravel()
 
     y_train = y_train.reshape(-1, 1)
-    model = NeuralNetwork(layer_sizes=[X_train.shape[1], 64, 1], alpha=0.1, lambda_reg=1e-6)
-    model.fit(X_train, y_train, batch_size=32, max_iter=50)
+    full_layer_sizes = [X_train.shape[1]] + HIDDEN_LAYER + [1]
+    model = NeuralNetwork(layer_sizes=full_layer_sizes, alpha=ALPHA, lambda_reg=LAMBDA_REG)
+    model.fit(X_train, y_train, batch_size=BATCH_SIZE, max_iter=M_SIZE)
     return model.predict(X_test).tolist()
+
 
 # === Main Ensemble Logic ===
 def ensemble_main(DATASET_NAME):

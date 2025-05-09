@@ -51,14 +51,6 @@
         "documentation": {}
     },
     {
-        "label": "Counter",
-        "importPath": "collections",
-        "description": "collections",
-        "isExtraImport": true,
-        "detail": "collections",
-        "documentation": {}
-    },
-    {
         "label": "math",
         "kind": 6,
         "isExtraImport": true,
@@ -125,56 +117,6 @@
         "importPath": "os",
         "description": "os",
         "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "chain",
-        "importPath": "itertools",
-        "description": "itertools",
-        "isExtraImport": true,
-        "detail": "itertools",
-        "documentation": {}
-    },
-    {
-        "label": "time",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "time",
-        "description": "time",
-        "detail": "time",
-        "documentation": {}
-    },
-    {
-        "label": "load_training_set",
-        "importPath": "utils",
-        "description": "utils",
-        "isExtraImport": true,
-        "detail": "utils",
-        "documentation": {}
-    },
-    {
-        "label": "load_test_set",
-        "importPath": "utils",
-        "description": "utils",
-        "isExtraImport": true,
-        "detail": "utils",
-        "documentation": {}
-    },
-    {
-        "label": "nltk",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "nltk",
-        "description": "nltk",
-        "detail": "nltk",
-        "documentation": {}
-    },
-    {
-        "label": "stopwords",
-        "importPath": "nltk.corpus",
-        "description": "nltk.corpus",
-        "isExtraImport": true,
-        "detail": "nltk.corpus",
         "documentation": {}
     },
     {
@@ -251,7 +193,7 @@
         "kind": 2,
         "importPath": "ensemble_algorithm.en",
         "description": "ensemble_algorithm.en",
-        "peekOfCode": "def load_dataset(DATASET_NAME):\n    # Load dataset from CSV file\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    # === parkinsons --> customize datset ===\n    if DATASET_NAME==\"parkinsons\":\n        # change last column as label\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    # Use 'diagnosis' column if 'label' doesn't exist\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:",
+        "peekOfCode": "def load_dataset(DATASET_NAME):\n    # Load dataset from CSV file\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    # === parkinsons --> customize datset ===\n    if DATASET_NAME==\"parkinsons\":\n        # change last column as label\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        df[\"label\"] = df[\"label\"].astype(\"category\").cat.codes\n    # Use 'diagnosis' column if 'label' doesn't exist",
         "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
@@ -269,7 +211,7 @@
         "kind": 2,
         "importPath": "ensemble_algorithm.en",
         "description": "ensemble_algorithm.en",
-        "peekOfCode": "def majority_vote(votes):\n    return Counter(votes).most_common(1)[0][0]\n# === KNN Fold Runner ===\ndef run_knn_single_fold(X_train, y_train, X_test, k=5):\n    def euclidean(x1, x2):\n        return np.sqrt(np.sum((x1 - x2) ** 2))\n    def majority_vote(neighbors):\n        count = Counter(neighbors)\n        return count.most_common(1)[0][0]\n    predictions = []",
+        "peekOfCode": "def majority_vote(votes):\n    return Counter(votes).most_common(1)[0][0]\n# === KNN Fold Runner ===\ndef run_knn_single_fold(X_train, y_train, X_test, k=KNN_NEAREST_K):\n    def euclidean(x1, x2):\n        return np.sqrt(np.sum((x1 - x2) ** 2))\n    def majority_vote(neighbors):\n        count = Counter(neighbors)\n        return count.most_common(1)[0][0]\n    predictions = []",
         "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
@@ -278,7 +220,7 @@
         "kind": 2,
         "importPath": "ensemble_algorithm.en",
         "description": "ensemble_algorithm.en",
-        "peekOfCode": "def run_knn_single_fold(X_train, y_train, X_test, k=5):\n    def euclidean(x1, x2):\n        return np.sqrt(np.sum((x1 - x2) ** 2))\n    def majority_vote(neighbors):\n        count = Counter(neighbors)\n        return count.most_common(1)[0][0]\n    predictions = []\n    for test_point in X_test:\n        distances = [euclidean(test_point, x_train) for x_train in X_train]\n        neighbors_idx = np.argsort(distances)[:k]",
+        "peekOfCode": "def run_knn_single_fold(X_train, y_train, X_test, k=KNN_NEAREST_K):\n    def euclidean(x1, x2):\n        return np.sqrt(np.sum((x1 - x2) ** 2))\n    def majority_vote(neighbors):\n        count = Counter(neighbors)\n        return count.most_common(1)[0][0]\n    predictions = []\n    for test_point in X_test:\n        distances = [euclidean(test_point, x_train) for x_train in X_train]\n        neighbors_idx = np.argsort(distances)[:k]",
         "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
@@ -287,7 +229,7 @@
         "kind": 2,
         "importPath": "ensemble_algorithm.en",
         "description": "ensemble_algorithm.en",
-        "peekOfCode": "def run_tree_single_fold(X_train, y_train, X_test, ntrees=50):\n    class Node:\n        def __init__(self, feature=None, threshold=None, label=None, children=None):\n            self.feature = feature\n            self.threshold = threshold\n            self.label = label\n            self.children = children if children else {}\n    def entropy(y):\n        probabilities = y.value_counts() / len(y)\n        return -np.sum(probabilities * np.log2(probabilities))",
+        "peekOfCode": "def run_tree_single_fold(X_train, y_train, X_test, ntrees=NTREES):\n    class Node:\n        def __init__(self, feature=None, threshold=None, label=None, children=None):\n            self.feature = feature\n            self.threshold = threshold\n            self.label = label\n            self.children = children if children else {}\n    def entropy(y):\n        probabilities = y.value_counts() / len(y)\n        return -np.sum(probabilities * np.log2(probabilities))",
         "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
@@ -305,7 +247,7 @@
         "kind": 2,
         "importPath": "ensemble_algorithm.en",
         "description": "ensemble_algorithm.en",
-        "peekOfCode": "def ensemble_main():\n    X, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X, y, K_FOLD_SIZE)\n    vote_dict = defaultdict(list)\n    for fold_idx, (train_df, test_df) in enumerate(folds):\n        print(f\"\\n🔁 Fold {fold_idx+1}/{K_FOLD_SIZE}\")\n        train_df, test_df = normalize_train_test(train_df, test_df)\n        X_train = train_df.drop(columns=['label']).values\n        y_train = train_df['label'].values.ravel()\n        X_test = test_df.drop(columns=['label']).values",
+        "peekOfCode": "def ensemble_main(DATASET_NAME):\n    X, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X, y, K_FOLD_SIZE)\n    vote_dict = defaultdict(list)\n    for fold_idx, (train_df, test_df) in enumerate(folds):\n        print(f\"\\n🔁 Fold {fold_idx+1}/{K_FOLD_SIZE}\")\n        train_df, test_df = normalize_train_test(train_df, test_df)\n        X_train = train_df.drop(columns=['label']).values\n        y_train = train_df['label'].values.ravel()\n        X_test = test_df.drop(columns=['label']).values",
         "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
@@ -314,7 +256,16 @@
         "kind": 5,
         "importPath": "ensemble_algorithm.en",
         "description": "ensemble_algorithm.en",
-        "peekOfCode": "K_FOLD_SIZE = 10\n# === Stratified K-Fold Split Function ===\ndef stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    df['original_index'] = np.arange(len(df))\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):",
+        "peekOfCode": "K_FOLD_SIZE = 10\nKNN_NEAREST_K=5\nNTREES=40\nMAX_DEPTH=5\nMIN_INFO_GAIN=0.00001\nHIDDEN_LAYER = [64] \nALPHA=0.1\nLAMBDA_REG=1e-6\nBATCH_SIZE=64\nM_SIZE=50",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "HIDDEN_LAYER",
+        "kind": 5,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "HIDDEN_LAYER = [64] \nALPHA=0.1\nLAMBDA_REG=1e-6\nBATCH_SIZE=64\nM_SIZE=50\n# === Stratified K-Fold Split Function ===\ndef stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    df['original_index'] = np.arange(len(df))",
         "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
@@ -323,7 +274,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def load_data(DATASET_NAME):\n    data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)\n    if DATASET_NAME == \"parkinsons\":\n        data_file.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    data_file = data_file.apply(pd.to_numeric, errors='coerce')\n    data_file = data_file.drop(index=0).reset_index(drop=True)\n    return data_file\n# === Stratified K-Fold Split ===\ndef stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)",
+        "peekOfCode": "def load_data(DATASET_NAME):\n    data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)\n    if DATASET_NAME == \"parkinsons\":\n        data_file.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        data_file[\"label\"] = data_file[\"label\"].astype(\"category\").cat.codes\n    data_file = data_file.apply(pd.to_numeric, errors='coerce')\n    data_file = data_file.drop(index=0).reset_index(drop=True)\n    return data_file\n# === Stratified K-Fold Split ===",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -494,7 +445,7 @@
         "kind": 2,
         "importPath": "logistic_regression.reg",
         "description": "logistic_regression.reg",
-        "peekOfCode": "def load_dataset(DATASET_NAME):\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    if DATASET_NAME == \"parkinsons\":\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:\n            df = df.rename(columns={'Diagnosis': 'label'})\n            print(\"🛈 Renamed 'Diagnosis' to 'label' for compatibility.\")\n        else:\n            raise ValueError(\"Dataset must contain a 'label' or 'diagnosis' column.\")",
+        "peekOfCode": "def load_dataset(DATASET_NAME):\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    if DATASET_NAME == \"parkinsons\":\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        df[\"label\"] = df[\"label\"].astype(\"category\").cat.codes\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:\n            df = df.rename(columns={'Diagnosis': 'label'})\n            print(\"🛈 Renamed 'Diagnosis' to 'label' for compatibility.\")",
         "detail": "logistic_regression.reg",
         "documentation": {}
     },
@@ -514,204 +465,6 @@
         "description": "logistic_regression.reg",
         "peekOfCode": "def evaluate(DATASET_NAME, k=5):\n    X, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X, y, k=K_FOLD_SIZE)\n    acc_list = []\n    f1_list = []\n    for i, (train_df, test_df) in enumerate(folds):\n        X_train = train_df.drop(columns=['label']).values\n        y_train = train_df['label'].values.reshape(-1, 1)\n        X_test = test_df.drop(columns=['label']).values\n        y_test = test_df['label'].values.reshape(-1, 1)",
         "detail": "logistic_regression.reg",
-        "documentation": {}
-    },
-    {
-        "label": "log_func",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def log_func(num):\n    return np.log10(num)\n######## likelihood_common ########       \n# for train dataset\ndef word_count_set(data_set):\n    # single test document => just list\n    all_words = [word for sublist in data_set for word in sublist]\n    word_counts = Counter(all_words)\n    # each count\n    freq_dataset=pd.DataFrame(word_counts.items(),columns=[\"word\",\"freq_train\"])",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "word_count_set",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def word_count_set(data_set):\n    # single test document => just list\n    all_words = [word for sublist in data_set for word in sublist]\n    word_counts = Counter(all_words)\n    # each count\n    freq_dataset=pd.DataFrame(word_counts.items(),columns=[\"word\",\"freq_train\"])\n    freq_dataset.set_index([\"word\"], drop=True, inplace=True)\n    return freq_dataset\n######## likelihood_standard ######## \n# for test dataset",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "word_count_list",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def word_count_list(data_list):\n    # single test document => just list\n    all_words = [word for word in data_list]\n    word_counts = Counter(all_words)\n    # each count\n    freq_dataset=pd.DataFrame(word_counts.items(),columns=[\"word\",\"freq_test\"])\n    freq_dataset.set_index([\"word\"], drop=True, inplace=True)\n    return freq_dataset\n######## posterior_standard, posterior_laplace ########     \n# Compare probability",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "compare_probability",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def compare_probability(posterior_pos, posterior_neg):\n    if posterior_pos > posterior_neg:\n        result = \"Positive\"\n        print(result)\n    elif posterior_pos < posterior_neg:\n        result = \"Negative\"\n        print(result)\n    elif posterior_pos == posterior_neg:\n        print(\"RANDOM~~~\")\n        result = random.choice([\"Positive\", \"Negative\"])",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "multiply_standard",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def multiply_standard(likelihood_sorted):  \n    # copy the original version\n    likelihood_sorted = likelihood_sorted.copy()\n    # before multiply, make portion : NaN => 0\n    likelihood_sorted.loc[:, \"portion_train_pos\"] = likelihood_sorted[\"portion_train_pos\"].fillna(0)\n    likelihood_sorted.loc[:, \"portion_train_neg\"] = likelihood_sorted[\"portion_train_neg\"].fillna(0)\n    # (portion_train_pos) ^ (freq_test)\n    likelihood_sorted.loc[:, \"multiply_pos\"] = likelihood_sorted[\"portion_train_pos\"] ** likelihood_sorted[\"freq_test\"]\n    likelihood_sorted.loc[:, \"multiply_neg\"] = likelihood_sorted[\"portion_train_neg\"] ** likelihood_sorted[\"freq_test\"]\n    # likely_pos, likely_neg = multiply all the result",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "sum_laplace",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def sum_laplace(likelihood_alpha):  \n    # copy the original version\n    likelihood_alpha = likelihood_alpha.copy()\n    # (portion_train_pos) * log(freq_test)\n    likelihood_alpha.loc[:, \"sum_pos\"] = likelihood_alpha[\"freq_test\"] * log_func(likelihood_alpha[\"portion_train_pos_alpha\"])\n    likelihood_alpha.loc[:, \"sum_neg\"] = likelihood_alpha[\"freq_test\"] * log_func(likelihood_alpha[\"portion_train_neg_alpha\"])\n    # likely_pos, likely_neg = multiply all the result\n    likely_pos=likelihood_alpha[\"sum_pos\"].sum()\n    likely_neg=likelihood_alpha[\"sum_neg\"].sum()\n    return likely_pos, likely_neg",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "draw_table",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def draw_table(confusion_table, accuracy, precision, recall, image_name):\n    fig, ax = plt.subplots(figsize=(6.5, 2.2))  # Create figure and axes\n    ax.axis('off')  # Hide axes\n    # Display the table\n    table = ax.table(cellText=confusion_table.values, colLabels=confusion_table.columns, rowLabels=confusion_table.index, cellLoc='center',  loc='center')\n    table.auto_set_column_width(13)\n    # Adjust table scale for better visibility\n    table.scale(1.5, 1.5)\n    # Set font size for table\n    table.auto_set_font_size(False)  ",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "draw_graph",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def draw_graph(alpha_list, accuracy_list):\n    log_alpha_list = log_func(alpha_list) \n    print(log_alpha_list)\n    plt.figure(figsize=(8, 6))\n    plt.plot(log_alpha_list, accuracy_list, marker='o', linestyle='-')\n    plt.xlabel('alpha (log scale)')\n    plt.ylabel('accuracy')\n    plt.title(\"Figure 2-Graph. Plot of the model's accuracy\")\n    plt.legend()\n    plt.grid(True, which=\"both\", linestyle=\"--\", linewidth=0.5)",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "preprocessing_data",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def preprocessing_data(train_percen_pos, train_percen_neg, test_percen_pos, test_percen_neg):\n    percentage_positive_instances_train = train_percen_pos\n    percentage_negative_instances_train = train_percen_neg\n    percentage_positive_instances_test = test_percen_pos\n    percentage_negative_instances_test = test_percen_neg\n    (train_pos, train_neg, vocab) = load_training_set(percentage_positive_instances_train, percentage_negative_instances_train)\n    (test_pos, test_neg) = load_test_set(percentage_positive_instances_test, percentage_negative_instances_test)\n    print(\"\\nTrain and Test dataset are completed to preprocessing data\")\n    return train_pos, train_neg, vocab, test_pos, test_neg\n##################################################################",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "prior_standard",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def prior_standard(pos_data_len, neg_data_len):\n    total_len = pos_data_len + neg_data_len\n    return pos_data_len / total_len, neg_data_len / total_len\n# Laplace : Q2 ~ Q6\ndef prior_laplace(pos_data_len, neg_data_len):\n    pos_prior, neg_prior = prior_standard(pos_data_len, neg_data_len)\n    return log_func(pos_prior), log_func(neg_prior)\n##################################################################\n########### 3. Likelihood ###########\n# likelihood_common => contain test and train data freq_pos, freq_neg",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "prior_laplace",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def prior_laplace(pos_data_len, neg_data_len):\n    pos_prior, neg_prior = prior_standard(pos_data_len, neg_data_len)\n    return log_func(pos_prior), log_func(neg_prior)\n##################################################################\n########### 3. Likelihood ###########\n# likelihood_common => contain test and train data freq_pos, freq_neg\ndef likelihood_common(train_pos, train_neg):\n    ###### train ######\n    # input the frequecy of train data\n    freq_train_pos=word_count_set(train_pos)",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "likelihood_common",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def likelihood_common(train_pos, train_neg):\n    ###### train ######\n    # input the frequecy of train data\n    freq_train_pos=word_count_set(train_pos)\n    freq_train_neg=word_count_set(train_neg)\n    # merge \n    likelihood_table = pd.concat([freq_train_pos, freq_train_neg],axis=1)\n    likelihood_table.columns=[\"freq_train_pos\",\"freq_train_neg\"]\n    # get the total frequency in the table\n    # use only train data -> Total_Frequency, so it will not affect to out of vocabulary, since vocab consist of train ",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "likelihood_standard",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def likelihood_standard(likelihood_table, test_data, vocab):\n    # Calculate portions\n    pos_sum = likelihood_table.at[\"Total\", \"freq_train_pos\"] # positive -> V\n    neg_sum = likelihood_table.at[\"Total\", \"freq_train_neg\"] # negative -> V\n    likelihood_table = likelihood_table.copy()  # avoid error that return myself\n    likelihood_table[\"portion_train_pos\"] = likelihood_table[\"freq_train_pos\"] / pos_sum\n    likelihood_table[\"portion_train_neg\"] = likelihood_table[\"freq_train_neg\"] / neg_sum\n    # input the frequecy of test data\n    freq_test=word_count_list(test_data)\n    # merge ",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "likelihood_laplace",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def likelihood_laplace(likelihood_table, test_data, alpha, vocab):\n    # Calculate portions\n    pos_sum = likelihood_table.at[\"Total\", \"freq_train_pos\"] \n    neg_sum = likelihood_table.at[\"Total\", \"freq_train_neg\"]\n    # input the frequecy of test data\n    freq_test=word_count_list(test_data)\n    # merge \n    likelihood_test = pd.concat([freq_test, likelihood_table], axis=1)\n    # sort not \"nan\" values from \"freq_test\"\n    likelihood_test = likelihood_test[likelihood_test['freq_test'].notna()].sort_values(by='freq_test')",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "posterior_standard",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def posterior_standard(prior_pos, prior_neg, likely_pos, likely_neg):\n    # test_pos \n    posterior_pos = prior_pos * likely_pos\n    posterior_neg = prior_neg * likely_neg\n    print(f\"prior * likely | pos: {posterior_pos} / neg: {posterior_neg}\")\n    posterior_result=compare_probability(posterior_pos, posterior_neg)\n    print(f\"posterior_result : {posterior_result}\")\n    return posterior_result\n# Laplace Smoothing log(prior probability) + sum (log(likelihoodal))\ndef posterior_laplace(likelihood_table, test_data, vocab, alpha):",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "posterior_laplace",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def posterior_laplace(likelihood_table, test_data, vocab, alpha):\n    # test_pos \n    posterior_pos = prior_pos + likely_pos\n    posterior_neg = prior_neg + likely_neg\n    print(f\"prior * likely | pos: {posterior_pos} / neg: {posterior_neg}\")\n    posterior_result=compare_probability(posterior_pos, posterior_neg)\n    print(f\"posterior_result : {posterior_result}\")\n    return posterior_result\n##################################################################\n########### 5. Confusion Metrix ###########",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "confusion_matrix",
-        "kind": 2,
-        "importPath": "naive_bayes.nb",
-        "description": "naive_bayes.nb",
-        "peekOfCode": "def confusion_matrix(posterior_pos, posterior_neg, file_name):\n    print(\"\\nMaking confusion matrix to get accuracy, precision, and recall\")\n    TP=posterior_pos.count(\"Positive\")\n    TN=posterior_neg.count(\"Negative\")\n    FP=posterior_neg.count(\"Positive\")\n    FN=posterior_pos.count(\"Negative\")\n    print(f\"TP:{TP} / FN:{FN} / TN:{TN} / FP:{FP}\")\n    # calcualte accuracy\n    accuracy=(TP+TN)/(TP+TN+FP+FN)\n    # calcualte precision",
-        "detail": "naive_bayes.nb",
-        "documentation": {}
-    },
-    {
-        "label": "preprocess_text",
-        "kind": 2,
-        "importPath": "naive_bayes.utils",
-        "description": "naive_bayes.utils",
-        "peekOfCode": "def preprocess_text(text):\n    stop_words = set(stopwords.words('english'))\n    text = REPLACE_NO_SPACE.sub(\"\", text)\n    text = REPLACE_WITH_SPACE.sub(\" \", text)\n    text = re.sub(r'\\d+', '', text)\n    text = text.lower()\n    words = text.split()\n    return [w for w in words if w not in stop_words]\ndef load_training_set(percentage_positives, percentage_negatives):\n    vocab = set()",
-        "detail": "naive_bayes.utils",
-        "documentation": {}
-    },
-    {
-        "label": "load_training_set",
-        "kind": 2,
-        "importPath": "naive_bayes.utils",
-        "description": "naive_bayes.utils",
-        "peekOfCode": "def load_training_set(percentage_positives, percentage_negatives):\n    vocab = set()\n    positive_instances = []\n    negative_instances = []\n    df = pd.read_csv('train-positive.csv')\n    for _, contents in df.iterrows():\n        contents = contents['reviewText']\n        if random.random() > percentage_positives:\n            continue\n        contents = preprocess_text(contents)",
-        "detail": "naive_bayes.utils",
-        "documentation": {}
-    },
-    {
-        "label": "load_test_set",
-        "kind": 2,
-        "importPath": "naive_bayes.utils",
-        "description": "naive_bayes.utils",
-        "peekOfCode": "def load_test_set(percentage_positives, percentage_negatives):\n    positive_instances = []\n    negative_instances = []\n    df = pd.read_csv('test-positive.csv')\n    for _, contents in df.iterrows():\n        contents = contents['reviewText']\n        if random.random() > percentage_positives:\n            continue\n        contents = preprocess_text(contents)\n        positive_instances.append(contents)",
-        "detail": "naive_bayes.utils",
-        "documentation": {}
-    },
-    {
-        "label": "REPLACE_NO_SPACE",
-        "kind": 5,
-        "importPath": "naive_bayes.utils",
-        "description": "naive_bayes.utils",
-        "peekOfCode": "REPLACE_NO_SPACE = re.compile(\"[._;:!*`짝\\'?,\\\"()\\[\\]]\")\nREPLACE_WITH_SPACE = re.compile(\"(<br\\s*/><br\\s*/>)|(\\-)|(\\/)\")\n# remove this part for mac -> add for window\nnltk.download('stopwords')\ndef preprocess_text(text):\n    stop_words = set(stopwords.words('english'))\n    text = REPLACE_NO_SPACE.sub(\"\", text)\n    text = REPLACE_WITH_SPACE.sub(\" \", text)\n    text = re.sub(r'\\d+', '', text)\n    text = text.lower()",
-        "detail": "naive_bayes.utils",
-        "documentation": {}
-    },
-    {
-        "label": "REPLACE_WITH_SPACE",
-        "kind": 5,
-        "importPath": "naive_bayes.utils",
-        "description": "naive_bayes.utils",
-        "peekOfCode": "REPLACE_WITH_SPACE = re.compile(\"(<br\\s*/><br\\s*/>)|(\\-)|(\\/)\")\n# remove this part for mac -> add for window\nnltk.download('stopwords')\ndef preprocess_text(text):\n    stop_words = set(stopwords.words('english'))\n    text = REPLACE_NO_SPACE.sub(\"\", text)\n    text = REPLACE_WITH_SPACE.sub(\" \", text)\n    text = re.sub(r'\\d+', '', text)\n    text = text.lower()\n    words = text.split()",
-        "detail": "naive_bayes.utils",
         "documentation": {}
     },
     {
@@ -737,7 +490,7 @@
         "kind": 2,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "def load_dataset(DATASET_NAME):\n    # Load dataset from CSV file\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    # === parkinsons --> customize datset ===\n    if DATASET_NAME==\"parkinsons\":\n        # change last column as label\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    # Use 'diagnosis' column if 'label' doesn't exist\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:",
+        "peekOfCode": "def load_dataset(DATASET_NAME):\n    # Load dataset from CSV file\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    # === parkinsons --> customize datset ===\n    if DATASET_NAME==\"parkinsons\":\n        # change last column as label\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        df[\"label\"] = df[\"label\"].astype(\"category\").cat.codes\n    # Use 'diagnosis' column if 'label' doesn't exist",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -809,7 +562,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1",
+        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -818,7 +571,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]",
+        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -827,7 +580,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]",
+        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -836,7 +589,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "BATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]",
+        "peekOfCode": "BATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]\n# LAMBDA_REG=[0.1, 0.001, 0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -845,7 +598,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]",
+        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]\n# LAMBDA_REG=[0.1, 0.001, 0.000001]\n# HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -854,7 +607,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "M_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]",
+        "peekOfCode": "M_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]\n# LAMBDA_REG=[0.1, 0.001, 0.000001]\n# HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -935,7 +688,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    for col in data.columns:\n        if col == \"label\":\n            continue\n        elif col.endswith(\"_cat\"):\n            data[col] = data[col].astype(str)",
+        "peekOfCode": "def load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        data[\"label\"] = data[\"label\"].astype(\"category\").cat.codes\n    for col in data.columns:\n        if col == \"label\":\n            continue",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -1079,7 +832,7 @@
         "kind": 5,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "MAX_DEPTH = 5\nMIN_INFO_GAIN = 1e-5\n# ===== Preprocessing =====\ndef load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    for col in data.columns:\n        if col == \"label\":",
+        "peekOfCode": "MAX_DEPTH = 5\nMIN_INFO_GAIN = 1e-5\n# ===== Preprocessing =====\ndef load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        data[\"label\"] = data[\"label\"].astype(\"category\").cat.codes",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -1088,7 +841,7 @@
         "kind": 5,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "MIN_INFO_GAIN = 1e-5\n# ===== Preprocessing =====\ndef load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    for col in data.columns:\n        if col == \"label\":\n            continue",
+        "peekOfCode": "MIN_INFO_GAIN = 1e-5\n# ===== Preprocessing =====\ndef load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        data[\"label\"] = data[\"label\"].astype(\"category\").cat.codes\n    for col in data.columns:",
         "detail": "random_forest.tree",
         "documentation": {}
     }
