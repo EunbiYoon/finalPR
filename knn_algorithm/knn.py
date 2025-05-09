@@ -4,14 +4,15 @@ import numpy as np
 import sklearn as sk
 import matplotlib.pyplot as plt
 import re
+import os
 
 # === Configuration ===
-DATASET_NAME="parkinsons"
-K_FOLD_SIZE=10
-MAX_K=51
+DATASET_NAME=""
+K_FOLD_SIZE=5
+MAX_K=3
 
 # === Load and clean dataset ===
-def load_data():
+def load_data(DATASET_NAME):
     data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)
     if DATASET_NAME == "parkinsons":
         data_file.rename(columns={"Diagnosis": "label"}, inplace=True)
@@ -108,7 +109,7 @@ def knn_algorithm(k, test_euclidean, predicted_class, actual_class, data_info, f
         f1score_value = calculate_f1score(actual_class, predicted_table[f"k={k_num}"])
         accuracy_f1_table.at[f"fold={fold_count}", f"accuracy (k={k_num})"] = accuracy_value
         accuracy_f1_table.at[f"fold={fold_count}", f"f1score (k={k_num})"] = f1score_value
-    return accuracy_f1_table
+    return accuracy_f1_table, predicted_table
 
 # === Compute mean/std and prepare for graphing ===
 def accuracy_avg_std(accuracy_f1_table, data_info):
@@ -131,8 +132,12 @@ def draw_graph(accuracy_f1_table, title):
     print("--> saved graph image file : " + str(title) + "...")
 
 # === Main entry point ===
-def main():
-    data_file = load_data()
+def main(DATASET_NAME):
+    # if the folder is not existed, create one
+    os.makedirs("evaluation", exist_ok=True) 
+    os.makedirs("normalization", exist_ok=True) 
+
+    data_file = load_data(DATASET_NAME)
     attributes, labels = attribute_class(data_file)
     attributes_normalized = normalization_forumla(attributes)
     folds = stratified_k_fold_split(attributes_normalized, labels, K_FOLD_SIZE)
@@ -144,8 +149,8 @@ def main():
         test_attr, test_label = attribute_class(test_df)
         train_euclidean = euclidean_matrix(train_attr, train_attr, "train")
         test_euclidean = euclidean_matrix(train_attr, test_attr, "test")
-        train_accuracy = knn_algorithm(MAX_K, train_euclidean, train_label, train_label, "train", fold_count, train_accuracy)
-        test_accuracy = knn_algorithm(MAX_K, test_euclidean, train_label, test_label, "test", fold_count, test_accuracy)
+        train_accuracy,_ = knn_algorithm(MAX_K, train_euclidean, train_label, train_label, "train", fold_count, train_accuracy)
+        test_accuracy,predicted_table = knn_algorithm(MAX_K, test_euclidean, train_label, test_label, "test", fold_count, test_accuracy)
     train_graph_table = accuracy_avg_std(train_accuracy, "train_data")
     draw_graph(train_graph_table, "training")
     test_graph_table = accuracy_avg_std(test_accuracy, "test_data")
@@ -153,5 +158,8 @@ def main():
     test_graph_table.to_excel(f"evaluation/{DATASET_NAME}_test.xlsx")
     print("\n[[ K-Fold Evaluation Complete! ]]\n")
 
+    # return for ensemble
+    return predicted_table
+
 if __name__ == "__main__":
-    main()
+    main(DATASET_NAME=DATASET_NAME)

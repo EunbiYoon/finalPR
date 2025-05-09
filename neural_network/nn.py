@@ -1,15 +1,16 @@
 # === Vectorized Neural Network Implementation ===
-import os
+import os,sys
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import OneHotEncoder
+sys.path.append(os.path.abspath(os.path.dirname(__file__)))
 from propagation import backpropagation_vectorized, forward_propagation, cost_function
 import debug_text
 
 # === Setting ===
-DATASET_NAME = "digits"  # Name of the dataset
-K_FOLD_SIZE=10
+DATASET_NAME = ""  # Name of the dataset
+K_FOLD_SIZE=5
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
 BATCH_SIZE = 64
@@ -21,8 +22,10 @@ M_SIZE = 50
 J_SIZE=0.1
 
 # === Hyper Parameter ===
-LAMBDA_REG=[0.1, 0.001, 0.000001]
-HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]
+LAMBDA_REG=[0.000001]
+HIDDEN_LAYER=[[64]]
+# LAMBDA_REG=[0.1, 0.001, 0.000001]
+# HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]
 # parkinsons
 # LAMBDA_REG=[5, 1, 0.5, 0.1]
 # HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]
@@ -37,7 +40,7 @@ else:
 
 
 # === Load dataset and apply preprocessing ===
-def load_dataset():
+def load_dataset(DATASET_NAME):
     # Load dataset from CSV file
     df = pd.read_csv(f"../datasets/{DATASET_NAME}.csv")
     
@@ -114,7 +117,7 @@ class NeuralNetwork:
         for i in range(len(self.weights)):
             self.weights[i] -= self.alpha * gradients[i]
 
-    def fit(self, X, y, batch_size=32, fold_index=None, mode='batch', stopping_J=600):
+    def fit(self, X, y, DATASET_NAME, batch_size=32, fold_index=None, mode='batch', stopping_J=600):
         m = X.shape[0]  # Total number of samples
         m_size = 0      # Epoch counter
 
@@ -215,7 +218,7 @@ def my_f1_score(y_true, y_pred):
     return 2 * (precision * recall) / (precision + recall)
 
 # === info_text Setting ===
-def info_text(lambda_reg,hidden_layer,alpha,mode, batch_size):
+def info_text(lambda_reg,hidden_layer,alpha,mode, batch_size, DATASET_NAME):
     info = f"{DATASET_NAME.capitalize()} BEST Learning Curve\n λ={lambda_reg},  Hidden={hidden_layer}, \nα={alpha}, Mode={mode}"
     if mode == "mini-batch":
         info += f", Batch Size={batch_size}\n"
@@ -228,7 +231,7 @@ def info_text(lambda_reg,hidden_layer,alpha,mode, batch_size):
     return info
 
 # === Plot Best Model's Learning Curve ===
-def plot_best_learning_curve(results, save_folder):
+def plot_best_learning_curve(results, save_folder, DATASET_NAME):
     # Identify model with lowest final cost
     best_key = min(results, key=lambda k: results[k]['model'].cost_history[-1])
     best_info = results[best_key]
@@ -246,7 +249,7 @@ def plot_best_learning_curve(results, save_folder):
     x_vals = [i * train_size for i in range(len(model.cost_history))]
     y_vals = model.cost_history
 
-    info=info_text(lambda_reg,hidden_layer,alpha,mode, batch_size)
+    info=info_text(lambda_reg,hidden_layer,alpha,mode, batch_size, DATASET_NAME)
 
     plt.figure()
     plt.plot(x_vals, y_vals, marker='o')
@@ -262,7 +265,7 @@ def plot_best_learning_curve(results, save_folder):
     plt.close()
 
 # === Save Metrics Table as Image ===
-def save_metrics_table(results, save_folder):
+def save_metrics_table(results, save_folder, DATASET_NAME):
     os.makedirs("evaluation", exist_ok=True)
 
     fig, ax = plt.subplots(figsize=(10, 8))
@@ -313,19 +316,22 @@ def save_metrics_table(results, save_folder):
     alpha = best_info['alpha']
     mode = best_info['mode']
     batch_size = best_info['batch_size']
-    info = info_text(lambda_reg, hidden_layer, alpha, mode, batch_size)
+    info = info_text(lambda_reg, hidden_layer, alpha, mode, batch_size, DATASET_NAME)
 
     plt.title(info, fontweight='bold')
     plt.tight_layout()
-    filename = f"{save_folder}/{FILE_NAME.lower()}_table.png"
+    filename = f"evaluation/{FILE_NAME.lower()}.png"
     plt.savefig(filename)
     print(f"📋 Saved metrics table: {filename}")
     plt.close()
 
 
 # === Neural Network Execution Wrapper ===
-def neural_network():
-    X, y = load_dataset()  # Load data and labels
+def neural_network(DATASET_NAME):
+    # if the folder is not existed, create
+    os.makedirs("evaluation", exist_ok=True) 
+
+    X, y = load_dataset(DATASET_NAME)  # Load data and labels
     folds = stratified_k_fold_split(X, y, k=K_FOLD_SIZE)  # Create 10-fold split
 
     lambda_reg_list = LAMBDA_REG  # List of λ values to test
@@ -334,8 +340,8 @@ def neural_network():
     batch_size = BATCH_SIZE        # Size of mini-batches
     mode = TRAIN_MODE        # Training mode
 
-    dataset_name = DATASET_NAME
     results = {}  # Dictionary to collect evaluation metrics
+    predict_nn = []  # Store predictions for ensemble
 
     for h_idx, hidden in enumerate(hidden_layers):
         for l_idx, lambda_reg in enumerate(lambda_reg_list):
@@ -352,23 +358,24 @@ def neural_network():
                     lambda_reg=lambda_reg
                 )
 
-                if STOP_CRITERIA=="M":
-                    stopping_J=M_SIZE
-                elif STOP_CRITERIA=="J":
-                    stopping_J=J_SIZE
-                        
+                stopping_J = M_SIZE if STOP_CRITERIA == "M" else J_SIZE
+
                 # Train the model
                 model.fit(
-                    X_train, y_train,
+                    X_train, y_train, 
+                    DATASET_NAME,
                     batch_size=batch_size,
                     fold_index=i,
                     mode=mode,
-                    stopping_J=stopping_J
+                    stopping_J=stopping_J,
                 )
 
                 # Make predictions
                 preds = model.predict(X_test)
                 preds_binary = (preds >= 0.5).astype(int).ravel()
+
+                # ✅ Save for ensemble
+                predict_nn.extend(preds_binary.tolist())
 
                 # Evaluate performance
                 acc = my_accuracy(y_test, preds_binary)
@@ -388,16 +395,15 @@ def neural_network():
                 }
 
     # Save performance table and learning curve
-    save_metrics_table(results, "evaluation")
-    plot_best_learning_curve(results, "evaluation")
+    save_metrics_table(results, "evaluation", DATASET_NAME)
+    plot_best_learning_curve(results, "evaluation", DATASET_NAME)
 
     # Run debugging output if flag is enabled
-    if DEBUG_MODE == True:
+    if DEBUG_MODE:
         A, Z, _, _ = forward_propagation(model.weights, X_train)
         finalized_D = model.finalized_D
         final_cost = model.final_cost
 
-        # Now safely extract all a_lists and z_lists for every instance
         all_a_lists = [[a[i].reshape(-1, 1) for a in A] for i in range(X_train.shape[0])]
         all_z_lists = [[z[i].reshape(-1, 1) for z in Z] for i in range(X_train.shape[0])]
         pred_y_list = [a_list[-1] for a_list in all_a_lists]
@@ -405,23 +411,24 @@ def neural_network():
         J_list = [-(yt.T @ np.log(yp) + (1 - yt).T @ np.log(1 - yp)).item()
                 for yt, yp in zip(true_y_list, pred_y_list)]
 
-        # delta_list, D_list calculation
         delta_list = []
         D_list = []
         for i in range(X_train.shape[0]):
             deltas = [None] * len(model.weights)
             deltas[-1] = all_a_lists[i][-1] - y_train[i].reshape(-1, 1)
             for l in reversed(range(len(model.weights) - 1)):
-                a = all_a_lists[i][l + 1][1:]  # exclude bias
+                a = all_a_lists[i][l + 1][1:]
                 da = a * (1 - a)
                 deltas[l] = (model.weights[l + 1][:, 1:].T @ deltas[l + 1]) * da
             delta_list.append(deltas)
             D_list.append([deltas[l] @ all_a_lists[i][l].T for l in range(len(model.weights))])
 
-        # call debug function
         debug_text.main(lambda_reg, X_train, y_train, model.weights, all_a_lists, all_z_lists,
-                J_list, final_cost, delta_list, D_list, finalized_D, FILE_NAME)
+                        J_list, final_cost, delta_list, D_list, finalized_D, FILE_NAME)
+
+    return predict_nn
+
         
 # === Main Entry Point ===
 if __name__ == "__main__":
-    neural_network()
+    neural_network(DATASET_NAME=DATASET_NAME)

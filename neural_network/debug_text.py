@@ -1,7 +1,12 @@
 
 import numpy as np
+import os
 
 def main(lambda_reg, X, y, Theta, all_a_lists, all_z_lists, J_list, final_cost, delta_list, D_list, finalized_D, DEBUG_FILENAME, header=""): 
+    # if the folder is not existed, create
+    os.makedirs("debug", exist_ok=True) 
+
+
     # Open a debug file for writing results
     with open(f"debug/backprop_{DEBUG_FILENAME}.txt", "w", encoding="utf-8") as f:
         if header:
