@@ -335,7 +335,7 @@
         "kind": 5,
         "importPath": "decision_tree.dt",
         "description": "decision_tree.dt",
-        "peekOfCode": "DATASET_NAME = \"digits\"\nMIN_GAIN = 1e-5       # 최소 정보 이득\nMAX_DEPTH = 5         # 최대 트리 깊이 제한\n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):",
+        "peekOfCode": "DATASET_NAME = \"digits\"\n# Stop Criteria\nMIN_GAIN = 1e-5       \nMAX_DEPTH = 5         \n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===",
         "detail": "decision_tree.dt",
         "documentation": {}
     },
@@ -344,7 +344,7 @@
         "kind": 5,
         "importPath": "decision_tree.dt",
         "description": "decision_tree.dt",
-        "peekOfCode": "MIN_GAIN = 1e-5       # 최소 정보 이득\nMAX_DEPTH = 5         # 최대 트리 깊이 제한\n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):\n    total_entropy = entropy(y)",
+        "peekOfCode": "MIN_GAIN = 1e-5       \nMAX_DEPTH = 5         \n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):\n    total_entropy = entropy(y)",
         "detail": "decision_tree.dt",
         "documentation": {}
     },
@@ -353,7 +353,7 @@
         "kind": 5,
         "importPath": "decision_tree.dt",
         "description": "decision_tree.dt",
-        "peekOfCode": "MAX_DEPTH = 5         # 최대 트리 깊이 제한\n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):\n    total_entropy = entropy(y)\n    values = X[feature].unique()",
+        "peekOfCode": "MAX_DEPTH = 5         \n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):\n    total_entropy = entropy(y)\n    values = X[feature].unique()",
         "detail": "decision_tree.dt",
         "documentation": {}
     },

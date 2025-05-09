@@ -5,8 +5,9 @@ import json
 import sys
 
 DATASET_NAME = "digits"
-MIN_GAIN = 1e-5       # 최소 정보 이득
-MAX_DEPTH = 5         # 최대 트리 깊이 제한
+# Stop Criteria
+MIN_GAIN = 1e-5       
+MAX_DEPTH = 5         
 
 # === Entropy Calculation ===
 def entropy(y):

@@ -51,9 +51,24 @@ python knn.py
 
 ---
 
-### ✅ Step 6: Run Random Forest Algorithm
+### ✅ Step 6: Run Random Forest
 
 ```bash
 cd random_forest
 python tree.py
+```
+
+### ✅ Step 7: Run Decision Tree
+
+```bash
+cd decision_tree
+python dt.py
+```
+
+### ✅ Step 8: Dataset name, Hyper Parameter, Stopping Criteria are located on the top of the all script. Please change to try different dataset or other settings. Below is random_forest/tree.py
+```bash
+DATASET_NAME="heart_disease"
+K_FOLD_SIZE=10
+MAX_DEPTH = 5
+MIN_INFO_GAIN = 1e-5
 ```
