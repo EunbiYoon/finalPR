@@ -7,7 +7,6 @@ import random
 from sklearn.preprocessing import OneHotEncoder
 
 
-DATASET_NAME = "digits"
 K_FOLD_SIZE = 10
 
 # === Stratified K-Fold Split Function ===
