@@ -1,9 +1,18 @@
 {
-    "feature": "36",
-    "threshold": 6.898954703832753,
+    "feature": "28",
+    "threshold": 7.02787456445993,
     "children": {
         "<=": {
-            "label": 0
+            "feature": "36",
+            "threshold": 0.48026315789473684,
+            "children": {
+                "<=": {
+                    "label": 0
+                },
+                ">": {
+                    "label": 1
+                }
+            }
         },
         ">": {
             "label": 1

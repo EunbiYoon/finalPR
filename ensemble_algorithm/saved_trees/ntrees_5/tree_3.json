@@ -1,3 +1,21 @@
 {
-    "label": 0
+    "feature": "33",
+    "threshold": 3.6202090592334493,
+    "children": {
+        "<=": {
+            "feature": "30",
+            "threshold": 1.1526717557251909,
+            "children": {
+                "<=": {
+                    "label": 1
+                },
+                ">": {
+                    "label": 0
+                }
+            }
+        },
+        ">": {
+            "label": 0
+        }
+    }
 }
