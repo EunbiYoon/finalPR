@@ -1,0 +1,464 @@
+
+⚡ Multinomial Linear Regression For digits dataset
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0252
+Epoch 200 / 1000 | Loss: 0.0212
+Epoch 300 / 1000 | Loss: 0.0195
+Epoch 400 / 1000 | Loss: 0.0186
+Epoch 500 / 1000 | Loss: 0.0180
+Epoch 600 / 1000 | Loss: 0.0176
+Epoch 700 / 1000 | Loss: 0.0173
+Epoch 800 / 1000 | Loss: 0.0171
+Epoch 900 / 1000 | Loss: 0.0169
+Fold 1: Accuracy = 0.9278, F1 Score = 0.9178
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0253
+Epoch 200 / 1000 | Loss: 0.0212
+Epoch 300 / 1000 | Loss: 0.0195
+Epoch 400 / 1000 | Loss: 0.0186
+Epoch 500 / 1000 | Loss: 0.0180
+Epoch 600 / 1000 | Loss: 0.0176
+Epoch 700 / 1000 | Loss: 0.0173
+Epoch 800 / 1000 | Loss: 0.0171
+Epoch 900 / 1000 | Loss: 0.0169
+Fold 2: Accuracy = 0.9167, F1 Score = 0.8914
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0253
+Epoch 200 / 1000 | Loss: 0.0212
+Epoch 300 / 1000 | Loss: 0.0195
+Epoch 400 / 1000 | Loss: 0.0186
+Epoch 500 / 1000 | Loss: 0.0180
+Epoch 600 / 1000 | Loss: 0.0176
+Epoch 700 / 1000 | Loss: 0.0173
+Epoch 800 / 1000 | Loss: 0.0171
+Epoch 900 / 1000 | Loss: 0.0169
+Fold 3: Accuracy = 0.9222, F1 Score = 0.9106
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0253
+Epoch 200 / 1000 | Loss: 0.0213
+Epoch 300 / 1000 | Loss: 0.0196
+Epoch 400 / 1000 | Loss: 0.0187
+Epoch 500 / 1000 | Loss: 0.0181
+Epoch 600 / 1000 | Loss: 0.0177
+Epoch 700 / 1000 | Loss: 0.0174
+Epoch 800 / 1000 | Loss: 0.0172
+Epoch 900 / 1000 | Loss: 0.0170
+Fold 4: Accuracy = 0.9278, F1 Score = 0.9211
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0253
+Epoch 200 / 1000 | Loss: 0.0213
+Epoch 300 / 1000 | Loss: 0.0196
+Epoch 400 / 1000 | Loss: 0.0187
+Epoch 500 / 1000 | Loss: 0.0181
+Epoch 600 / 1000 | Loss: 0.0177
+Epoch 700 / 1000 | Loss: 0.0174
+Epoch 800 / 1000 | Loss: 0.0172
+Epoch 900 / 1000 | Loss: 0.0170
+Fold 5: Accuracy = 0.9389, F1 Score = 0.9350
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0252
+Epoch 200 / 1000 | Loss: 0.0212
+Epoch 300 / 1000 | Loss: 0.0195
+Epoch 400 / 1000 | Loss: 0.0186
+Epoch 500 / 1000 | Loss: 0.0180
+Epoch 600 / 1000 | Loss: 0.0176
+Epoch 700 / 1000 | Loss: 0.0173
+Epoch 800 / 1000 | Loss: 0.0171
+Epoch 900 / 1000 | Loss: 0.0169
+Fold 6: Accuracy = 0.9278, F1 Score = 0.9271
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0253
+Epoch 200 / 1000 | Loss: 0.0212
+Epoch 300 / 1000 | Loss: 0.0195
+Epoch 400 / 1000 | Loss: 0.0186
+Epoch 500 / 1000 | Loss: 0.0180
+Epoch 600 / 1000 | Loss: 0.0177
+Epoch 700 / 1000 | Loss: 0.0174
+Epoch 800 / 1000 | Loss: 0.0171
+Epoch 900 / 1000 | Loss: 0.0170
+Fold 7: Accuracy = 0.9556, F1 Score = 0.9506
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0252
+Epoch 200 / 1000 | Loss: 0.0211
+Epoch 300 / 1000 | Loss: 0.0194
+Epoch 400 / 1000 | Loss: 0.0185
+Epoch 500 / 1000 | Loss: 0.0179
+Epoch 600 / 1000 | Loss: 0.0175
+Epoch 700 / 1000 | Loss: 0.0173
+Epoch 800 / 1000 | Loss: 0.0170
+Epoch 900 / 1000 | Loss: 0.0169
+Fold 8: Accuracy = 0.9441, F1 Score = 0.9317
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0251
+Epoch 200 / 1000 | Loss: 0.0211
+Epoch 300 / 1000 | Loss: 0.0194
+Epoch 400 / 1000 | Loss: 0.0185
+Epoch 500 / 1000 | Loss: 0.0179
+Epoch 600 / 1000 | Loss: 0.0175
+Epoch 700 / 1000 | Loss: 0.0172
+Epoch 800 / 1000 | Loss: 0.0170
+Epoch 900 / 1000 | Loss: 0.0168
+Fold 9: Accuracy = 0.9497, F1 Score = 0.9504
+Epoch 0 / 1000 | Loss: 0.0500
+Epoch 100 / 1000 | Loss: 0.0252
+Epoch 200 / 1000 | Loss: 0.0212
+Epoch 300 / 1000 | Loss: 0.0195
+Epoch 400 / 1000 | Loss: 0.0186
+Epoch 500 / 1000 | Loss: 0.0180
+Epoch 600 / 1000 | Loss: 0.0176
+Epoch 700 / 1000 | Loss: 0.0173
+Epoch 800 / 1000 | Loss: 0.0171
+Epoch 900 / 1000 | Loss: 0.0169
+Fold 10: Accuracy = 0.8994, F1 Score = 0.8996
+
+✅ Final Results:
+Average Accuracy: 0.9310
+Average F1 Score: 0.9235
+
+⚡ Multinomial Linear Regression For parkinsons dataset
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1146
+Epoch 200 / 1000 | Loss: 0.1129
+Epoch 300 / 1000 | Loss: 0.1115
+Epoch 400 / 1000 | Loss: 0.1105
+Epoch 500 / 1000 | Loss: 0.1096
+Epoch 600 / 1000 | Loss: 0.1088
+Epoch 700 / 1000 | Loss: 0.1082
+Epoch 800 / 1000 | Loss: 0.1077
+Epoch 900 / 1000 | Loss: 0.1073
+Fold 1: Accuracy = 0.7500, F1 Score = 0.4286
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1135
+Epoch 200 / 1000 | Loss: 0.1116
+Epoch 300 / 1000 | Loss: 0.1101
+Epoch 400 / 1000 | Loss: 0.1088
+Epoch 500 / 1000 | Loss: 0.1078
+Epoch 600 / 1000 | Loss: 0.1070
+Epoch 700 / 1000 | Loss: 0.1063
+Epoch 800 / 1000 | Loss: 0.1057
+Epoch 900 / 1000 | Loss: 0.1052
+Fold 2: Accuracy = 0.7000, F1 Score = 0.4118
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1137
+Epoch 200 / 1000 | Loss: 0.1119
+Epoch 300 / 1000 | Loss: 0.1104
+Epoch 400 / 1000 | Loss: 0.1092
+Epoch 500 / 1000 | Loss: 0.1083
+Epoch 600 / 1000 | Loss: 0.1074
+Epoch 700 / 1000 | Loss: 0.1068
+Epoch 800 / 1000 | Loss: 0.1062
+Epoch 900 / 1000 | Loss: 0.1057
+Fold 3: Accuracy = 0.6500, F1 Score = 0.3939
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1131
+Epoch 200 / 1000 | Loss: 0.1114
+Epoch 300 / 1000 | Loss: 0.1101
+Epoch 400 / 1000 | Loss: 0.1090
+Epoch 500 / 1000 | Loss: 0.1081
+Epoch 600 / 1000 | Loss: 0.1074
+Epoch 700 / 1000 | Loss: 0.1067
+Epoch 800 / 1000 | Loss: 0.1062
+Epoch 900 / 1000 | Loss: 0.1058
+Fold 4: Accuracy = 0.6500, F1 Score = 0.3939
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1134
+Epoch 200 / 1000 | Loss: 0.1118
+Epoch 300 / 1000 | Loss: 0.1105
+Epoch 400 / 1000 | Loss: 0.1095
+Epoch 500 / 1000 | Loss: 0.1086
+Epoch 600 / 1000 | Loss: 0.1079
+Epoch 700 / 1000 | Loss: 0.1073
+Epoch 800 / 1000 | Loss: 0.1068
+Epoch 900 / 1000 | Loss: 0.1064
+Fold 5: Accuracy = 0.7000, F1 Score = 0.4118
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1123
+Epoch 200 / 1000 | Loss: 0.1105
+Epoch 300 / 1000 | Loss: 0.1092
+Epoch 400 / 1000 | Loss: 0.1081
+Epoch 500 / 1000 | Loss: 0.1073
+Epoch 600 / 1000 | Loss: 0.1065
+Epoch 700 / 1000 | Loss: 0.1059
+Epoch 800 / 1000 | Loss: 0.1054
+Epoch 900 / 1000 | Loss: 0.1050
+Fold 6: Accuracy = 0.6842, F1 Score = 0.4063
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1155
+Epoch 200 / 1000 | Loss: 0.1138
+Epoch 300 / 1000 | Loss: 0.1125
+Epoch 400 / 1000 | Loss: 0.1114
+Epoch 500 / 1000 | Loss: 0.1105
+Epoch 600 / 1000 | Loss: 0.1097
+Epoch 700 / 1000 | Loss: 0.1091
+Epoch 800 / 1000 | Loss: 0.1086
+Epoch 900 / 1000 | Loss: 0.1082
+Fold 7: Accuracy = 0.7895, F1 Score = 0.4412
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1158
+Epoch 200 / 1000 | Loss: 0.1142
+Epoch 300 / 1000 | Loss: 0.1130
+Epoch 400 / 1000 | Loss: 0.1120
+Epoch 500 / 1000 | Loss: 0.1111
+Epoch 600 / 1000 | Loss: 0.1105
+Epoch 700 / 1000 | Loss: 0.1099
+Epoch 800 / 1000 | Loss: 0.1094
+Epoch 900 / 1000 | Loss: 0.1090
+Fold 8: Accuracy = 0.8421, F1 Score = 0.4571
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1162
+Epoch 200 / 1000 | Loss: 0.1145
+Epoch 300 / 1000 | Loss: 0.1133
+Epoch 400 / 1000 | Loss: 0.1122
+Epoch 500 / 1000 | Loss: 0.1113
+Epoch 600 / 1000 | Loss: 0.1106
+Epoch 700 / 1000 | Loss: 0.1099
+Epoch 800 / 1000 | Loss: 0.1094
+Epoch 900 / 1000 | Loss: 0.1089
+Fold 9: Accuracy = 0.8421, F1 Score = 0.4571
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.1162
+Epoch 200 / 1000 | Loss: 0.1145
+Epoch 300 / 1000 | Loss: 0.1132
+Epoch 400 / 1000 | Loss: 0.1121
+Epoch 500 / 1000 | Loss: 0.1112
+Epoch 600 / 1000 | Loss: 0.1105
+Epoch 700 / 1000 | Loss: 0.1098
+Epoch 800 / 1000 | Loss: 0.1093
+Epoch 900 / 1000 | Loss: 0.1088
+Fold 10: Accuracy = 0.8421, F1 Score = 0.4571
+
+✅ Final Results:
+Average Accuracy: 0.7450
+Average F1 Score: 0.4259
+
+⚡ Multinomial Linear Regression For rice dataset
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2406
+Epoch 200 / 1000 | Loss: 0.2319
+Epoch 300 / 1000 | Loss: 0.2238
+Epoch 400 / 1000 | Loss: 0.2162
+Epoch 500 / 1000 | Loss: 0.2091
+Epoch 600 / 1000 | Loss: 0.2024
+Epoch 700 / 1000 | Loss: 0.1962
+Epoch 800 / 1000 | Loss: 0.1903
+Epoch 900 / 1000 | Loss: 0.1848
+Fold 1: Accuracy = 0.9291, F1 Score = 0.9280
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2405
+Epoch 200 / 1000 | Loss: 0.2317
+Epoch 300 / 1000 | Loss: 0.2235
+Epoch 400 / 1000 | Loss: 0.2158
+Epoch 500 / 1000 | Loss: 0.2086
+Epoch 600 / 1000 | Loss: 0.2019
+Epoch 700 / 1000 | Loss: 0.1956
+Epoch 800 / 1000 | Loss: 0.1897
+Epoch 900 / 1000 | Loss: 0.1841
+Fold 2: Accuracy = 0.9055, F1 Score = 0.9030
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2406
+Epoch 200 / 1000 | Loss: 0.2318
+Epoch 300 / 1000 | Loss: 0.2236
+Epoch 400 / 1000 | Loss: 0.2159
+Epoch 500 / 1000 | Loss: 0.2087
+Epoch 600 / 1000 | Loss: 0.2020
+Epoch 700 / 1000 | Loss: 0.1957
+Epoch 800 / 1000 | Loss: 0.1898
+Epoch 900 / 1000 | Loss: 0.1843
+Fold 3: Accuracy = 0.9213, F1 Score = 0.9200
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2405
+Epoch 200 / 1000 | Loss: 0.2317
+Epoch 300 / 1000 | Loss: 0.2235
+Epoch 400 / 1000 | Loss: 0.2158
+Epoch 500 / 1000 | Loss: 0.2087
+Epoch 600 / 1000 | Loss: 0.2019
+Epoch 700 / 1000 | Loss: 0.1956
+Epoch 800 / 1000 | Loss: 0.1897
+Epoch 900 / 1000 | Loss: 0.1842
+Fold 4: Accuracy = 0.9134, F1 Score = 0.9120
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2406
+Epoch 200 / 1000 | Loss: 0.2318
+Epoch 300 / 1000 | Loss: 0.2236
+Epoch 400 / 1000 | Loss: 0.2160
+Epoch 500 / 1000 | Loss: 0.2089
+Epoch 600 / 1000 | Loss: 0.2022
+Epoch 700 / 1000 | Loss: 0.1959
+Epoch 800 / 1000 | Loss: 0.1900
+Epoch 900 / 1000 | Loss: 0.1845
+Fold 5: Accuracy = 0.9265, F1 Score = 0.9254
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2405
+Epoch 200 / 1000 | Loss: 0.2317
+Epoch 300 / 1000 | Loss: 0.2235
+Epoch 400 / 1000 | Loss: 0.2158
+Epoch 500 / 1000 | Loss: 0.2086
+Epoch 600 / 1000 | Loss: 0.2019
+Epoch 700 / 1000 | Loss: 0.1956
+Epoch 800 / 1000 | Loss: 0.1897
+Epoch 900 / 1000 | Loss: 0.1842
+Fold 6: Accuracy = 0.9003, F1 Score = 0.8987
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2405
+Epoch 200 / 1000 | Loss: 0.2317
+Epoch 300 / 1000 | Loss: 0.2234
+Epoch 400 / 1000 | Loss: 0.2157
+Epoch 500 / 1000 | Loss: 0.2085
+Epoch 600 / 1000 | Loss: 0.2018
+Epoch 700 / 1000 | Loss: 0.1955
+Epoch 800 / 1000 | Loss: 0.1896
+Epoch 900 / 1000 | Loss: 0.1840
+Fold 7: Accuracy = 0.9081, F1 Score = 0.9063
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2406
+Epoch 200 / 1000 | Loss: 0.2318
+Epoch 300 / 1000 | Loss: 0.2236
+Epoch 400 / 1000 | Loss: 0.2159
+Epoch 500 / 1000 | Loss: 0.2088
+Epoch 600 / 1000 | Loss: 0.2021
+Epoch 700 / 1000 | Loss: 0.1958
+Epoch 800 / 1000 | Loss: 0.1899
+Epoch 900 / 1000 | Loss: 0.1844
+Fold 8: Accuracy = 0.9186, F1 Score = 0.9173
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2405
+Epoch 200 / 1000 | Loss: 0.2317
+Epoch 300 / 1000 | Loss: 0.2235
+Epoch 400 / 1000 | Loss: 0.2158
+Epoch 500 / 1000 | Loss: 0.2086
+Epoch 600 / 1000 | Loss: 0.2019
+Epoch 700 / 1000 | Loss: 0.1956
+Epoch 800 / 1000 | Loss: 0.1897
+Epoch 900 / 1000 | Loss: 0.1842
+Fold 9: Accuracy = 0.9134, F1 Score = 0.9116
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2406
+Epoch 200 / 1000 | Loss: 0.2318
+Epoch 300 / 1000 | Loss: 0.2236
+Epoch 400 / 1000 | Loss: 0.2159
+Epoch 500 / 1000 | Loss: 0.2087
+Epoch 600 / 1000 | Loss: 0.2020
+Epoch 700 / 1000 | Loss: 0.1957
+Epoch 800 / 1000 | Loss: 0.1898
+Epoch 900 / 1000 | Loss: 0.1843
+Fold 10: Accuracy = 0.9160, F1 Score = 0.9146
+
+✅ Final Results:
+Average Accuracy: 0.9152
+Average F1 Score: 0.9137
+
+⚡ Multinomial Linear Regression For credit_approval dataset
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2339
+Epoch 200 / 1000 | Loss: 0.2196
+Epoch 300 / 1000 | Loss: 0.2067
+Epoch 400 / 1000 | Loss: 0.1952
+Epoch 500 / 1000 | Loss: 0.1849
+Epoch 600 / 1000 | Loss: 0.1756
+Epoch 700 / 1000 | Loss: 0.1673
+Epoch 800 / 1000 | Loss: 0.1598
+Epoch 900 / 1000 | Loss: 0.1531
+Fold 1: Accuracy = 0.8485, F1 Score = 0.8413
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2340
+Epoch 200 / 1000 | Loss: 0.2196
+Epoch 300 / 1000 | Loss: 0.2068
+Epoch 400 / 1000 | Loss: 0.1953
+Epoch 500 / 1000 | Loss: 0.1850
+Epoch 600 / 1000 | Loss: 0.1758
+Epoch 700 / 1000 | Loss: 0.1675
+Epoch 800 / 1000 | Loss: 0.1600
+Epoch 900 / 1000 | Loss: 0.1533
+Fold 2: Accuracy = 0.8030, F1 Score = 0.7951
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2340
+Epoch 200 / 1000 | Loss: 0.2197
+Epoch 300 / 1000 | Loss: 0.2069
+Epoch 400 / 1000 | Loss: 0.1954
+Epoch 500 / 1000 | Loss: 0.1851
+Epoch 600 / 1000 | Loss: 0.1759
+Epoch 700 / 1000 | Loss: 0.1676
+Epoch 800 / 1000 | Loss: 0.1601
+Epoch 900 / 1000 | Loss: 0.1534
+Fold 3: Accuracy = 0.8030, F1 Score = 0.7890
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2340
+Epoch 200 / 1000 | Loss: 0.2196
+Epoch 300 / 1000 | Loss: 0.2068
+Epoch 400 / 1000 | Loss: 0.1953
+Epoch 500 / 1000 | Loss: 0.1850
+Epoch 600 / 1000 | Loss: 0.1758
+Epoch 700 / 1000 | Loss: 0.1675
+Epoch 800 / 1000 | Loss: 0.1600
+Epoch 900 / 1000 | Loss: 0.1533
+Fold 4: Accuracy = 0.8000, F1 Score = 0.7871
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2339
+Epoch 200 / 1000 | Loss: 0.2195
+Epoch 300 / 1000 | Loss: 0.2066
+Epoch 400 / 1000 | Loss: 0.1950
+Epoch 500 / 1000 | Loss: 0.1847
+Epoch 600 / 1000 | Loss: 0.1754
+Epoch 700 / 1000 | Loss: 0.1670
+Epoch 800 / 1000 | Loss: 0.1595
+Epoch 900 / 1000 | Loss: 0.1528
+Fold 5: Accuracy = 0.8154, F1 Score = 0.8077
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2340
+Epoch 200 / 1000 | Loss: 0.2196
+Epoch 300 / 1000 | Loss: 0.2068
+Epoch 400 / 1000 | Loss: 0.1953
+Epoch 500 / 1000 | Loss: 0.1850
+Epoch 600 / 1000 | Loss: 0.1758
+Epoch 700 / 1000 | Loss: 0.1674
+Epoch 800 / 1000 | Loss: 0.1600
+Epoch 900 / 1000 | Loss: 0.1532
+Fold 6: Accuracy = 0.8000, F1 Score = 0.7871
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2339
+Epoch 200 / 1000 | Loss: 0.2196
+Epoch 300 / 1000 | Loss: 0.2067
+Epoch 400 / 1000 | Loss: 0.1952
+Epoch 500 / 1000 | Loss: 0.1849
+Epoch 600 / 1000 | Loss: 0.1757
+Epoch 700 / 1000 | Loss: 0.1674
+Epoch 800 / 1000 | Loss: 0.1599
+Epoch 900 / 1000 | Loss: 0.1532
+Fold 7: Accuracy = 0.8154, F1 Score = 0.8018
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2340
+Epoch 200 / 1000 | Loss: 0.2197
+Epoch 300 / 1000 | Loss: 0.2069
+Epoch 400 / 1000 | Loss: 0.1955
+Epoch 500 / 1000 | Loss: 0.1852
+Epoch 600 / 1000 | Loss: 0.1760
+Epoch 700 / 1000 | Loss: 0.1677
+Epoch 800 / 1000 | Loss: 0.1603
+Epoch 900 / 1000 | Loss: 0.1536
+Fold 8: Accuracy = 0.8462, F1 Score = 0.8397
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2338
+Epoch 200 / 1000 | Loss: 0.2194
+Epoch 300 / 1000 | Loss: 0.2065
+Epoch 400 / 1000 | Loss: 0.1949
+Epoch 500 / 1000 | Loss: 0.1845
+Epoch 600 / 1000 | Loss: 0.1752
+Epoch 700 / 1000 | Loss: 0.1668
+Epoch 800 / 1000 | Loss: 0.1593
+Epoch 900 / 1000 | Loss: 0.1525
+Fold 9: Accuracy = 0.6923, F1 Score = 0.6750
+Epoch 0 / 1000 | Loss: 0.2500
+Epoch 100 / 1000 | Loss: 0.2339
+Epoch 200 / 1000 | Loss: 0.2196
+Epoch 300 / 1000 | Loss: 0.2067
+Epoch 400 / 1000 | Loss: 0.1952
+Epoch 500 / 1000 | Loss: 0.1849
+Epoch 600 / 1000 | Loss: 0.1756
+Epoch 700 / 1000 | Loss: 0.1673
+Epoch 800 / 1000 | Loss: 0.1598
+Epoch 900 / 1000 | Loss: 0.1530
+Fold 10: Accuracy = 0.7538, F1 Score = 0.7436
+
+✅ Final Results:
+Average Accuracy: 0.7978
+Average F1 Score: 0.7868
