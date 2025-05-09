@@ -7,8 +7,8 @@ import json
 import math
 import random
 
-DATASET_NAME=""
-K_FOLD_SIZE=5
+DATASET_NAME="rice"
+K_FOLD_SIZE=10
 
 MAX_DEPTH = 5
 MIN_INFO_GAIN = 1e-5

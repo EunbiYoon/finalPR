@@ -1,20 +1,20 @@
 [
     {
-        "label": "pandas",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "pandas",
-        "description": "pandas",
-        "detail": "pandas",
-        "documentation": {}
-    },
-    {
         "label": "numpy",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "numpy",
         "description": "numpy",
         "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
         "documentation": {}
     },
     {
@@ -35,11 +35,69 @@
         "documentation": {}
     },
     {
-        "label": "datasets",
-        "importPath": "sklearn",
-        "description": "sklearn",
+        "label": "defaultdict",
+        "importPath": "collections",
+        "description": "collections",
         "isExtraImport": true,
-        "detail": "sklearn",
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "OneHotEncoder",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "OneHotEncoder",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
+        "documentation": {}
+    },
+    {
+        "label": "OneHotEncoder",
+        "importPath": "sklearn.preprocessing",
+        "description": "sklearn.preprocessing",
+        "isExtraImport": true,
+        "detail": "sklearn.preprocessing",
         "documentation": {}
     },
     {
@@ -70,11 +128,62 @@
         "documentation": {}
     },
     {
-        "label": "OneHotEncoder",
-        "importPath": "sklearn.preprocessing",
-        "description": "sklearn.preprocessing",
+        "label": "chain",
+        "importPath": "itertools",
+        "description": "itertools",
         "isExtraImport": true,
-        "detail": "sklearn.preprocessing",
+        "detail": "itertools",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "load_training_set",
+        "importPath": "utils",
+        "description": "utils",
+        "isExtraImport": true,
+        "detail": "utils",
+        "documentation": {}
+    },
+    {
+        "label": "load_test_set",
+        "importPath": "utils",
+        "description": "utils",
+        "isExtraImport": true,
+        "detail": "utils",
+        "documentation": {}
+    },
+    {
+        "label": "nltk",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "nltk",
+        "description": "nltk",
+        "detail": "nltk",
+        "documentation": {}
+    },
+    {
+        "label": "stopwords",
+        "importPath": "nltk.corpus",
+        "description": "nltk.corpus",
+        "isExtraImport": true,
+        "detail": "nltk.corpus",
+        "documentation": {}
+    },
+    {
+        "label": "os,sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os.sys",
+        "description": "os.sys",
+        "detail": "os.sys",
         "documentation": {}
     },
     {
@@ -120,49 +229,6 @@
         "documentation": {}
     },
     {
-        "label": "math",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "math",
-        "description": "math",
-        "detail": "math",
-        "documentation": {}
-    },
-    {
-        "label": "random",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "random",
-        "description": "random",
-        "detail": "random",
-        "documentation": {}
-    },
-    {
-        "label": "train_test_split",
-        "importPath": "sklearn.model_selection",
-        "description": "sklearn.model_selection",
-        "isExtraImport": true,
-        "detail": "sklearn.model_selection",
-        "documentation": {}
-    },
-    {
-        "label": "shuffle",
-        "importPath": "sklearn.utils",
-        "description": "sklearn.utils",
-        "isExtraImport": true,
-        "detail": "sklearn.utils",
-        "documentation": {}
-    },
-    {
-        "label": "df",
-        "kind": 5,
-        "importPath": "datasets.label_parkinsons",
-        "description": "datasets.label_parkinsons",
-        "peekOfCode": "df = pd.read_csv(\"parkinsons.csv\")\n# 마지막 열 이름을 'label'로 변경\ndf.rename(columns={df.columns[-1]: \"label\"}, inplace=True)\n# 변경된 결과를 다시 CSV로 저장\ndf.to_csv(\"parkinsons_labeled.csv\", index=False)",
-        "detail": "datasets.label_parkinsons",
-        "documentation": {}
-    },
-    {
         "label": "load_dataset",
         "kind": 2,
         "importPath": "datasets.load_digits",
@@ -172,21 +238,84 @@
         "documentation": {}
     },
     {
-        "label": "attribute_class",
+        "label": "stratified_k_fold_split",
         "kind": 2,
-        "importPath": "knn_algorithm.knn",
-        "description": "knn_algorithm.knn",
-        "peekOfCode": "def attribute_class(data):\n    # separate attributes and class\n    attribute_data=data.iloc[:,:-1]\n    class_data=data.iloc[:, -1]\n    return attribute_data, class_data\ndef normalization_forumla(data):\n    data_numpy=data.to_numpy()\n    normalized_numpy = (data_numpy - np.min(data_numpy, axis=0)) / (np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0))\n    #check which one is the problem\n    diff = np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0)",
-        "detail": "knn_algorithm.knn",
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    df['original_index'] = np.arange(len(df))\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):\n        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]\n        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]",
+        "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
     {
-        "label": "normalization_forumla",
+        "label": "load_dataset",
         "kind": 2,
-        "importPath": "knn_algorithm.knn",
-        "description": "knn_algorithm.knn",
-        "peekOfCode": "def normalization_forumla(data):\n    data_numpy=data.to_numpy()\n    normalized_numpy = (data_numpy - np.min(data_numpy, axis=0)) / (np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0))\n    #check which one is the problem\n    diff = np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0)\n    print(\"Zero-variance columns (same value for all rows):\", np.where(diff == 0))\n    # change normalized data to pandas dataframe\n    normalized_data = pd.DataFrame(normalized_numpy, columns=data.columns)\n    return normalized_data\ndef load_data():",
-        "detail": "knn_algorithm.knn",
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def load_dataset(DATASET_NAME):\n    # Load dataset from CSV file\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    # === parkinsons --> customize datset ===\n    if DATASET_NAME==\"parkinsons\":\n        # change last column as label\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    # Use 'diagnosis' column if 'label' doesn't exist\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_train_test",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def normalize_train_test(train_df, test_df):\n    features = train_df.drop(columns=['label', 'original_index']).columns\n    train_X = train_df[features]\n    test_X = test_df[features]\n    min_vals = train_X.min()\n    max_vals = train_X.max()\n    diff = max_vals - min_vals\n    diff[diff == 0] = 1e-8\n    train_X_norm = (train_X - min_vals) / diff\n    test_X_norm = (test_X - min_vals) / diff",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "majority_vote",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def majority_vote(votes):\n    return Counter(votes).most_common(1)[0][0]\n# === KNN Fold Runner ===\ndef run_knn_single_fold(X_train, y_train, X_test, k=5):\n    def euclidean(x1, x2):\n        return np.sqrt(np.sum((x1 - x2) ** 2))\n    def majority_vote(neighbors):\n        count = Counter(neighbors)\n        return count.most_common(1)[0][0]\n    predictions = []",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "run_knn_single_fold",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def run_knn_single_fold(X_train, y_train, X_test, k=5):\n    def euclidean(x1, x2):\n        return np.sqrt(np.sum((x1 - x2) ** 2))\n    def majority_vote(neighbors):\n        count = Counter(neighbors)\n        return count.most_common(1)[0][0]\n    predictions = []\n    for test_point in X_test:\n        distances = [euclidean(test_point, x_train) for x_train in X_train]\n        neighbors_idx = np.argsort(distances)[:k]",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "run_tree_single_fold",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def run_tree_single_fold(X_train, y_train, X_test, ntrees=50):\n    class Node:\n        def __init__(self, feature=None, threshold=None, label=None, children=None):\n            self.feature = feature\n            self.threshold = threshold\n            self.label = label\n            self.children = children if children else {}\n    def entropy(y):\n        probabilities = y.value_counts() / len(y)\n        return -np.sum(probabilities * np.log2(probabilities))",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "run_nn_single_fold",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def run_nn_single_fold(X_train, y_train, X_test):\n    class NeuralNetwork:\n        def __init__(self, layer_sizes, alpha=0.01, lambda_reg=0.0):\n            self.layer_sizes = layer_sizes\n            self.alpha = alpha\n            self.lambda_reg = lambda_reg\n            self.weights = self.initialize_weights()\n        def initialize_weights(self):\n            weights = []\n            for i in range(len(self.layer_sizes) - 1):",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "ensemble_main",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def ensemble_main():\n    X, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X, y, K_FOLD_SIZE)\n    vote_dict = defaultdict(list)\n    for fold_idx, (train_df, test_df) in enumerate(folds):\n        print(f\"\\n🔁 Fold {fold_idx+1}/{K_FOLD_SIZE}\")\n        train_df, test_df = normalize_train_test(train_df, test_df)\n        X_train = train_df.drop(columns=['label']).values\n        y_train = train_df['label'].values.ravel()\n        X_test = test_df.drop(columns=['label']).values",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "K_FOLD_SIZE",
+        "kind": 5,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "K_FOLD_SIZE = 10\n# === Stratified K-Fold Split Function ===\ndef stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    df['original_index'] = np.arange(len(df))\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):",
+        "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
     {
@@ -194,16 +323,43 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def load_data():\n    # read CSV file\n    data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)\n    # if you have columnn -> maybe recognize as string\n    data_file = data_file.apply(pd.to_numeric, errors='coerce')\n    # attribute become another row -> need to remove\n    data_file=data_file.drop(index=0)\n    data_file=data_file.reset_index(drop=True)\n    return data_file\n# Prepared train_data, test_data",
+        "peekOfCode": "def load_data(DATASET_NAME):\n    data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)\n    if DATASET_NAME == \"parkinsons\":\n        data_file.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    data_file = data_file.apply(pd.to_numeric, errors='coerce')\n    data_file = data_file.drop(index=0).reset_index(drop=True)\n    return data_file\n# === Stratified K-Fold Split ===\ndef stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
     {
-        "label": "shuffle_normalization",
+        "label": "stratified_k_fold_split",
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def shuffle_normalization(data_file):\n    # shuffle the DataFrame\n    shuffled_data = sk.utils.shuffle(data_file)\n    # split data with training and testing\n    train_data, test_data= sk.model_selection.train_test_split(shuffled_data, test_size=0.2)\n    # reset index both train_data and test_data\n    train_data=train_data.reset_index(drop=True)\n    test_data=test_data.reset_index(drop=True)\n    #train_data.to_excel('train_data.xlsx')\n    #test_data.to_excel('test_data.xlsx')",
+        "peekOfCode": "def stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = y\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):\n        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]\n        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]\n        test_df = pd.concat([c0, c1]).sample(frac=1).reset_index(drop=True)",
+        "detail": "knn_algorithm.knn",
+        "documentation": {}
+    },
+    {
+        "label": "attribute_class",
+        "kind": 2,
+        "importPath": "knn_algorithm.knn",
+        "description": "knn_algorithm.knn",
+        "peekOfCode": "def attribute_class(data):\n    attribute_data = data.iloc[:, :-1]\n    class_data = data.iloc[:, -1]\n    return attribute_data, class_data\n# === Normalize data using Min-Max ===\ndef normalization_formula_train(train_data):\n    min_vals = np.min(train_data.to_numpy(), axis=0)\n    max_vals = np.max(train_data.to_numpy(), axis=0)\n    diff = max_vals - min_vals\n    if np.all(diff == 0):",
+        "detail": "knn_algorithm.knn",
+        "documentation": {}
+    },
+    {
+        "label": "normalization_formula_train",
+        "kind": 2,
+        "importPath": "knn_algorithm.knn",
+        "description": "knn_algorithm.knn",
+        "peekOfCode": "def normalization_formula_train(train_data):\n    min_vals = np.min(train_data.to_numpy(), axis=0)\n    max_vals = np.max(train_data.to_numpy(), axis=0)\n    diff = max_vals - min_vals\n    if np.all(diff == 0):\n        print(\"Zero-variance columns:\", np.where(diff == 0))\n    normalized_train = (train_data - min_vals) / diff\n    return pd.DataFrame(normalized_train, columns=train_data.columns), min_vals, diff\ndef normalization_formula_test(test_data, min_vals, diff):\n    normalized_test = (test_data - min_vals) / diff",
+        "detail": "knn_algorithm.knn",
+        "documentation": {}
+    },
+    {
+        "label": "normalization_formula_test",
+        "kind": 2,
+        "importPath": "knn_algorithm.knn",
+        "description": "knn_algorithm.knn",
+        "peekOfCode": "def normalization_formula_test(test_data, min_vals, diff):\n    normalized_test = (test_data - min_vals) / diff\n    return pd.DataFrame(normalized_test, columns=test_data.columns)\n# === Euclidean distance calculation ===\ndef euclidean_formula(vector1, vector2):\n    return np.sqrt(np.sum((vector1 - vector2) ** 2))\ndef euclidean_matrix(train_data, test_data, data_info):\n    euclidean_table = np.zeros((len(train_data), len(test_data)))\n    for train_idx in range(len(train_data)):\n        for test_idx in range(len(test_data)):",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -212,7 +368,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def euclidean_formula(vector1,vector2):\n    # follow eucliean distance formula\n    euclidean_distance = np.sqrt(np.sum((vector1-vector2)**2))\n    return euclidean_distance\n# Calculate Euclidean Distane in train_data\ndef euclidean_matrix(train_data, test_data, data_info):\n    # Initialize an empty NumPy array (rows = train_data, columns = test_data)\n    euclidean_table = np.zeros((len(train_data), len(test_data)))\n    # Compute distances row-wise (train_data as rows, test_data as columns)\n    for train_idx in range(len(train_data)):",
+        "peekOfCode": "def euclidean_formula(vector1, vector2):\n    return np.sqrt(np.sum((vector1 - vector2) ** 2))\ndef euclidean_matrix(train_data, test_data, data_info):\n    euclidean_table = np.zeros((len(train_data), len(test_data)))\n    for train_idx in range(len(train_data)):\n        for test_idx in range(len(test_data)):\n            euclidean_table[train_idx, test_idx] = euclidean_formula(train_data.iloc[train_idx], test_data.iloc[test_idx])\n    euclidean_df = pd.DataFrame(euclidean_table, index=[f\"Train_{i}\" for i in range(len(train_data))], columns=[f\"Test_{j}\" for j in range(len(test_data))])\n    print(\"--> Euclidean distance matrix has been created : \" + data_info + \"_data...\")\n    return euclidean_df",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -221,7 +377,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def euclidean_matrix(train_data, test_data, data_info):\n    # Initialize an empty NumPy array (rows = train_data, columns = test_data)\n    euclidean_table = np.zeros((len(train_data), len(test_data)))\n    # Compute distances row-wise (train_data as rows, test_data as columns)\n    for train_idx in range(len(train_data)):\n        for test_idx in range(len(test_data)):\n            euclidean_table[train_idx, test_idx] = euclidean_formula(\n                train_data.iloc[train_idx], test_data.iloc[test_idx]\n            )\n    # Convert the NumPy array to a DataFrame (train_data as index, test_data as columns)",
+        "peekOfCode": "def euclidean_matrix(train_data, test_data, data_info):\n    euclidean_table = np.zeros((len(train_data), len(test_data)))\n    for train_idx in range(len(train_data)):\n        for test_idx in range(len(test_data)):\n            euclidean_table[train_idx, test_idx] = euclidean_formula(train_data.iloc[train_idx], test_data.iloc[test_idx])\n    euclidean_df = pd.DataFrame(euclidean_table, index=[f\"Train_{i}\" for i in range(len(train_data))], columns=[f\"Test_{j}\" for j in range(len(test_data))])\n    print(\"--> Euclidean distance matrix has been created : \" + data_info + \"_data...\")\n    return euclidean_df\n# === Select k-nearest neighbors ===\ndef cutoff_k(test_column, k_num):",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -230,7 +386,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def cutoff_k(test_column,k_num):\n    # sort by smallest and cutoff k amount\n    smallest_column=test_column.sort_values(ascending=True)[:k_num]\n    # find index of smallest_column\n    smallest_indices=smallest_column.index.str.split('_').str[1].astype(int)\n    return smallest_indices\n# check majority\ndef majority_formula(list):\n    # count 1 or 0, if there is nothing value is 0\n    count_1 = list.value_counts().get(1, 0)  ",
+        "peekOfCode": "def cutoff_k(test_column, k_num):\n    smallest_column = test_column.sort_values(ascending=True)[:k_num]\n    smallest_indices = smallest_column.index.str.split('_').str[1].astype(int)\n    return smallest_indices\n# === Determine majority label ===\ndef majority_formula(list):\n    count_1 = list.value_counts().get(1, 0)\n    count_0 = list.value_counts().get(0, 0)\n    return 1 if count_1 > count_0 else 0\n# === Accuracy calculation ===",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -239,7 +395,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def majority_formula(list):\n    # count 1 or 0, if there is nothing value is 0\n    count_1 = list.value_counts().get(1, 0)  \n    count_0 = list.value_counts().get(0, 0) \n    # betwen 1 and 0 which one is more\n    if count_1 > count_0:\n        return 1\n    else:\n        return 0\n# Accuracy in Training and Testing",
+        "peekOfCode": "def majority_formula(list):\n    count_1 = list.value_counts().get(1, 0)\n    count_0 = list.value_counts().get(0, 0)\n    return 1 if count_1 > count_0 else 0\n# === Accuracy calculation ===\ndef calculate_accuracy(actual_series, predicted_series):\n    actual_list = np.array(actual_series.tolist())\n    predicted_list = np.array(predicted_series, dtype=int)\n    match_count = np.sum(actual_list == predicted_list)\n    return match_count / len(actual_list)",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -248,7 +404,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def calculate_accuracy(actual_series, predicted_seires):\n    if (len(actual_series))==len((predicted_seires)):\n        # transform series to list\n        actual_list=np.array(actual_series.tolist())\n        # transform series to list & change datatype integer\n        predicted_list=np.array(predicted_seires, dtype=int)\n        # compare two column. matched->1, mismatched->0\n        match_count=np.sum(actual_list==predicted_list)\n        # calculate accuracy\n        accuracy_value=match_count/len(actual_list)",
+        "peekOfCode": "def calculate_accuracy(actual_series, predicted_series):\n    actual_list = np.array(actual_series.tolist())\n    predicted_list = np.array(predicted_series, dtype=int)\n    match_count = np.sum(actual_list == predicted_list)\n    return match_count / len(actual_list)\n# === F1 Score calculation ===\ndef calculate_f1score(actual_series, predicted_series):\n    actual = np.array(actual_series.tolist(), dtype=int)\n    predicted = np.array(predicted_series.tolist(), dtype=int)\n    TP = np.sum((actual == 1) & (predicted == 1))",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -257,7 +413,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def calculate_f1score(actual_series, predicted_series):\n    actual = np.array(actual_series.tolist(), dtype=int)\n    predicted = np.array(predicted_series.tolist(), dtype=int)\n    # TP, FP, FN 정의\n    TP = np.sum((actual == 1) & (predicted == 1))\n    FP = np.sum((actual == 0) & (predicted == 1))\n    FN = np.sum((actual == 1) & (predicted == 0))\n    # Precision, Recall 계산\n    precision = TP / (TP + FP) if (TP + FP) > 0 else 0\n    recall = TP / (TP + FN) if (TP + FN) > 0 else 0",
+        "peekOfCode": "def calculate_f1score(actual_series, predicted_series):\n    actual = np.array(actual_series.tolist(), dtype=int)\n    predicted = np.array(predicted_series.tolist(), dtype=int)\n    TP = np.sum((actual == 1) & (predicted == 1))\n    FP = np.sum((actual == 0) & (predicted == 1))\n    FN = np.sum((actual == 1) & (predicted == 0))\n    precision = TP / (TP + FP) if (TP + FP) > 0 else 0\n    recall = TP / (TP + FN) if (TP + FN) > 0 else 0\n    return 2 * precision * recall / (precision + recall) if precision + recall > 0 else 0.0\n# === Run KNN for given k values ===",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -266,7 +422,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def knn_algorithm(k, test_euclidean, predicted_class, actual_class, data_info, try_count, accuracy_f1_table):\n    predicted_table=pd.DataFrame()\n    # Iterate over k values : 1~51 odd number\n    for k_num in range(1,k+1,2): \n        # j is for data instances \n        for test_num in range(len(test_euclidean.columns)):\n            # cutoff k amount and get indices\n            cutoff_indcies=cutoff_k(test_euclidean[\"Test_\"+str(test_num)],k_num)\n            # get predicted list \n            predicted_list=predicted_class.iloc[cutoff_indcies]",
+        "peekOfCode": "def knn_algorithm(k, test_euclidean, predicted_class, actual_class, data_info, fold_count, accuracy_f1_table):\n    predicted_table = pd.DataFrame()\n    for k_num in range(1, k+1, 2):\n        for test_num in range(len(test_euclidean.columns)):\n            cutoff_indices = cutoff_k(test_euclidean[f\"Test_{test_num}\"], k_num)\n            predicted_list = predicted_class.iloc[cutoff_indices]\n            predicted_value = majority_formula(predicted_list)\n            predicted_table.at[f\"Test_{test_num}\", f\"k={k_num}\"] = int(predicted_value)\n            print(f\"knn algorithm : test_data={data_info} , fold={fold_count} , k={k_num} , test_instance={test_num}\")\n        accuracy_value = calculate_accuracy(actual_class, predicted_table[f\"k={k_num}\"])",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -275,7 +431,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def accuracy_avg_std(accuracy_f1_table, data_info):\n    # add mean and std bottom of the each column (same k, different try)\n    meanstd = accuracy_f1_table.agg(['mean', 'std'])\n    # merge accuracy_f1_table with std table \n    graph_table=pd.concat([accuracy_f1_table, meanstd])\n    print(\"graph_table\")\n    print(graph_table)\n    # message\n    print(\"\\n--> Calcuate mean and standard deviation of each k value : \"+str(data_info)+\"...\")\n    return graph_table",
+        "peekOfCode": "def accuracy_avg_std(accuracy_f1_table, data_info):\n    meanstd = accuracy_f1_table.agg(['mean', 'std'])\n    graph_table = pd.concat([accuracy_f1_table, meanstd])\n    print(\"\\n--> Calculate mean and standard deviation of each k value : \" + str(data_info) + \"...\")\n    return graph_table\n# === Draw accuracy graph with error bars ===\ndef draw_graph(accuracy_f1_table, title):\n    accuracy_table = accuracy_f1_table[[col for col in accuracy_f1_table.columns if \"accuracy\" in col]]\n    k_values = [int(re.search(r'\\(k=(\\d+)\\)', col).group(1)) for col in accuracy_table.columns]\n    mean_values = accuracy_table.loc['mean'].tolist()",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -284,7 +440,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def draw_graph(accuracy_f1_table, title):\n    # get only accuracy_table\n    accuracy_table=accuracy_f1_table[[col for col in accuracy_f1_table.columns if \"accuracy\" in col]]\n    # Extract integer k values from the column names using regex\n    k_values = []\n    for col in accuracy_table.columns:\n        match = re.search(r'\\(k=(\\d+)\\)', col)\n        if match:\n            k_values.append(int(match.group(1)))\n        else:",
+        "peekOfCode": "def draw_graph(accuracy_f1_table, title):\n    accuracy_table = accuracy_f1_table[[col for col in accuracy_f1_table.columns if \"accuracy\" in col]]\n    k_values = [int(re.search(r'\\(k=(\\d+)\\)', col).group(1)) for col in accuracy_table.columns]\n    mean_values = accuracy_table.loc['mean'].tolist()\n    std_values = accuracy_table.loc['std'].tolist()\n    plt.figure(figsize=(6, 4))\n    plt.errorbar(k_values, mean_values, yerr=std_values, fmt='o-', capsize=5)\n    plt.xlabel(\"(Value of k)\")\n    plt.ylabel(\"(Accuracy over \" + title + \" data\")\n    plt.savefig(f'evaluation/{DATASET_NAME}_' + title + \".png\", dpi=300, bbox_inches='tight')",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -293,8 +449,269 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def main():\n    train_accuracy=pd.DataFrame()\n    test_accuracy=pd.DataFrame()\n    data_file=load_data()\n    # iterate try = 1 ~ 20 \n    for try_count in range(1,ITERATION_COUNT+1):\n        # message\n        print(\"\\n================================================================================\")\n        print(f\"[[ try = {try_count} ]]\")\n        # preprocess dataset",
+        "peekOfCode": "def main(DATASET_NAME):\n    # if the folder is not existed, create one\n    os.makedirs(\"evaluation\", exist_ok=True) \n    os.makedirs(\"normalization\", exist_ok=True) \n    data_file = load_data(DATASET_NAME)\n    attributes, labels = attribute_class(data_file)\n    folds = stratified_k_fold_split(attributes, labels, K_FOLD_SIZE)\n    train_accuracy = pd.DataFrame()\n    test_accuracy = pd.DataFrame()\n    for fold_count, (train_df, test_df) in enumerate(folds, start=1):",
         "detail": "knn_algorithm.knn",
+        "documentation": {}
+    },
+    {
+        "label": "LogisticRegression",
+        "kind": 6,
+        "importPath": "logistic_regression.reg",
+        "description": "logistic_regression.reg",
+        "peekOfCode": "class LogisticRegression:\n    def __init__(self, learning_rate=0.01, epochs=1000):\n        self.learning_rate = learning_rate\n        self.epochs = epochs\n    def fit(self, X, y):\n        n_samples, n_features = X.shape\n        self.w = np.zeros((n_features, 1))  # initialize weights\n        self.b = 0.0                        # initialize bias\n        for _ in range(self.epochs):\n            linear_model = np.dot(X, self.w) + self.b",
+        "detail": "logistic_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "my_accuracy",
+        "kind": 2,
+        "importPath": "logistic_regression.reg",
+        "description": "logistic_regression.reg",
+        "peekOfCode": "def my_accuracy(y_true, y_pred):\n    correct = np.sum(y_true == y_pred)\n    return correct / len(y_true)\n# === F1 Score Calculation ===\ndef my_f1_score(y_true, y_pred):\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    if tp == 0:\n        return 0.0",
+        "detail": "logistic_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "my_f1_score",
+        "kind": 2,
+        "importPath": "logistic_regression.reg",
+        "description": "logistic_regression.reg",
+        "peekOfCode": "def my_f1_score(y_true, y_pred):\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    if tp == 0:\n        return 0.0\n    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0\n    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0\n    if precision + recall == 0:\n        return 0.0",
+        "detail": "logistic_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "sigmoid",
+        "kind": 2,
+        "importPath": "logistic_regression.reg",
+        "description": "logistic_regression.reg",
+        "peekOfCode": "def sigmoid(z):\n    z = np.clip(z, -500, 500)  # prevent overflow in np.exp()\n    return 1 / (1 + np.exp(-z))\n# === Logistic Regression from Scratch ===\nclass LogisticRegression:\n    def __init__(self, learning_rate=0.01, epochs=1000):\n        self.learning_rate = learning_rate\n        self.epochs = epochs\n    def fit(self, X, y):\n        n_samples, n_features = X.shape",
+        "detail": "logistic_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "load_dataset",
+        "kind": 2,
+        "importPath": "logistic_regression.reg",
+        "description": "logistic_regression.reg",
+        "peekOfCode": "def load_dataset(DATASET_NAME):\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    if DATASET_NAME == \"parkinsons\":\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:\n            df = df.rename(columns={'Diagnosis': 'label'})\n            print(\"🛈 Renamed 'Diagnosis' to 'label' for compatibility.\")\n        else:\n            raise ValueError(\"Dataset must contain a 'label' or 'diagnosis' column.\")",
+        "detail": "logistic_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "stratified_k_fold_split",
+        "kind": 2,
+        "importPath": "logistic_regression.reg",
+        "description": "logistic_regression.reg",
+        "peekOfCode": "def stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):\n        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]\n        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]\n        test_df = pd.concat([c0, c1]).sample(frac=1).reset_index(drop=True)",
+        "detail": "logistic_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate",
+        "kind": 2,
+        "importPath": "logistic_regression.reg",
+        "description": "logistic_regression.reg",
+        "peekOfCode": "def evaluate(DATASET_NAME, k=5):\n    X, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X, y, k=K_FOLD_SIZE)\n    acc_list = []\n    f1_list = []\n    for i, (train_df, test_df) in enumerate(folds):\n        X_train = train_df.drop(columns=['label']).values\n        y_train = train_df['label'].values.reshape(-1, 1)\n        X_test = test_df.drop(columns=['label']).values\n        y_test = test_df['label'].values.reshape(-1, 1)",
+        "detail": "logistic_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "log_func",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def log_func(num):\n    return np.log10(num)\n######## likelihood_common ########       \n# for train dataset\ndef word_count_set(data_set):\n    # single test document => just list\n    all_words = [word for sublist in data_set for word in sublist]\n    word_counts = Counter(all_words)\n    # each count\n    freq_dataset=pd.DataFrame(word_counts.items(),columns=[\"word\",\"freq_train\"])",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "word_count_set",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def word_count_set(data_set):\n    # single test document => just list\n    all_words = [word for sublist in data_set for word in sublist]\n    word_counts = Counter(all_words)\n    # each count\n    freq_dataset=pd.DataFrame(word_counts.items(),columns=[\"word\",\"freq_train\"])\n    freq_dataset.set_index([\"word\"], drop=True, inplace=True)\n    return freq_dataset\n######## likelihood_standard ######## \n# for test dataset",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "word_count_list",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def word_count_list(data_list):\n    # single test document => just list\n    all_words = [word for word in data_list]\n    word_counts = Counter(all_words)\n    # each count\n    freq_dataset=pd.DataFrame(word_counts.items(),columns=[\"word\",\"freq_test\"])\n    freq_dataset.set_index([\"word\"], drop=True, inplace=True)\n    return freq_dataset\n######## posterior_standard, posterior_laplace ########     \n# Compare probability",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "compare_probability",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def compare_probability(posterior_pos, posterior_neg):\n    if posterior_pos > posterior_neg:\n        result = \"Positive\"\n        print(result)\n    elif posterior_pos < posterior_neg:\n        result = \"Negative\"\n        print(result)\n    elif posterior_pos == posterior_neg:\n        print(\"RANDOM~~~\")\n        result = random.choice([\"Positive\", \"Negative\"])",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "multiply_standard",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def multiply_standard(likelihood_sorted):  \n    # copy the original version\n    likelihood_sorted = likelihood_sorted.copy()\n    # before multiply, make portion : NaN => 0\n    likelihood_sorted.loc[:, \"portion_train_pos\"] = likelihood_sorted[\"portion_train_pos\"].fillna(0)\n    likelihood_sorted.loc[:, \"portion_train_neg\"] = likelihood_sorted[\"portion_train_neg\"].fillna(0)\n    # (portion_train_pos) ^ (freq_test)\n    likelihood_sorted.loc[:, \"multiply_pos\"] = likelihood_sorted[\"portion_train_pos\"] ** likelihood_sorted[\"freq_test\"]\n    likelihood_sorted.loc[:, \"multiply_neg\"] = likelihood_sorted[\"portion_train_neg\"] ** likelihood_sorted[\"freq_test\"]\n    # likely_pos, likely_neg = multiply all the result",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "sum_laplace",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def sum_laplace(likelihood_alpha):  \n    # copy the original version\n    likelihood_alpha = likelihood_alpha.copy()\n    # (portion_train_pos) * log(freq_test)\n    likelihood_alpha.loc[:, \"sum_pos\"] = likelihood_alpha[\"freq_test\"] * log_func(likelihood_alpha[\"portion_train_pos_alpha\"])\n    likelihood_alpha.loc[:, \"sum_neg\"] = likelihood_alpha[\"freq_test\"] * log_func(likelihood_alpha[\"portion_train_neg_alpha\"])\n    # likely_pos, likely_neg = multiply all the result\n    likely_pos=likelihood_alpha[\"sum_pos\"].sum()\n    likely_neg=likelihood_alpha[\"sum_neg\"].sum()\n    return likely_pos, likely_neg",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "draw_table",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def draw_table(confusion_table, accuracy, precision, recall, image_name):\n    fig, ax = plt.subplots(figsize=(6.5, 2.2))  # Create figure and axes\n    ax.axis('off')  # Hide axes\n    # Display the table\n    table = ax.table(cellText=confusion_table.values, colLabels=confusion_table.columns, rowLabels=confusion_table.index, cellLoc='center',  loc='center')\n    table.auto_set_column_width(13)\n    # Adjust table scale for better visibility\n    table.scale(1.5, 1.5)\n    # Set font size for table\n    table.auto_set_font_size(False)  ",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "draw_graph",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def draw_graph(alpha_list, accuracy_list):\n    log_alpha_list = log_func(alpha_list) \n    print(log_alpha_list)\n    plt.figure(figsize=(8, 6))\n    plt.plot(log_alpha_list, accuracy_list, marker='o', linestyle='-')\n    plt.xlabel('alpha (log scale)')\n    plt.ylabel('accuracy')\n    plt.title(\"Figure 2-Graph. Plot of the model's accuracy\")\n    plt.legend()\n    plt.grid(True, which=\"both\", linestyle=\"--\", linewidth=0.5)",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "preprocessing_data",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def preprocessing_data(train_percen_pos, train_percen_neg, test_percen_pos, test_percen_neg):\n    percentage_positive_instances_train = train_percen_pos\n    percentage_negative_instances_train = train_percen_neg\n    percentage_positive_instances_test = test_percen_pos\n    percentage_negative_instances_test = test_percen_neg\n    (train_pos, train_neg, vocab) = load_training_set(percentage_positive_instances_train, percentage_negative_instances_train)\n    (test_pos, test_neg) = load_test_set(percentage_positive_instances_test, percentage_negative_instances_test)\n    print(\"\\nTrain and Test dataset are completed to preprocessing data\")\n    return train_pos, train_neg, vocab, test_pos, test_neg\n##################################################################",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "prior_standard",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def prior_standard(pos_data_len, neg_data_len):\n    total_len = pos_data_len + neg_data_len\n    return pos_data_len / total_len, neg_data_len / total_len\n# Laplace : Q2 ~ Q6\ndef prior_laplace(pos_data_len, neg_data_len):\n    pos_prior, neg_prior = prior_standard(pos_data_len, neg_data_len)\n    return log_func(pos_prior), log_func(neg_prior)\n##################################################################\n########### 3. Likelihood ###########\n# likelihood_common => contain test and train data freq_pos, freq_neg",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "prior_laplace",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def prior_laplace(pos_data_len, neg_data_len):\n    pos_prior, neg_prior = prior_standard(pos_data_len, neg_data_len)\n    return log_func(pos_prior), log_func(neg_prior)\n##################################################################\n########### 3. Likelihood ###########\n# likelihood_common => contain test and train data freq_pos, freq_neg\ndef likelihood_common(train_pos, train_neg):\n    ###### train ######\n    # input the frequecy of train data\n    freq_train_pos=word_count_set(train_pos)",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "likelihood_common",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def likelihood_common(train_pos, train_neg):\n    ###### train ######\n    # input the frequecy of train data\n    freq_train_pos=word_count_set(train_pos)\n    freq_train_neg=word_count_set(train_neg)\n    # merge \n    likelihood_table = pd.concat([freq_train_pos, freq_train_neg],axis=1)\n    likelihood_table.columns=[\"freq_train_pos\",\"freq_train_neg\"]\n    # get the total frequency in the table\n    # use only train data -> Total_Frequency, so it will not affect to out of vocabulary, since vocab consist of train ",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "likelihood_standard",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def likelihood_standard(likelihood_table, test_data, vocab):\n    # Calculate portions\n    pos_sum = likelihood_table.at[\"Total\", \"freq_train_pos\"] # positive -> V\n    neg_sum = likelihood_table.at[\"Total\", \"freq_train_neg\"] # negative -> V\n    likelihood_table = likelihood_table.copy()  # avoid error that return myself\n    likelihood_table[\"portion_train_pos\"] = likelihood_table[\"freq_train_pos\"] / pos_sum\n    likelihood_table[\"portion_train_neg\"] = likelihood_table[\"freq_train_neg\"] / neg_sum\n    # input the frequecy of test data\n    freq_test=word_count_list(test_data)\n    # merge ",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "likelihood_laplace",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def likelihood_laplace(likelihood_table, test_data, alpha, vocab):\n    # Calculate portions\n    pos_sum = likelihood_table.at[\"Total\", \"freq_train_pos\"] \n    neg_sum = likelihood_table.at[\"Total\", \"freq_train_neg\"]\n    # input the frequecy of test data\n    freq_test=word_count_list(test_data)\n    # merge \n    likelihood_test = pd.concat([freq_test, likelihood_table], axis=1)\n    # sort not \"nan\" values from \"freq_test\"\n    likelihood_test = likelihood_test[likelihood_test['freq_test'].notna()].sort_values(by='freq_test')",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "posterior_standard",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def posterior_standard(prior_pos, prior_neg, likely_pos, likely_neg):\n    # test_pos \n    posterior_pos = prior_pos * likely_pos\n    posterior_neg = prior_neg * likely_neg\n    print(f\"prior * likely | pos: {posterior_pos} / neg: {posterior_neg}\")\n    posterior_result=compare_probability(posterior_pos, posterior_neg)\n    print(f\"posterior_result : {posterior_result}\")\n    return posterior_result\n# Laplace Smoothing log(prior probability) + sum (log(likelihoodal))\ndef posterior_laplace(likelihood_table, test_data, vocab, alpha):",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "posterior_laplace",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def posterior_laplace(likelihood_table, test_data, vocab, alpha):\n    # test_pos \n    posterior_pos = prior_pos + likely_pos\n    posterior_neg = prior_neg + likely_neg\n    print(f\"prior * likely | pos: {posterior_pos} / neg: {posterior_neg}\")\n    posterior_result=compare_probability(posterior_pos, posterior_neg)\n    print(f\"posterior_result : {posterior_result}\")\n    return posterior_result\n##################################################################\n########### 5. Confusion Metrix ###########",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "confusion_matrix",
+        "kind": 2,
+        "importPath": "naive_bayes.nb",
+        "description": "naive_bayes.nb",
+        "peekOfCode": "def confusion_matrix(posterior_pos, posterior_neg, file_name):\n    print(\"\\nMaking confusion matrix to get accuracy, precision, and recall\")\n    TP=posterior_pos.count(\"Positive\")\n    TN=posterior_neg.count(\"Negative\")\n    FP=posterior_neg.count(\"Positive\")\n    FN=posterior_pos.count(\"Negative\")\n    print(f\"TP:{TP} / FN:{FN} / TN:{TN} / FP:{FP}\")\n    # calcualte accuracy\n    accuracy=(TP+TN)/(TP+TN+FP+FN)\n    # calcualte precision",
+        "detail": "naive_bayes.nb",
+        "documentation": {}
+    },
+    {
+        "label": "preprocess_text",
+        "kind": 2,
+        "importPath": "naive_bayes.utils",
+        "description": "naive_bayes.utils",
+        "peekOfCode": "def preprocess_text(text):\n    stop_words = set(stopwords.words('english'))\n    text = REPLACE_NO_SPACE.sub(\"\", text)\n    text = REPLACE_WITH_SPACE.sub(\" \", text)\n    text = re.sub(r'\\d+', '', text)\n    text = text.lower()\n    words = text.split()\n    return [w for w in words if w not in stop_words]\ndef load_training_set(percentage_positives, percentage_negatives):\n    vocab = set()",
+        "detail": "naive_bayes.utils",
+        "documentation": {}
+    },
+    {
+        "label": "load_training_set",
+        "kind": 2,
+        "importPath": "naive_bayes.utils",
+        "description": "naive_bayes.utils",
+        "peekOfCode": "def load_training_set(percentage_positives, percentage_negatives):\n    vocab = set()\n    positive_instances = []\n    negative_instances = []\n    df = pd.read_csv('train-positive.csv')\n    for _, contents in df.iterrows():\n        contents = contents['reviewText']\n        if random.random() > percentage_positives:\n            continue\n        contents = preprocess_text(contents)",
+        "detail": "naive_bayes.utils",
+        "documentation": {}
+    },
+    {
+        "label": "load_test_set",
+        "kind": 2,
+        "importPath": "naive_bayes.utils",
+        "description": "naive_bayes.utils",
+        "peekOfCode": "def load_test_set(percentage_positives, percentage_negatives):\n    positive_instances = []\n    negative_instances = []\n    df = pd.read_csv('test-positive.csv')\n    for _, contents in df.iterrows():\n        contents = contents['reviewText']\n        if random.random() > percentage_positives:\n            continue\n        contents = preprocess_text(contents)\n        positive_instances.append(contents)",
+        "detail": "naive_bayes.utils",
+        "documentation": {}
+    },
+    {
+        "label": "REPLACE_NO_SPACE",
+        "kind": 5,
+        "importPath": "naive_bayes.utils",
+        "description": "naive_bayes.utils",
+        "peekOfCode": "REPLACE_NO_SPACE = re.compile(\"[._;:!*`짝\\'?,\\\"()\\[\\]]\")\nREPLACE_WITH_SPACE = re.compile(\"(<br\\s*/><br\\s*/>)|(\\-)|(\\/)\")\n# remove this part for mac -> add for window\nnltk.download('stopwords')\ndef preprocess_text(text):\n    stop_words = set(stopwords.words('english'))\n    text = REPLACE_NO_SPACE.sub(\"\", text)\n    text = REPLACE_WITH_SPACE.sub(\" \", text)\n    text = re.sub(r'\\d+', '', text)\n    text = text.lower()",
+        "detail": "naive_bayes.utils",
+        "documentation": {}
+    },
+    {
+        "label": "REPLACE_WITH_SPACE",
+        "kind": 5,
+        "importPath": "naive_bayes.utils",
+        "description": "naive_bayes.utils",
+        "peekOfCode": "REPLACE_WITH_SPACE = re.compile(\"(<br\\s*/><br\\s*/>)|(\\-)|(\\/)\")\n# remove this part for mac -> add for window\nnltk.download('stopwords')\ndef preprocess_text(text):\n    stop_words = set(stopwords.words('english'))\n    text = REPLACE_NO_SPACE.sub(\"\", text)\n    text = REPLACE_WITH_SPACE.sub(\" \", text)\n    text = re.sub(r'\\d+', '', text)\n    text = text.lower()\n    words = text.split()",
+        "detail": "naive_bayes.utils",
         "documentation": {}
     },
     {
@@ -302,7 +719,7 @@
         "kind": 2,
         "importPath": "neural_network.debug_text",
         "description": "neural_network.debug_text",
-        "peekOfCode": "def main(lambda_reg, X, y, Theta, all_a_lists, all_z_lists, J_list, final_cost, delta_list, D_list, finalized_D, DEBUG_FILENAME, header=\"\"): \n    # Open a debug file for writing results\n    with open(f\"debug/backprop_{DEBUG_FILENAME}.txt\", \"w\", encoding=\"utf-8\") as f:\n        if header:\n            # Write optional header if provided\n            f.write(\"=\" * 80 + \"\\n\")\n            f.write(header + \"\\n\")\n            f.write(\"=\" * 80 + \"\\n\")\n        # Set NumPy printing options for consistent formatting\n        np.set_printoptions(precision=5, suppress=True, floatmode='fixed')",
+        "peekOfCode": "def main(lambda_reg, X, y, Theta, all_a_lists, all_z_lists, J_list, final_cost, delta_list, D_list, finalized_D, DEBUG_FILENAME, header=\"\"): \n    # if the folder is not existed, create\n    os.makedirs(\"debug\", exist_ok=True) \n    # Open a debug file for writing results\n    with open(f\"debug/backprop_{DEBUG_FILENAME}.txt\", \"w\", encoding=\"utf-8\") as f:\n        if header:\n            # Write optional header if provided\n            f.write(\"=\" * 80 + \"\\n\")\n            f.write(header + \"\\n\")\n            f.write(\"=\" * 80 + \"\\n\")",
         "detail": "neural_network.debug_text",
         "documentation": {}
     },
@@ -320,7 +737,7 @@
         "kind": 2,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "def load_dataset():\n    # Load dataset from CSV file\n    DATA_PATH = f\"../datasets/{DATASET_NAME}.csv\"\n    df = pd.read_csv(DATA_PATH)\n    # Use 'diagnosis' column if 'label' doesn't exist\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:\n            df = df.rename(columns={'Diagnosis': 'label'})\n            print(\"🛈 Renamed 'Diagnosis' to 'label' for compatibility.\")\n        else:",
+        "peekOfCode": "def load_dataset(DATASET_NAME):\n    # Load dataset from CSV file\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    # === parkinsons --> customize datset ===\n    if DATASET_NAME==\"parkinsons\":\n        # change last column as label\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    # Use 'diagnosis' column if 'label' doesn't exist\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -329,7 +746,7 @@
         "kind": 2,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "def stratified_k_fold_split(X, y, k=5):\n    # Create stratified folds with equal class distribution\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):\n        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]\n        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]",
+        "peekOfCode": "def stratified_k_fold_split(X, y, k):\n    # Create stratified folds with equal class distribution\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):\n        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]\n        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -352,11 +769,20 @@
         "documentation": {}
     },
     {
+        "label": "info_text",
+        "kind": 2,
+        "importPath": "neural_network.nn",
+        "description": "neural_network.nn",
+        "peekOfCode": "def info_text(lambda_reg,hidden_layer,alpha,mode, batch_size, DATASET_NAME):\n    info = f\"{DATASET_NAME.capitalize()} BEST Learning Curve\\n λ={lambda_reg},  Hidden={hidden_layer}, \\nα={alpha}, Mode={mode}\"\n    if mode == \"mini-batch\":\n        info += f\", Batch Size={batch_size}\\n\"\n    else:\n        info += f\"\\n\"\n    if STOP_CRITERIA==\"M\":\n        info += f\"Stopping Criteria=m size [{M_SIZE}]\"   \n    elif STOP_CRITERIA==\"J\":\n        info += f\"Stopping Criteria=Final Cost(J)[{J_SIZE}]\"   ",
+        "detail": "neural_network.nn",
+        "documentation": {}
+    },
+    {
         "label": "plot_best_learning_curve",
         "kind": 2,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "def plot_best_learning_curve(results, dataset_name, save_folder):\n    # Identify model with lowest final cost\n    best_key = min(results, key=lambda k: results[k]['model'].cost_history[-1])\n    best_info = results[best_key]\n    model = best_info['model']\n    hidden_layer = best_info['hidden']\n    lambda_reg = best_info['lambda_reg']\n    train_size = best_info['train_size']\n    alpha = best_info['alpha']\n    mode = best_info['mode']",
+        "peekOfCode": "def plot_best_learning_curve(results, save_folder, DATASET_NAME):\n    # Identify model with lowest final cost\n    best_key = min(results, key=lambda k: results[k]['model'].cost_history[-1])\n    best_info = results[best_key]\n    model = best_info['model']\n    hidden_layer = best_info['hidden']\n    lambda_reg = best_info['lambda_reg']\n    train_size = best_info['train_size']\n    alpha = best_info['alpha']\n    mode = best_info['mode']",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -365,7 +791,7 @@
         "kind": 2,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "def save_metrics_table(results_by_dataset, save_folder):\n    os.makedirs(\"evaluation\", exist_ok=True)\n    for dataset_name, dataset_results in results_by_dataset.items():\n        fig, ax = plt.subplots()\n        ax.axis('off')\n        # Determine table columns based on whether mini-batch was used\n        if any(val['mode'] == 'mini-batch' for val in dataset_results.values()):\n            col_labels = [\"Layer & Neuron\", \"Lambda\", \"Alpha\", \"Batch Size\", \"Mode\", \"Avg Accuracy\", \"Avg F1 Score\"]\n            show_batch_size = True\n        else:",
+        "peekOfCode": "def save_metrics_table(results, save_folder, DATASET_NAME):\n    os.makedirs(\"evaluation\", exist_ok=True)\n    fig, ax = plt.subplots(figsize=(10, 8))\n    ax.axis('off')\n    # Determine table columns based on whether mini-batch was used\n    if any(val['mode'] == 'mini-batch' for val in results.values()):\n        col_labels = [\"Layer & Neuron\", \"Lambda\", \"Alpha\", \"Batch Size\", \"Mode\", \"Avg Accuracy\", \"Avg F1 Score\"]\n        show_batch_size = True\n    else:\n        col_labels = [\"Layer & Neuron\", \"Lambda\", \"Alpha\", \"Mode\", \"Avg Accuracy\", \"Avg F1 Score\"]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -374,7 +800,7 @@
         "kind": 2,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "def neural_network():\n    X, y = load_dataset()  # Load data and labels\n    folds = stratified_k_fold_split(X, y, k=5)  # Create 5-fold split\n    lambda_reg_list = [0.1, 0.000001]  # List of λ values to test\n    hidden_layers = [[32], [32, 16], [32, 16, 8], [32, 16, 8, 4]]  # Layer architectures to test\n    alpha = ALPHA            # Learning rate\n    batch_size = BATCH_SIZE        # Size of mini-batches\n    mode = TRAIN_MODE        # Training mode\n    dataset_name = DATASET_NAME\n    results = {}  # Dictionary to collect evaluation metrics",
+        "peekOfCode": "def neural_network(DATASET_NAME):\n    # if the folder is not existed, create\n    os.makedirs(\"evaluation\", exist_ok=True) \n    X, y = load_dataset(DATASET_NAME)  # Load data and labels\n    folds = stratified_k_fold_split(X, y, k=K_FOLD_SIZE)  # Create 10-fold split\n    lambda_reg_list = LAMBDA_REG  # List of λ values to test\n    hidden_layers = HIDDEN_LAYER  # Layer architectures to test\n    alpha = ALPHA            # Learning rate\n    batch_size = BATCH_SIZE        # Size of mini-batches\n    mode = TRAIN_MODE        # Training mode",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -383,7 +809,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DATASET_NAME = \"digits\"  # Name of the dataset\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === FILE_NAME Setting ===",
+        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -392,7 +818,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === FILE_NAME Setting ===\nif TRAIN_MODE==\"batch\":",
+        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -401,7 +827,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === FILE_NAME Setting ===\nif TRAIN_MODE==\"batch\":\n    FILE_NAME = DATASET_NAME",
+        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -410,7 +836,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "BATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === FILE_NAME Setting ===\nif TRAIN_MODE==\"batch\":\n    FILE_NAME = DATASET_NAME\nelif TRAIN_MODE==\"mini-batch\":",
+        "peekOfCode": "BATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -419,7 +845,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === FILE_NAME Setting ===\nif TRAIN_MODE==\"batch\":\n    FILE_NAME = DATASET_NAME\nelif TRAIN_MODE==\"mini-batch\":\n    FILE_NAME = DATASET_NAME+\"_minibatch\"\nelse:\n    print(\"choose mini-batch or batch in TRAIN_MODE\")",
+        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -428,7 +854,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "M_SIZE = 50            \nJ_SIZE=0.1\n# === FILE_NAME Setting ===\nif TRAIN_MODE==\"batch\":\n    FILE_NAME = DATASET_NAME\nelif TRAIN_MODE==\"mini-batch\":\n    FILE_NAME = DATASET_NAME+\"_minibatch\"\nelse:\n    print(\"choose mini-batch or batch in TRAIN_MODE\")\n# === Neural Network Class ===",
+        "peekOfCode": "M_SIZE = 5000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n# LAMBDA_REG=[0.000001]\n# HIDDEN_LAYER=[[64]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -500,16 +926,7 @@
         "kind": 6,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "class Node:\n    # Node in the decision tree\n    def __init__(self, feature=None, threshold=None, label=None, children=None):\n        self.feature = feature\n        self.threshold = threshold\n        self.label = label\n        self.children = children if children else {}\n# Compute entropy of label distribution\n# e.g., (x=sunny)-> y = [y,y,y,n,n] -> entropy calcuate\n# e.g., all y = [y,y,y,n,n,n,n,n,y,y,y,n] -> entropy calcuate",
-        "detail": "random_forest.tree",
-        "documentation": {}
-    },
-    {
-        "label": "main",
-        "kind": 2,
-        "importPath": "random_forest.tree",
-        "description": "random_forest.tree",
-        "peekOfCode": "def main():\n    ##### choose dataset #####\n    filename = f\"../datasets/{DATASET_NAME}.csv\" # <<<<===== changing point \n    base = os.path.basename(filename)     \n    basename = os.path.splitext(base)[0]\n    # Load dataset and preprocess it\n    data = load_and_preprocess_data(filename)\n    # Apply stratified k-fold cross-validation\n    fold_data = cross_validation(data, k_fold=5)\n    # Train and evaluate Random Forest",
+        "peekOfCode": "class Node:\n    def __init__(self, feature=None, threshold=None, label=None, children=None):\n        self.feature = feature\n        self.threshold = threshold\n        self.label = label\n        self.children = children if children else {}\ndef entropy(y):\n    probabilities = y.value_counts() / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\ndef build_tree(X, y, features, depth=0):",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -518,7 +935,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def load_and_preprocess_data(filepath):\n    # Load CSV and rename target column\n    data = pd.read_csv(filepath)\n    data = data.rename(columns={\"class\": \"label\"})\n    # Process each column by its suffix\n    for col in data.columns:\n        if col == \"label\":\n            continue\n        elif col.endswith(\"_cat\"):\n            data[col] = data[col].astype(str)  # Categorical feature",
+        "peekOfCode": "def load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    for col in data.columns:\n        if col == \"label\":\n            continue\n        elif col.endswith(\"_cat\"):\n            data[col] = data[col].astype(str)",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -527,7 +944,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def cross_validation(data, k_fold):\n    # Separate data by class label for stratified sampling\n    class_0 = data[data['label'] == 0].sample(frac=1).reset_index(drop=True) # sampling with fraction=100%\n    class_1 = data[data['label'] == 1].sample(frac=1).reset_index(drop=True) # sampling with fraction=100%\n    # proceed seperate class_0(label=0 sub dataset), class_1(label=1 sub dataset) to preserve proportions\n    all_data = pd.DataFrame()\n    for i in range(k_fold):\n        # Slice each class proportionally into folds => satisfied disjoint condition \n        class_0_start = int(len(class_0) * i / k_fold)\n        class_0_end = int(len(class_0) * (i + 1) / k_fold)",
+        "peekOfCode": "def cross_validation(data, k_fold):\n    class_0 = data[data['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = data[data['label'] == 1].sample(frac=1).reset_index(drop=True)\n    all_data = pd.DataFrame()\n    for i in range(k_fold):\n        class_0_fold = class_0.iloc[int(len(class_0)*i/k_fold):int(len(class_0)*(i+1)/k_fold)]\n        class_1_fold = class_1.iloc[int(len(class_1)*i/k_fold):int(len(class_1)*(i+1)/k_fold)]\n        fold_data = pd.concat([class_0_fold, class_1_fold]).copy()\n        fold_data[\"k_fold\"] = i\n        all_data = pd.concat([all_data, fold_data], ignore_index=True)",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -536,7 +953,16 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def bootstrap_sample(X, y):\n    # random select on index\n    idxs = np.random.choice(len(X), size=len(X), replace=True) # replacement = True\n    # get the selected index in X,y\n    X_sample = X.iloc[idxs].reset_index(drop=True)\n    y_sample = y.iloc[idxs].reset_index(drop=True)\n    # return same as input\n    return X_sample, y_sample\n# ===== Evaluation & Plotting =====\ndef evaluate_random_forest(fold_data, k_fold, basename):",
+        "peekOfCode": "def bootstrap_sample(X, y):\n    idxs = np.random.choice(len(X), size=len(X), replace=True)\n    return X.iloc[idxs].reset_index(drop=True), y.iloc[idxs].reset_index(drop=True)\ndef main(DATASET_NAME):\n    os.makedirs(\"plot\", exist_ok=True)\n    os.makedirs(\"table\", exist_ok=True)\n    data = load_and_preprocess_data(DATASET_NAME)\n    fold_data = cross_validation(data, k_fold=K_FOLD_SIZE)\n    ntrees_list, metrics, predict_y = evaluate_random_forest(fold_data, K_FOLD_SIZE, DATASET_NAME)\n    plot_metrics(ntrees_list, metrics, DATASET_NAME)",
+        "detail": "random_forest.tree",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "random_forest.tree",
+        "description": "random_forest.tree",
+        "peekOfCode": "def main(DATASET_NAME):\n    os.makedirs(\"plot\", exist_ok=True)\n    os.makedirs(\"table\", exist_ok=True)\n    data = load_and_preprocess_data(DATASET_NAME)\n    fold_data = cross_validation(data, k_fold=K_FOLD_SIZE)\n    ntrees_list, metrics, predict_y = evaluate_random_forest(fold_data, K_FOLD_SIZE, DATASET_NAME)\n    plot_metrics(ntrees_list, metrics, DATASET_NAME)\n    return predict_y\ndef evaluate_random_forest(fold_data, k_fold, DATASET_NAME):\n    ntrees_list = [1, 5, 10, 20, 30, 40, 50]",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -545,7 +971,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def evaluate_random_forest(fold_data, k_fold, basename):\n    ntrees_list = [1, 5, 10, 20, 30, 40, 50]\n    acc_list, prec_list, rec_list, f1_list = [], [], [], []\n    # operate in all ntrees\n    for ntrees in ntrees_list:\n        print(f\"\\nEvaluating Random Forest with {ntrees} trees\")\n        accs, precisions, recalls, f1s = [], [], [], []\n        # execute cross_validation\n        for i in range(k_fold):\n            # Split fold into training and testing",
+        "peekOfCode": "def evaluate_random_forest(fold_data, k_fold, DATASET_NAME):\n    ntrees_list = [1, 5, 10, 20, 30, 40, 50]\n    acc_list, prec_list, rec_list, f1_list = [], [], [], []\n    final_predictions = None\n    for ntrees in ntrees_list:\n        print(f\"\\nEvaluating Random Forest with {ntrees} trees\")\n        accs, precisions, recalls, f1s = [], [], [], []\n        for i in range(k_fold):\n            test_data = fold_data[fold_data[\"k_fold\"] == i]\n            train_data = fold_data[fold_data[\"k_fold\"] != i]",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -554,7 +980,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def entropy(y):\n    # count label and change to series\n    class_counts = y.value_counts()\n    # divided by total length\n    probabilities = class_counts / len(y)\n    # entropy = sum(- prob * log2(prob))\n    return -np.sum(probabilities * np.log2(probabilities))\ndef build_tree(X, y, features, depth=0):\n    ####### Stop splitting node criteria (maximal_depth and minimal_gain are combined) ####### \n    # depth = 0 --> check current node depth to confirm when depth reached to max_depth",
+        "peekOfCode": "def entropy(y):\n    probabilities = y.value_counts() / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\ndef build_tree(X, y, features, depth=0):\n    if len(y.unique()) == 1 or len(features) == 0 or depth == MAX_DEPTH:\n        return Node(label=y.mode()[0])\n    m = int(math.sqrt(len(features)))\n    selected_features = random.sample(list(features), m)\n    best_feature, best_gain, best_threshold = None, -1, None\n    for feature in selected_features:",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -563,7 +989,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def build_tree(X, y, features, depth=0):\n    ####### Stop splitting node criteria (maximal_depth and minimal_gain are combined) ####### \n    # depth = 0 --> check current node depth to confirm when depth reached to max_depth\n    max_depth=5 # maximal_depth\n    min_info_gain=1e-5 # minimal_gain\n    ### Check Stop Spliting condition ===> maximal_depth\n    # unique -> check all the same class\n    # len(features) -> no features left\n    # current depth = max_depth\n    if len(y.unique()) == 1 or len(features) == 0 or depth == max_depth:",
+        "peekOfCode": "def build_tree(X, y, features, depth=0):\n    if len(y.unique()) == 1 or len(features) == 0 or depth == MAX_DEPTH:\n        return Node(label=y.mode()[0])\n    m = int(math.sqrt(len(features)))\n    selected_features = random.sample(list(features), m)\n    best_feature, best_gain, best_threshold = None, -1, None\n    for feature in selected_features:\n        if feature.endswith('_cat'):\n            values = X[feature].unique()\n            weighted_entropy = sum((len(y[X[feature] == v]) / len(y)) * entropy(y[X[feature] == v]) for v in values)",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -572,7 +998,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def random_forest_predict(trees, X_test):\n    # Collect predictions from all trees (shape: [num_trees, num_X_test_samples])\n    # k-fold function result => test dataset fixed\n    # test sample : 3, tree: 4 => [[1,0,0],[1,1,1],[0,1,1],[1,1,1]]\n    tree_preds = np.array([predict(tree, X_test) for tree in trees])\n    # Total number of test samples\n    test_all = X_test.shape[0]  \n    # List to store final predictions after majority voting\n    final_preds = [] \n    # Iterate over each sample",
+        "peekOfCode": "def random_forest_predict(trees, X_test):\n    tree_preds = np.array([predict(tree, X_test) for tree in trees])\n    final_preds = []\n    for i in range(X_test.shape[0]):\n        row_preds = tree_preds[:, i]\n        values, counts = np.unique(row_preds[row_preds != None], return_counts=True)\n        if len(counts) == 0:\n            final_preds.append(None)\n        elif len(counts) > 1 and counts[0] == counts[1]:\n            final_preds.append(random.choice(values))",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -581,7 +1007,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def predict(tree, X_test):\n    # gather all the prediction results\n    predictions = []\n    ##### repeat X_test counts #####\n    # get index(not using), row(samples) from itterows\n    for index, row in X_test.iterrows(): # iterate row by row\n        # initialize the node = tree\n        # each sample starts to search from root of tree\n        node = tree\n        # repeat until reaching out to the leaf node (label exist -> leaf node)",
+        "peekOfCode": "def predict(tree, X_test):\n    predictions = []\n    for _, row in X_test.iterrows():\n        node = tree\n        while node.label is None:\n            val = row[node.feature]\n            if node.threshold is None:\n                node = node.children.get(val)\n            else:\n                node = node.children.get(\"<=\") if val <= node.threshold else node.children.get(\">\")",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -590,7 +1016,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def accuracy(predictions, true_labels):\n    predictions = np.array(predictions)\n    true_labels = np.array(true_labels)\n    valid = predictions != None\n    return np.mean(predictions[valid] == true_labels[valid])\n# Calculate precision\ndef precision(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fp = np.sum((y_pred == 1) & (y_true == 0))\n    return tp / (tp + fp) if (tp + fp) > 0 else 0.0",
+        "peekOfCode": "def accuracy(predictions, true_labels):\n    predictions, true_labels = np.array(predictions), np.array(true_labels)\n    valid = predictions != None\n    return np.mean(predictions[valid] == true_labels[valid])\ndef precision(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fp = np.sum((y_pred == 1) & (y_true == 0))\n    return tp / (tp + fp) if (tp + fp) > 0 else 0.0\ndef recall(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -599,7 +1025,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def precision(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fp = np.sum((y_pred == 1) & (y_true == 0))\n    return tp / (tp + fp) if (tp + fp) > 0 else 0.0\n# Calculate recall\ndef recall(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fn = np.sum((y_pred == 0) & (y_true == 1))\n    return tp / (tp + fn) if (tp + fn) > 0 else 0.0\n# Calculate F1-score",
+        "peekOfCode": "def precision(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fp = np.sum((y_pred == 1) & (y_true == 0))\n    return tp / (tp + fp) if (tp + fp) > 0 else 0.0\ndef recall(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fn = np.sum((y_pred == 0) & (y_true == 1))\n    return tp / (tp + fn) if (tp + fn) > 0 else 0.0\ndef f1_score_manual(y_true, y_pred):\n    p = precision(y_true, y_pred)",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -608,7 +1034,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def recall(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fn = np.sum((y_pred == 0) & (y_true == 1))\n    return tp / (tp + fn) if (tp + fn) > 0 else 0.0\n# Calculate F1-score\ndef f1_score_manual(y_true, y_pred):\n    p = precision(y_true, y_pred)\n    r = recall(y_true, y_pred)\n    return 2 * p * r / (p + r) if (p + r) > 0 else 0.0\n##################################### plot the metrics ##################################### ",
+        "peekOfCode": "def recall(y_true, y_pred):\n    tp = np.sum((y_pred == 1) & (y_true == 1))\n    fn = np.sum((y_pred == 0) & (y_true == 1))\n    return tp / (tp + fn) if (tp + fn) > 0 else 0.0\ndef f1_score_manual(y_true, y_pred):\n    p = precision(y_true, y_pred)\n    r = recall(y_true, y_pred)\n    return 2 * p * r / (p + r) if (p + r) > 0 else 0.0\ndef plot_metrics(ntrees_list, metrics, DATASET_NAME):\n    titles = [\"Accuracy\", \"Precision\", \"Recall\", \"F1Score\"]",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -617,7 +1043,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def f1_score_manual(y_true, y_pred):\n    p = precision(y_true, y_pred)\n    r = recall(y_true, y_pred)\n    return 2 * p * r / (p + r) if (p + r) > 0 else 0.0\n##################################### plot the metrics ##################################### \ndef plot_metrics(basename, ntrees_list, metrics, save_dir):\n    titles = [\"Accuracy\", \"Precision\", \"Recall\", \"F1Score\"]\n    os.makedirs(save_dir, exist_ok=True)\n    for metric, title in zip(metrics, titles):\n        plt.figure(figsize=(6, 4))",
+        "peekOfCode": "def f1_score_manual(y_true, y_pred):\n    p = precision(y_true, y_pred)\n    r = recall(y_true, y_pred)\n    return 2 * p * r / (p + r) if (p + r) > 0 else 0.0\ndef plot_metrics(ntrees_list, metrics, DATASET_NAME):\n    titles = [\"Accuracy\", \"Precision\", \"Recall\", \"F1Score\"]\n    for metric, title in zip(metrics, titles):\n        plt.figure(figsize=(6, 4))\n        plt.plot(ntrees_list, metric, marker='o')\n        plt.title(f\"{DATASET_NAME.capitalize()} Dataset_{title} vs ntrees\")",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -626,7 +1052,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def plot_metrics(basename, ntrees_list, metrics, save_dir):\n    titles = [\"Accuracy\", \"Precision\", \"Recall\", \"F1Score\"]\n    os.makedirs(save_dir, exist_ok=True)\n    for metric, title in zip(metrics, titles):\n        plt.figure(figsize=(6, 4))\n        plt.plot(ntrees_list, metric, marker='o')\n        plt.title(f\"{basename.capitalize()} Dataset_{title} vs ntrees\")\n        plt.xlabel(\"ntrees\")\n        plt.ylabel(title)\n        plt.grid(True)",
+        "peekOfCode": "def plot_metrics(ntrees_list, metrics, DATASET_NAME):\n    titles = [\"Accuracy\", \"Precision\", \"Recall\", \"F1Score\"]\n    for metric, title in zip(metrics, titles):\n        plt.figure(figsize=(6, 4))\n        plt.plot(ntrees_list, metric, marker='o')\n        plt.title(f\"{DATASET_NAME.capitalize()} Dataset_{title} vs ntrees\")\n        plt.xlabel(\"ntrees\")\n        plt.ylabel(title)\n        plt.grid(True)\n        plt.savefig(f\"plot/{DATASET_NAME}_{title}.png\")",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -635,7 +1061,7 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def tree_to_dict(node):\n    if node.label is not None:\n        return {\"label\": int(node.label)}\n    return {\n        \"feature\": node.feature,\n        \"threshold\": node.threshold,\n        \"children\": {str(k): tree_to_dict(v) for k, v in node.children.items()}\n    }\n# Save all trees in the forest as JSON files\ndef save_trees_as_json(trees, ntrees, base_dir=\"saved_trees\"):",
+        "peekOfCode": "def tree_to_dict(node):\n    if node.label is not None:\n        return {\"label\": int(node.label)}\n    return {\n        \"feature\": node.feature,\n        \"threshold\": node.threshold,\n        \"children\": {str(k): tree_to_dict(v) for k, v in node.children.items()}\n    }\ndef save_trees_as_json(trees, ntrees, base_dir=\"saved_trees\"):\n    folder = os.path.join(base_dir, f\"ntrees_{ntrees}\")",
         "detail": "random_forest.tree",
         "documentation": {}
     },
@@ -644,89 +1070,26 @@
         "kind": 2,
         "importPath": "random_forest.tree",
         "description": "random_forest.tree",
-        "peekOfCode": "def save_trees_as_json(trees, ntrees, base_dir=\"saved_trees\"):\n    folder = os.path.join(base_dir, f\"ntrees_{ntrees}\")\n    os.makedirs(folder, exist_ok=True)\n    for i, tree in enumerate(trees, start=1):\n        tree_dict = tree_to_dict(tree)\n        with open(os.path.join(folder, f\"tree_{i}.json\"), \"w\") as f:\n            json.dump(tree_dict, f, indent=4)\nif __name__ == \"__main__\":\n    main()",
+        "peekOfCode": "def save_trees_as_json(trees, ntrees, base_dir=\"saved_trees\"):\n    folder = os.path.join(base_dir, f\"ntrees_{ntrees}\")\n    os.makedirs(folder, exist_ok=True)\n    for i, tree in enumerate(trees, start=1):\n        tree_dict = tree_to_dict(tree)\n        with open(os.path.join(folder, f\"tree_{i}.json\"), \"w\") as f:\n            json.dump(tree_dict, f, indent=4)\nif __name__ == \"__main__\":\n    main(DATASET_NAME=DATASET_NAME)",
         "detail": "random_forest.tree",
         "documentation": {}
     },
     {
-        "label": "Node",
-        "kind": 6,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "class Node:\n    def __init__(self, feature=None, label=None, children=None):\n        self.feature = feature\n        self.label = label\n        self.children = children if children else {}\n# Build decision tree function\ndef build_tree(X, y, features):\n    if len(y.unique()) == 1:\n        return Node(label=y.iloc[0])\n    if len(features) == 0:",
-        "detail": "digits_decisiontree",
+        "label": "MAX_DEPTH",
+        "kind": 5,
+        "importPath": "random_forest.tree",
+        "description": "random_forest.tree",
+        "peekOfCode": "MAX_DEPTH = 5\nMIN_INFO_GAIN = 1e-5\n# ===== Preprocessing =====\ndef load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    for col in data.columns:\n        if col == \"label\":",
+        "detail": "random_forest.tree",
         "documentation": {}
     },
     {
-        "label": "load_data",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def load_data():\n    # Load the digits dataset\n    digits = datasets.load_digits()\n    X = digits.data\n    y = digits.target\n    # Fix here: set correct column name\n    X_df = pd.DataFrame(X)\n    y_df = pd.DataFrame(y, columns=['class'])\n    print(X_df)\n    print(y_df)",
-        "detail": "digits_decisiontree",
-        "documentation": {}
-    },
-    {
-        "label": "gini_impurity",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def gini_impurity(y):\n    class_counts = y.value_counts()\n    probabilities = class_counts / len(y)\n    return 1 - np.sum(probabilities ** 2)\n# Gini impurity reduction calculation function (Information Gain → Gini Reduction)\ndef gini_reduction(X, y, feature):\n    total_gini = gini_impurity(y)\n    values = X[feature].unique()\n    weighted_gini = sum(\n        (len(y[X[feature] == value]) / len(y)) * gini_impurity(y[X[feature] == value]) for value in values",
-        "detail": "digits_decisiontree",
-        "documentation": {}
-    },
-    {
-        "label": "gini_reduction",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def gini_reduction(X, y, feature):\n    total_gini = gini_impurity(y)\n    values = X[feature].unique()\n    weighted_gini = sum(\n        (len(y[X[feature] == value]) / len(y)) * gini_impurity(y[X[feature] == value]) for value in values\n    )\n    return total_gini - weighted_gini\n# Decision tree node class\nclass Node:\n    def __init__(self, feature=None, label=None, children=None):",
-        "detail": "digits_decisiontree",
-        "documentation": {}
-    },
-    {
-        "label": "build_tree",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def build_tree(X, y, features):\n    if len(y.unique()) == 1:\n        return Node(label=y.iloc[0])\n    if len(features) == 0:\n        return Node(label=y.mode()[0])\n    # Choose the best feature based on Gini Reduction\n    best_feature = max(features, key=lambda f: gini_reduction(X, y, f))\n    tree = Node(feature=best_feature)\n    remaining_features = [f for f in features if f != best_feature]\n    for value in X[best_feature].unique():",
-        "detail": "digits_decisiontree",
-        "documentation": {}
-    },
-    {
-        "label": "tree_to_dict",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def tree_to_dict(tree):\n    if tree.label is not None:\n        return {'label': int(tree.label)}  # 🔥 핵심 수정\n    return {\n        'feature': tree.feature,\n        'children': {str(value): tree_to_dict(child) for value, child in tree.children.items()}\n    }\n# Predict function\ndef predict(tree, X):\n    predictions = []",
-        "detail": "digits_decisiontree",
-        "documentation": {}
-    },
-    {
-        "label": "predict",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def predict(tree, X):\n    predictions = []\n    for _, row in X.iterrows():\n        node = tree\n        while node.label is None:\n            if row[node.feature] not in node.children:\n                predictions.append(None)\n                break\n            node = node.children[row[node.feature]]\n        else:",
-        "detail": "digits_decisiontree",
-        "documentation": {}
-    },
-    {
-        "label": "evaluate",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def evaluate(X, y, test_size=0.2, num_trials=100):\n    train_accuracies = []\n    test_accuracies = []\n    for trial in range(1, num_trials + 1):\n        print(f\"Running trial {trial}...\")\n        # shuffle for every trial\n        df_shuffled = shuffle(pd.concat([X, y], axis=1), random_state=None)\n        X_shuffled = df_shuffled.drop(columns=['class'])\n        y_shuffled = df_shuffled['class']\n        # Train-test split",
-        "detail": "digits_decisiontree",
-        "documentation": {}
-    },
-    {
-        "label": "main",
-        "kind": 2,
-        "importPath": "digits_decisiontree",
-        "description": "digits_decisiontree",
-        "peekOfCode": "def main():\n    # Load dataset (shuffle X)\n    X,y=load_data()\n    # Run evaluation (shuffle for every trial)\n    train_acc, test_acc = evaluate(X, y, test_size=0.2, num_trials=100)\n    # Plot histograms\n    plt.figure(figsize=(6, 4))\n    plt.hist(train_acc, bins=10, edgecolor='black', alpha=0.7)\n    plt.xlabel('Training Accuracy')\n    plt.ylabel('Accuracy Frequency on Training Data')",
-        "detail": "digits_decisiontree",
+        "label": "MIN_INFO_GAIN",
+        "kind": 5,
+        "importPath": "random_forest.tree",
+        "description": "random_forest.tree",
+        "peekOfCode": "MIN_INFO_GAIN = 1e-5\n# ===== Preprocessing =====\ndef load_and_preprocess_data(DATASET_NAME):\n    data = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    data = data.rename(columns={\"class\": \"label\"})\n    if DATASET_NAME == \"parkinsons\":\n        data.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    for col in data.columns:\n        if col == \"label\":\n            continue",
+        "detail": "random_forest.tree",
         "documentation": {}
     }
 ]

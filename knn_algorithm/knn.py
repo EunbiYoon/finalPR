@@ -7,15 +7,16 @@ import re
 import os
 
 # === Configuration ===
-DATASET_NAME=""
-K_FOLD_SIZE=5
-MAX_K=3
+DATASET_NAME="digits"
+K_FOLD_SIZE=10
+MAX_K=51
 
 # === Load and clean dataset ===
 def load_data(DATASET_NAME):
     data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)
     if DATASET_NAME == "parkinsons":
         data_file.rename(columns={"Diagnosis": "label"}, inplace=True)
+
     data_file = data_file.apply(pd.to_numeric, errors='coerce')
     data_file = data_file.drop(index=0).reset_index(drop=True)
     return data_file
@@ -44,13 +45,18 @@ def attribute_class(data):
     return attribute_data, class_data
 
 # === Normalize data using Min-Max ===
-def normalization_forumla(data):
-    data_numpy = data.to_numpy()
-    normalized_numpy = (data_numpy - np.min(data_numpy, axis=0)) / (np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0))
-    diff = np.max(data_numpy, axis=0) - np.min(data_numpy, axis=0)
-    print("Zero-variance columns:", np.where(diff == 0))
-    normalized_data = pd.DataFrame(normalized_numpy, columns=data.columns)
-    return normalized_data
+def normalization_formula_train(train_data):
+    min_vals = np.min(train_data.to_numpy(), axis=0)
+    max_vals = np.max(train_data.to_numpy(), axis=0)
+    diff = max_vals - min_vals
+    if np.all(diff == 0):
+        print("Zero-variance columns:", np.where(diff == 0))
+    normalized_train = (train_data - min_vals) / diff
+    return pd.DataFrame(normalized_train, columns=train_data.columns), min_vals, diff
+
+def normalization_formula_test(test_data, min_vals, diff):
+    normalized_test = (test_data - min_vals) / diff
+    return pd.DataFrame(normalized_test, columns=test_data.columns)
 
 # === Euclidean distance calculation ===
 def euclidean_formula(vector1, vector2):
@@ -139,14 +145,17 @@ def main(DATASET_NAME):
 
     data_file = load_data(DATASET_NAME)
     attributes, labels = attribute_class(data_file)
-    attributes_normalized = normalization_forumla(attributes)
-    folds = stratified_k_fold_split(attributes_normalized, labels, K_FOLD_SIZE)
+    folds = stratified_k_fold_split(attributes, labels, K_FOLD_SIZE)
     train_accuracy = pd.DataFrame()
     test_accuracy = pd.DataFrame()
     for fold_count, (train_df, test_df) in enumerate(folds, start=1):
         print(f"\n========== Fold {fold_count}/{K_FOLD_SIZE} ==========")
+        train_df, test_df = folds[fold_count]
         train_attr, train_label = attribute_class(train_df)
         test_attr, test_label = attribute_class(test_df)
+        train_attr_normalized, min_vals, diff = normalization_formula_train(train_attr)
+        test_attr_normalized = normalization_formula_test(test_attr, min_vals, diff)
+
         train_euclidean = euclidean_matrix(train_attr, train_attr, "train")
         test_euclidean = euclidean_matrix(train_attr, test_attr, "test")
         train_accuracy,_ = knn_algorithm(MAX_K, train_euclidean, train_label, train_label, "train", fold_count, train_accuracy)
