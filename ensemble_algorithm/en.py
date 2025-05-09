@@ -40,6 +40,8 @@ def load_dataset(DATASET_NAME):
     if DATASET_NAME=="parkinsons":
         # change last column as label
         df.rename(columns={"Diagnosis": "label"}, inplace=True)
+    elif DATASET_NAME=="rice":
+        df["label"] = df["label"].astype("category").cat.codes
 
 
     # Use 'diagnosis' column if 'label' doesn't exist
@@ -238,7 +240,7 @@ def run_nn_single_fold(X_train, y_train, X_test):
     return model.predict(X_test).tolist()
 
 # === Main Ensemble Logic ===
-def ensemble_main():
+def ensemble_main(DATASET_NAME):
     X, y = load_dataset(DATASET_NAME)
     folds = stratified_k_fold_split(X, y, K_FOLD_SIZE)
     vote_dict = defaultdict(list)
@@ -285,7 +287,7 @@ def ensemble_main():
     # Save to Excel with metrics
     metrics_df = pd.DataFrame({
         'Metric': ['Accuracy', 'F1 Score'],
-        'Value': [acc, f1]
+        'Value': [f"{acc:.4f}", f"{f1:.4f}"]
     })
 
     output_file = f"ensemble_{DATASET_NAME}_metrics.xlsx"
@@ -293,8 +295,8 @@ def ensemble_main():
         metrics_df.to_excel(writer, sheet_name="Metrics", index=False)
 
 if __name__ == "__main__":
-    # dataset_list=["digits", "parkinsons", "rice", "credit"]
-    dataset_list=["credit_approval"]
+    dataset_list=["digits", "parkinsons", "rice", "credit_approval"]
+    # dataset_list=["credit_approval"]
     for dataset_name in dataset_list:
         DATASET_NAME = dataset_name
         print(f"\n⚡Ensemble Algorithm For {DATASET_NAME} dataset")
