@@ -6,7 +6,13 @@ import json
 import math
 import random
 
-DATASET_NAME="parkinsons_labeled"
+DATASET_NAME="parkinsons"
+K_FOLD_SIZE=10
+
+####### Stop splitting node criteria (maximal_depth and minimal_gain are combined) ####### 
+# depth = 0 --> check current node depth to confirm when depth reached to max_depth
+MAX_DEPTH=5 # maximal_depth
+MIN_INFO_GAIN=1e-5 # minimal_gain
 
 # ===== Main Function =====
 def main():
@@ -19,10 +25,10 @@ def main():
     data = load_and_preprocess_data(filename)
     
     # Apply stratified k-fold cross-validation
-    fold_data = cross_validation(data, k_fold=5)
+    fold_data = cross_validation(data, k_fold=K_FOLD_SIZE)
 
     # Train and evaluate Random Forest
-    ntrees_list, metrics = evaluate_random_forest(fold_data, 5, basename)
+    ntrees_list, metrics = evaluate_random_forest(fold_data, K_FOLD_SIZE, basename)
     
     # Plot evaluation metrics
     plot_metrics(basename, ntrees_list, metrics, save_dir="plots")
@@ -176,16 +182,11 @@ def entropy(y):
 
 
 def build_tree(X, y, features, depth=0):
-    ####### Stop splitting node criteria (maximal_depth and minimal_gain are combined) ####### 
-    # depth = 0 --> check current node depth to confirm when depth reached to max_depth
-    max_depth=5 # maximal_depth
-    min_info_gain=1e-5 # minimal_gain
-
     ### Check Stop Spliting condition ===> maximal_depth
     # unique -> check all the same class
     # len(features) -> no features left
     # current depth = max_depth
-    if len(y.unique()) == 1 or len(features) == 0 or depth == max_depth:
+    if len(y.unique()) == 1 or len(features) == 0 or depth == MAX_DEPTH:
         return Node(label=y.mode()[0])
 
     ### Select m random attributes
@@ -252,7 +253,7 @@ def build_tree(X, y, features, depth=0):
 
 
     ####### before saved into Node to check stopping criteria ====> minial_gain
-    if best_gain < min_info_gain or best_feature is None: 
+    if best_gain < MIN_INFO_GAIN or best_feature is None: 
         # make leaf node and no more branching
         return Node(label=y.mode()[0])
 

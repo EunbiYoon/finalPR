@@ -4,9 +4,45 @@ import sklearn as sk
 import matplotlib.pyplot as plt
 import re
 
-DATASET_NAME="parkinsons_labeled"
-ITERATION_COUNT=21
+DATASET_NAME="parkinsons"
+K_FOLD_SIZE=10
 MAX_K=51
+
+def load_data():
+    # read CSV file
+    data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)
+    
+    # === parkinsons --> customize datset ===
+    if DATASET_NAME=="parkinsons":
+        # change last column as label
+        data_file.rename(columns={"Diagnosis": "label"}, inplace=True)
+
+    # if you have columnn -> maybe recognize as string
+    data_file = data_file.apply(pd.to_numeric, errors='coerce')
+    
+    # attribute become another row -> need to remove
+    data_file=data_file.drop(index=0)
+    data_file=data_file.reset_index(drop=True)
+
+    return data_file
+
+# === Stratified K-Fold Split ===
+def stratified_k_fold_split(X, y, k):
+    # Create stratified folds with equal class distribution
+    df = pd.DataFrame(X)
+    df['label'] = y.ravel()
+    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)
+    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)
+    folds = []
+    for i in range(k):
+        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]
+        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]
+        test_df = pd.concat([c0, c1]).sample(frac=1).reset_index(drop=True)
+        remaining_c0 = pd.concat([class_0.iloc[:int(len(class_0)*i/k)], class_0.iloc[int(len(class_0)*(i+1)/k):]])
+        remaining_c1 = pd.concat([class_1.iloc[:int(len(class_1)*i/k)], class_1.iloc[int(len(class_1)*(i+1)/k):]])
+        train_df = pd.concat([remaining_c0, remaining_c1]).sample(frac=1).reset_index(drop=True)
+        folds.append((train_df, test_df))
+    return folds
 
 # separate attribute and class in data
 def attribute_class(data):
@@ -28,19 +64,6 @@ def normalization_forumla(data):
     normalized_data = pd.DataFrame(normalized_numpy, columns=data.columns)
     return normalized_data
 
-
-def load_data():
-    # read CSV file
-    data_file = pd.read_csv(f'../datasets/{DATASET_NAME}.csv', header=None)
-    
-    # if you have columnn -> maybe recognize as string
-    data_file = data_file.apply(pd.to_numeric, errors='coerce')
-    
-    # attribute become another row -> need to remove
-    data_file=data_file.drop(index=0)
-    data_file=data_file.reset_index(drop=True)
-
-    return data_file
 
 # Prepared train_data, test_data
 def shuffle_normalization(data_file):
@@ -250,41 +273,39 @@ def draw_graph(accuracy_f1_table, title):
 
 # main function - united all function above
 def main():
-    train_accuracy=pd.DataFrame()
-    test_accuracy=pd.DataFrame()
-    data_file=load_data()
-    # iterate try = 1 ~ 20 
-    for try_count in range(1,ITERATION_COUNT+1):
-        # message
-        print("\n================================================================================")
-        print(f"[[ try = {try_count} ]]")
-        
-        # preprocess dataset
-        train_attribute, train_class, test_attribute, test_class=shuffle_normalization(data_file)
+    data_file = load_data()
+    attributes, labels = attribute_class(data_file)
+    attributes_normalized = normalization_forumla(attributes)
 
-        # make euclidean matrix 
-        train_euclidean=euclidean_matrix(train_attribute, train_attribute, "train")
-        test_euclidean=euclidean_matrix(train_attribute, test_attribute, "test")
-        #train_euclidean.to_excel('train_euclidean.xlsx')
-        #test_euclidean.to_excel('test_euclidean.xlsx')
+    folds = stratified_k_fold_split(attributes_normalized, labels, K_FOLD_SIZE)
 
-        # knn algoritm
-        train_accuracy=knn_algorithm(MAX_K, train_euclidean, train_class, train_class, "train", try_count, train_accuracy)
-        test_accuracy=knn_algorithm(MAX_K, test_euclidean, train_class, test_class, "test", try_count, test_accuracy)
+    train_accuracy = pd.DataFrame()
+    test_accuracy = pd.DataFrame()
 
-    # draw graph
-    train_graph_table=accuracy_avg_std(train_accuracy, "train_data")
-    draw_graph(train_graph_table,"training")
+    for try_count, (train_df, test_df) in enumerate(folds, start=1):
+        print(f"\n========== Fold {try_count}/{K_FOLD_SIZE} ==========")
 
-    test_graph_table=accuracy_avg_std(test_accuracy, "test_data")
-    draw_graph(test_graph_table,"testing")
+        # 분리
+        train_attr, train_label = attribute_class(train_df)
+        test_attr, test_label = attribute_class(test_df)
 
-    # draw table
-    #train_graph_table.to_excel(f"evaluation/{DATASET_NAME}_train.xlsx")
+        # 유클리디안 거리 행렬
+        train_euclidean = euclidean_matrix(train_attr, train_attr, "train")
+        test_euclidean = euclidean_matrix(train_attr, test_attr, "test")
+
+        # KNN
+        train_accuracy = knn_algorithm(MAX_K, train_euclidean, train_label, train_label, "train", try_count, train_accuracy)
+        test_accuracy = knn_algorithm(MAX_K, test_euclidean, train_label, test_label, "test", try_count, test_accuracy)
+
+    # 그래프 및 평가 저장
+    train_graph_table = accuracy_avg_std(train_accuracy, "train_data")
+    draw_graph(train_graph_table, "training")
+
+    test_graph_table = accuracy_avg_std(test_accuracy, "test_data")
+    draw_graph(test_graph_table, "testing")
     test_graph_table.to_excel(f"evaluation/{DATASET_NAME}_test.xlsx")
 
-    # message
-    print("\n[[ Complete task! ]]\n")
+    print("\n[[ K-Fold Evaluation Complete! ]]\n")
 
 # ensures that the main function is executed only.
 if __name__ == "__main__":
