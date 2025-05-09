@@ -8,7 +8,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 
 DATASET_NAME = "digits"
-K_FOLD = 5
+K_FOLD_SIZE = 10
 
 # === Stratified K-Fold Split Function ===
 def stratified_k_fold_split(X, y, k):
@@ -241,11 +241,11 @@ def run_nn_single_fold(X_train, y_train, X_test):
 # === Main Ensemble Logic ===
 def ensemble_main():
     X, y = load_dataset(DATASET_NAME)
-    folds = stratified_k_fold_split(X, y, K_FOLD)
+    folds = stratified_k_fold_split(X, y, K_FOLD_SIZE)
     vote_dict = defaultdict(list)
 
     for fold_idx, (train_df, test_df) in enumerate(folds):
-        print(f"\n🔁 Fold {fold_idx+1}/{K_FOLD}")
+        print(f"\n🔁 Fold {fold_idx+1}/{K_FOLD_SIZE}")
         train_df, test_df = normalize_train_test(train_df, test_df)
 
         X_train = train_df.drop(columns=['label']).values
@@ -293,6 +293,10 @@ def ensemble_main():
     with pd.ExcelWriter(output_file) as writer:
         metrics_df.to_excel(writer, sheet_name="Metrics", index=False)
 
-    print(f"📁 Results saved to: {output_file}")
 if __name__ == "__main__":
-    ensemble_main()
+    # dataset_list=["digits", "parkinsons", "rice", "credit"]
+    dataset_list=["credit_approval"]
+    for dataset_name in dataset_list:
+        DATASET_NAME = dataset_name
+        print(f"\n⚡Ensemble Algorithm For {DATASET_NAME} dataset")
+        ensemble_main(DATASET_NAME)
