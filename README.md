@@ -65,7 +65,8 @@ cd decision_tree
 python dt.py
 ```
 
-### ✅ Step 8: Dataset name, Hyper Parameter, Stopping Criteria are located on the top of the all script. Please change to try different dataset or other settings. Below is random_forest/tree.py
+### ✅ Step 8: Change Settings in Each Script.
+# Dataset name, Hyper Parameter, Stopping Criteria are located on the top of the all script. Please change to try different dataset or other settings. Below is random_forest/tree.py
 ```bash
 DATASET_NAME="heart_disease"
 K_FOLD_SIZE=10
