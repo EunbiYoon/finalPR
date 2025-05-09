@@ -150,18 +150,24 @@ def main(DATASET_NAME):
     folds = stratified_k_fold_split(attributes, labels, K_FOLD_SIZE)
     train_accuracy = pd.DataFrame()
     test_accuracy = pd.DataFrame()
+
     for fold_count, (train_df, test_df) in enumerate(folds, start=1):
         print(f"\n========== Fold {fold_count}/{K_FOLD_SIZE} ==========")
-        train_df, test_df = folds[fold_count]
+        # ✅ 이 줄 제거:
+        # train_df, test_df = folds[fold_count - 1]
+
         train_attr, train_label = attribute_class(train_df)
         test_attr, test_label = attribute_class(test_df)
+
         train_attr_normalized, min_vals, diff = normalization_formula_train(train_attr)
         test_attr_normalized = normalization_formula_test(test_attr, min_vals, diff)
 
-        train_euclidean = euclidean_matrix(train_attr, train_attr, "train")
-        test_euclidean = euclidean_matrix(train_attr, test_attr, "test")
-        train_accuracy,_ = knn_algorithm(MAX_K, train_euclidean, train_label, train_label, "train", fold_count, train_accuracy)
-        test_accuracy,predicted_table = knn_algorithm(MAX_K, test_euclidean, train_label, test_label, "test", fold_count, test_accuracy)
+        train_euclidean = euclidean_matrix(train_attr_normalized, train_attr_normalized, "train")
+        test_euclidean = euclidean_matrix(train_attr_normalized, test_attr_normalized, "test")
+
+        train_accuracy, _ = knn_algorithm(MAX_K, train_euclidean, train_label, train_label, "train", fold_count, train_accuracy)
+        test_accuracy, predicted_table = knn_algorithm(MAX_K, test_euclidean, train_label, test_label, "test", fold_count, test_accuracy)
+
     train_graph_table = accuracy_avg_std(train_accuracy, "train_data")
     draw_graph(train_graph_table, "training")
     test_graph_table = accuracy_avg_std(test_accuracy, "test_data")

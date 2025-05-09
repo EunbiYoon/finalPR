@@ -35,6 +35,33 @@
         "documentation": {}
     },
     {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
         "label": "defaultdict",
         "importPath": "collections",
         "description": "collections",
@@ -93,15 +120,6 @@
         "documentation": {}
     },
     {
-        "label": "matplotlib.pyplot",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "matplotlib.pyplot",
-        "description": "matplotlib.pyplot",
-        "detail": "matplotlib.pyplot",
-        "documentation": {}
-    },
-    {
         "label": "re",
         "kind": 6,
         "isExtraImport": true,
@@ -117,15 +135,6 @@
         "importPath": "os",
         "description": "os",
         "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "sys",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "sys",
-        "description": "sys",
-        "detail": "sys",
         "documentation": {}
     },
     {
@@ -171,21 +180,129 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
         "label": "load_dataset",
         "kind": 2,
         "importPath": "datasets.load_digits",
         "description": "datasets.load_digits",
         "peekOfCode": "def load_dataset():\n    # Load the digits dataset (0–9)\n    digits = datasets.load_digits()\n    X = pd.DataFrame(digits.data)\n    print(X)\n    y = pd.Series(digits.target)\n    # Add target to the dataframe\n    X['label'] = y\n    X = X.dropna(axis=1, how='all')                 # drop all-NaN columns\n    X = X.loc[:, ~(X == 0).all()]                  # drop all-0 columns",
         "detail": "datasets.load_digits",
+        "documentation": {}
+    },
+    {
+        "label": "Node",
+        "kind": 6,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "class Node:\n    def __init__(self, feature=None, label=None, children=None):\n        self.feature = feature\n        self.label = label\n        self.children = children if children else {}\n# === Build Decision Tree ===\ndef build_tree(X, y, features, depth=0):\n    # 1. Pure class\n    if len(y.unique()) == 1:\n        return Node(label=y.iloc[0])",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "entropy",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):\n    total_entropy = entropy(y)\n    values = X[feature].unique()\n    weighted_entropy = sum(\n        (len(y[X[feature] == value]) / len(y)) * entropy(y[X[feature] == value]) for value in values",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "information_gain",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def information_gain(X, y, feature):\n    total_entropy = entropy(y)\n    values = X[feature].unique()\n    weighted_entropy = sum(\n        (len(y[X[feature] == value]) / len(y)) * entropy(y[X[feature] == value]) for value in values\n    )\n    return total_entropy - weighted_entropy\n# === Decision Tree Node ===\nclass Node:\n    def __init__(self, feature=None, label=None, children=None):",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "build_tree",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def build_tree(X, y, features, depth=0):\n    # 1. Pure class\n    if len(y.unique()) == 1:\n        return Node(label=y.iloc[0])\n    # 2. No more features to split\n    if len(features) == 0:\n        return Node(label=y.mode()[0])\n    # 3. Compute info gains for all features\n    gains = {f: information_gain(X, y, f) for f in features}\n    best_feature = max(gains, key=gains.get)",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "tree_to_dict",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def tree_to_dict(tree):\n    if tree.label is not None:\n        return {'label': int(tree.label)}\n    return {\n        'feature': tree.feature,\n        'children': {str(value): tree_to_dict(child) for value, child in tree.children.items()}\n    }\n# === Prediction ===\ndef predict(tree, X):\n    predictions = []",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "predict",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def predict(tree, X):\n    predictions = []\n    for _, row in X.iterrows():\n        node = tree\n        while node.label is None:\n            if row[node.feature] not in node.children:\n                predictions.append(None)\n                break\n            node = node.children[row[node.feature]]\n        else:",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "my_accuracy",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def my_accuracy(y_true, y_pred):\n    correct = np.sum(y_true == y_pred)\n    return correct / len(y_true)\n# === F1 Score Calculation ===\ndef my_f1_score(y_true, y_pred):\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    if tp == 0:\n        return 0.0",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "my_f1_score",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def my_f1_score(y_true, y_pred):\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    if tp == 0:\n        return 0.0\n    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0\n    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0\n    if precision + recall == 0:\n        return 0.0",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "stratified_k_fold_split",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = np.array(y)\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):\n        c0 = class_0.iloc[int(len(class_0) * i / k):int(len(class_0) * (i + 1) / k)]\n        c1 = class_1.iloc[int(len(class_1) * i / k):int(len(class_1) * (i + 1) / k)]\n        test_df = pd.concat([c0, c1]).sample(frac=1).reset_index(drop=True)",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_k_fold",
+        "kind": 2,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "def evaluate_k_fold(X, y, k=10):\n    folds = stratified_k_fold_split(X, y, k)\n    train_accuracies = []\n    test_accuracies = []\n    train_f1s = []\n    test_f1s = []\n    for fold_idx, (X_train, y_train, X_test, y_test) in enumerate(folds, start=1):\n        print(f\"\\n[Fold {fold_idx}/{k}]\")\n        # Build tree\n        tree = build_tree(X_train, y_train, X_train.columns)",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "DATASET_NAME",
+        "kind": 5,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "DATASET_NAME = \"digits\"\nMIN_GAIN = 1e-5       # 최소 정보 이득\nMAX_DEPTH = 5         # 최대 트리 깊이 제한\n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "MIN_GAIN",
+        "kind": 5,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "MIN_GAIN = 1e-5       # 최소 정보 이득\nMAX_DEPTH = 5         # 최대 트리 깊이 제한\n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):\n    total_entropy = entropy(y)",
+        "detail": "decision_tree.dt",
+        "documentation": {}
+    },
+    {
+        "label": "MAX_DEPTH",
+        "kind": 5,
+        "importPath": "decision_tree.dt",
+        "description": "decision_tree.dt",
+        "peekOfCode": "MAX_DEPTH = 5         # 최대 트리 깊이 제한\n# === Entropy Calculation ===\ndef entropy(y):\n    label_counts = y.value_counts()\n    probabilities = label_counts / len(y)\n    return -np.sum(probabilities * np.log2(probabilities))\n# === Information Gain Calculation ===\ndef information_gain(X, y, feature):\n    total_entropy = entropy(y)\n    values = X[feature].unique()",
+        "detail": "decision_tree.dt",
         "documentation": {}
     },
     {
@@ -607,7 +724,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
+        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -616,7 +733,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]",
+        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -625,7 +742,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]",
+        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -634,7 +751,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "BATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]",
+        "peekOfCode": "BATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },

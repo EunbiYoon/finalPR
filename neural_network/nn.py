@@ -13,7 +13,7 @@ DATASET_NAME = "credit_approval"  # Name of the dataset
 K_FOLD_SIZE= 10
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
-BATCH_SIZE = 256
+BATCH_SIZE = 128
 ALPHA=0.1
 
 # === Stopping Criteria ===
