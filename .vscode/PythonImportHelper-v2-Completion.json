@@ -35,6 +35,22 @@
         "documentation": {}
     },
     {
+        "label": "fetch_ucirepo",
+        "importPath": "ucimlrepo",
+        "description": "ucimlrepo",
+        "isExtraImport": true,
+        "detail": "ucimlrepo",
+        "documentation": {}
+    },
+    {
+        "label": "list_available_datasets",
+        "importPath": "ucimlrepo",
+        "description": "ucimlrepo",
+        "isExtraImport": true,
+        "detail": "ucimlrepo",
+        "documentation": {}
+    },
+    {
         "label": "matplotlib.pyplot",
         "kind": 6,
         "isExtraImport": true,
@@ -186,6 +202,42 @@
         "description": "datasets.load_digits",
         "peekOfCode": "def load_dataset():\n    # Load the digits dataset (0–9)\n    digits = datasets.load_digits()\n    X = pd.DataFrame(digits.data)\n    print(X)\n    y = pd.Series(digits.target)\n    # Add target to the dataframe\n    X['label'] = y\n    X = X.dropna(axis=1, how='all')                 # drop all-NaN columns\n    X = X.loc[:, ~(X == 0).all()]                  # drop all-0 columns",
         "detail": "datasets.load_digits",
+        "documentation": {}
+    },
+    {
+        "label": "heart_disease",
+        "kind": 5,
+        "importPath": "datasets.load_heart",
+        "description": "datasets.load_heart",
+        "peekOfCode": "heart_disease = fetch_ucirepo(id=45) # dataset number 45 in uci\n# alternatively: fetch_ucirepo(name='Heart Disease')\n# access data\nX = heart_disease.data.features\ny = heart_disease.data.targets\n# train model e.g. sklearn.linear_model.LinearRegression().fit(X, y)\n# save as csv file\ndf = pd.concat([X, y], axis=1)\ndf.rename(columns={df.columns[-1]: \"label\"}, inplace=True)\ndf.to_csv(\"heart_disease.csv\", index=False)",
+        "detail": "datasets.load_heart",
+        "documentation": {}
+    },
+    {
+        "label": "X",
+        "kind": 5,
+        "importPath": "datasets.load_heart",
+        "description": "datasets.load_heart",
+        "peekOfCode": "X = heart_disease.data.features\ny = heart_disease.data.targets\n# train model e.g. sklearn.linear_model.LinearRegression().fit(X, y)\n# save as csv file\ndf = pd.concat([X, y], axis=1)\ndf.rename(columns={df.columns[-1]: \"label\"}, inplace=True)\ndf.to_csv(\"heart_disease.csv\", index=False)",
+        "detail": "datasets.load_heart",
+        "documentation": {}
+    },
+    {
+        "label": "y",
+        "kind": 5,
+        "importPath": "datasets.load_heart",
+        "description": "datasets.load_heart",
+        "peekOfCode": "y = heart_disease.data.targets\n# train model e.g. sklearn.linear_model.LinearRegression().fit(X, y)\n# save as csv file\ndf = pd.concat([X, y], axis=1)\ndf.rename(columns={df.columns[-1]: \"label\"}, inplace=True)\ndf.to_csv(\"heart_disease.csv\", index=False)",
+        "detail": "datasets.load_heart",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "datasets.load_heart",
+        "description": "datasets.load_heart",
+        "peekOfCode": "df = pd.concat([X, y], axis=1)\ndf.rename(columns={df.columns[-1]: \"label\"}, inplace=True)\ndf.to_csv(\"heart_disease.csv\", index=False)",
+        "detail": "datasets.load_heart",
         "documentation": {}
     },
     {
@@ -544,7 +596,7 @@
         "kind": 2,
         "importPath": "knn_algorithm.knn",
         "description": "knn_algorithm.knn",
-        "peekOfCode": "def main(DATASET_NAME):\n    # if the folder is not existed, create one\n    os.makedirs(\"evaluation\", exist_ok=True) \n    os.makedirs(\"normalization\", exist_ok=True) \n    data_file = load_data(DATASET_NAME)\n    attributes, labels = attribute_class(data_file)\n    folds = stratified_k_fold_split(attributes, labels, K_FOLD_SIZE)\n    train_accuracy = pd.DataFrame()\n    test_accuracy = pd.DataFrame()\n    for fold_count, (train_df, test_df) in enumerate(folds, start=1):",
+        "peekOfCode": "def main(DATASET_NAME):\n    # if the folder is not existed, create one\n    os.makedirs(\"evaluation\", exist_ok=True) \n    data_file = load_data(DATASET_NAME)\n    attributes, labels = attribute_class(data_file)\n    folds = stratified_k_fold_split(attributes, labels, K_FOLD_SIZE)\n    train_accuracy = pd.DataFrame()\n    test_accuracy = pd.DataFrame()\n    for fold_count, (train_df, test_df) in enumerate(folds, start=1):\n        print(f\"\\n========== Fold {fold_count}/{K_FOLD_SIZE} ==========\")",
         "detail": "knn_algorithm.knn",
         "documentation": {}
     },
@@ -724,7 +776,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
+        "peekOfCode": "DATASET_NAME = \"heart_disease\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
         "detail": "neural_network.nn",
         "documentation": {}
     },

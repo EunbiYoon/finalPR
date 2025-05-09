@@ -9,7 +9,7 @@ from propagation import backpropagation_vectorized, forward_propagation, cost_fu
 import debug_text
 
 # === Setting ===
-DATASET_NAME = "credit_approval"  # Name of the dataset
+DATASET_NAME = "heart_disease"  # Name of the dataset
 K_FOLD_SIZE= 10
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"

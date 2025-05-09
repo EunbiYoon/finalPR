@@ -7,7 +7,7 @@ import json
 import math
 import random
 
-DATASET_NAME="rice"
+DATASET_NAME="heart_disease"
 K_FOLD_SIZE=10
 
 MAX_DEPTH = 5
@@ -97,7 +97,8 @@ def evaluate_random_forest(fold_data, k_fold, DATASET_NAME):
         f"ntrees={nt}": [acc, prec, rec, f1]
         for nt, acc, prec, rec, f1 in zip(ntrees_list, acc_list, prec_list, rec_list, f1_list)
     }, index=["Accuracy", "Precision", "Recall", "F1Score"])
-    result.to_excel(f"table/{DATASET_NAME}.xlsx")
+    result = result.round(4)
+    result.to_excel(f"table/{DATASET_NAME}.xlsx", float_format="%.4f")
     return ntrees_list, [acc_list, prec_list, rec_list, f1_list], final_predictions
 
 class Node:

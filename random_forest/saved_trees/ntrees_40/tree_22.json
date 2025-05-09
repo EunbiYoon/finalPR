@@ -1,92 +1,20 @@
 {
-    "feature": "Shimmer:DDA",
-    "threshold": 0.048627485714285726,
+    "feature": "fbs",
+    "threshold": 0.12244897959183673,
     "children": {
         "<=": {
-            "feature": "MDVP:Jitter(Abs)",
-            "threshold": 3.15909090909091e-05,
+            "feature": "exang",
+            "threshold": 0.20930232558139536,
             "children": {
                 "<=": {
-                    "feature": "spread2",
-                    "threshold": 0.19215018421052632,
-                    "children": {
-                        "<=": {
-                            "feature": "MDVP:Fo(Hz)",
-                            "threshold": 180.62733333333333,
-                            "children": {
-                                "<=": {
-                                    "feature": "spread2",
-                                    "threshold": 0.1532983888888889,
-                                    "children": {
-                                        "<=": {
-                                            "label": 0
-                                        },
-                                        ">": {
-                                            "label": 1
-                                        }
-                                    }
-                                },
-                                ">": {
-                                    "feature": "MDVP:Flo(Hz)",
-                                    "threshold": 171.64238095238093,
-                                    "children": {
-                                        "<=": {
-                                            "label": 0
-                                        },
-                                        ">": {
-                                            "label": 0
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        ">": {
-                            "feature": "MDVP:PPQ",
-                            "threshold": 0.0019627027027027026,
-                            "children": {
-                                "<=": {
-                                    "feature": "Shimmer:APQ3",
-                                    "threshold": 0.007908333333333333,
-                                    "children": {
-                                        "<=": {
-                                            "label": 1
-                                        },
-                                        ">": {
-                                            "label": 0
-                                        }
-                                    }
-                                },
-                                ">": {
-                                    "label": 1
-                                }
-                            }
-                        }
-                    }
+                    "label": 0
                 },
                 ">": {
-                    "feature": "Jitter:DDP",
-                    "threshold": 0.009671764705882354,
+                    "feature": "thal",
+                    "threshold": 5.277777777777778,
                     "children": {
                         "<=": {
-                            "feature": "D2",
-                            "threshold": 2.2679418500000006,
-                            "children": {
-                                "<=": {
-                                    "feature": "MDVP:APQ",
-                                    "threshold": 0.02142307692307692,
-                                    "children": {
-                                        "<=": {
-                                            "label": 1
-                                        },
-                                        ">": {
-                                            "label": 1
-                                        }
-                                    }
-                                },
-                                ">": {
-                                    "label": 1
-                                }
-                            }
+                            "label": 0
                         },
                         ">": {
                             "label": 1
@@ -96,7 +24,7 @@
             }
         },
         ">": {
-            "label": 1
+            "label": 0
         }
     }
 }

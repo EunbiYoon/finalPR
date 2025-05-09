@@ -7,7 +7,7 @@ import re
 import os
 
 # === Configuration ===
-DATASET_NAME="digits"
+DATASET_NAME="heart_disease"
 K_FOLD_SIZE=10
 MAX_K=51
 
@@ -143,7 +143,6 @@ def draw_graph(accuracy_f1_table, title):
 def main(DATASET_NAME):
     # if the folder is not existed, create one
     os.makedirs("evaluation", exist_ok=True) 
-    os.makedirs("normalization", exist_ok=True) 
 
     data_file = load_data(DATASET_NAME)
     attributes, labels = attribute_class(data_file)
@@ -172,7 +171,7 @@ def main(DATASET_NAME):
     draw_graph(train_graph_table, "training")
     test_graph_table = accuracy_avg_std(test_accuracy, "test_data")
     draw_graph(test_graph_table, "testing")
-    test_graph_table.to_excel(f"evaluation/{DATASET_NAME}_test.xlsx")
+    test_graph_table.round(4).to_excel(f"evaluation/{DATASET_NAME}_test.xlsx", float_format="%.4f")
     print("\n[[ K-Fold Evaluation Complete! ]]\n")
 
     # return for ensemble
