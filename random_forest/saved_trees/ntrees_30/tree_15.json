@@ -1,28 +1,76 @@
 {
-    "feature": "MDVP:Shimmer",
-    "threshold": 0.03011116129032258,
+    "feature": "Shimmer:APQ5",
+    "threshold": 0.0177208,
     "children": {
         "<=": {
-            "feature": "PPE",
-            "threshold": 0.16930886315789473,
+            "feature": "MDVP:Fhi(Hz)",
+            "threshold": 205.04805172413793,
             "children": {
                 "<=": {
-                    "feature": "MDVP:Fhi(Hz)",
-                    "threshold": 220.53424000000004,
+                    "feature": "MDVP:PPQ",
+                    "threshold": 0.0026097058823529415,
                     "children": {
                         "<=": {
-                            "feature": "spread2",
-                            "threshold": 0.19071199999999994,
+                            "feature": "D2",
+                            "threshold": 2.1923411463414633,
                             "children": {
                                 "<=": {
-                                    "label": 1
+                                    "feature": "MDVP:Fhi(Hz)",
+                                    "threshold": 144.89020833333333,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
                                 },
                                 ">": {
-                                    "feature": "Shimmer:APQ3",
-                                    "threshold": 0.008438888888888888,
+                                    "feature": "RPDE",
+                                    "threshold": 0.39572729411764707,
                                     "children": {
                                         "<=": {
                                             "label": 1
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        ">": {
+                            "label": 1
+                        }
+                    }
+                },
+                ">": {
+                    "feature": "MDVP:Jitter(%)",
+                    "threshold": 0.0042385416666666665,
+                    "children": {
+                        "<=": {
+                            "feature": "MDVP:Jitter(%)",
+                            "threshold": 0.0027,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Shimmer",
+                                    "threshold": 0.015829285714285716,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "feature": "MDVP:Jitter(%)",
+                                    "threshold": 0.0032518181818181817,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
                                         },
                                         ">": {
                                             "label": 0
@@ -32,21 +80,24 @@
                             }
                         },
                         ">": {
-                            "label": 0
-                        }
-                    }
-                },
-                ">": {
-                    "feature": "Shimmer:DDA",
-                    "threshold": 0.029127333333333342,
-                    "children": {
-                        "<=": {
-                            "feature": "spread2",
-                            "threshold": 0.24932985185185183,
+                            "feature": "DFA",
+                            "threshold": 0.6862201304347826,
                             "children": {
                                 "<=": {
-                                    "feature": "MDVP:Flo(Hz)",
-                                    "threshold": 109.2746923076923,
+                                    "feature": "HNR",
+                                    "threshold": 21.943733333333334,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "feature": "NHR",
+                                    "threshold": 0.007838749999999998,
                                     "children": {
                                         "<=": {
                                             "label": 1
@@ -55,14 +106,8 @@
                                             "label": 1
                                         }
                                     }
-                                },
-                                ">": {
-                                    "label": 1
                                 }
                             }
-                        },
-                        ">": {
-                            "label": 1
                         }
                     }
                 }

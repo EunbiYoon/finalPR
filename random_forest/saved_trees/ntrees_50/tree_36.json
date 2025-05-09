@@ -1,34 +1,22 @@
 {
-    "feature": "MDVP:Fhi(Hz)",
-    "threshold": 194.7903806451613,
+    "feature": "MDVP:Shimmer",
+    "threshold": 0.030241999999999998,
     "children": {
         "<=": {
-            "feature": "MDVP:Shimmer(dB)",
-            "threshold": 0.317,
+            "feature": "Jitter:DDP",
+            "threshold": 0.006817256637168143,
             "children": {
                 "<=": {
-                    "feature": "MDVP:PPQ",
-                    "threshold": 0.002323913043478261,
+                    "feature": "spread2",
+                    "threshold": 0.19442782352941176,
                     "children": {
                         "<=": {
                             "feature": "Shimmer:APQ5",
-                            "threshold": 0.009921034482758622,
+                            "threshold": 0.008523589743589745,
                             "children": {
                                 "<=": {
-                                    "feature": "MDVP:Fo(Hz)",
-                                    "threshold": 129.73999999999998,
-                                    "children": {
-                                        "<=": {
-                                            "label": 1
-                                        },
-                                        ">": {
-                                            "label": 1
-                                        }
-                                    }
-                                },
-                                ">": {
-                                    "feature": "HNR",
-                                    "threshold": 23.372428571428575,
+                                    "feature": "DFA",
+                                    "threshold": 0.7001471578947368,
                                     "children": {
                                         "<=": {
                                             "label": 1
@@ -37,6 +25,120 @@
                                             "label": 0
                                         }
                                     }
+                                },
+                                ">": {
+                                    "feature": "MDVP:Jitter(%)",
+                                    "threshold": 0.0030355000000000004,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        ">": {
+                            "feature": "NHR",
+                            "threshold": 0.008492413793103448,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:APQ",
+                                    "threshold": 0.013702500000000003,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                ">": {
+                    "feature": "DFA",
+                    "threshold": 0.7029469777777777,
+                    "children": {
+                        "<=": {
+                            "feature": "spread2",
+                            "threshold": 0.22384638095238096,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Fhi(Hz)",
+                                    "threshold": 236.0413,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        },
+                        ">": {
+                            "feature": "MDVP:Fhi(Hz)",
+                            "threshold": 215.8465833333333,
+                            "children": {
+                                "<=": {
+                                    "label": 1
+                                },
+                                ">": {
+                                    "feature": "MDVP:APQ",
+                                    "threshold": 0.014341666666666667,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        ">": {
+            "feature": "spread2",
+            "threshold": 0.265308370967742,
+            "children": {
+                "<=": {
+                    "feature": "spread2",
+                    "threshold": 0.19733396774193548,
+                    "children": {
+                        "<=": {
+                            "feature": "DFA",
+                            "threshold": 0.7182975714285715,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Fhi(Hz)",
+                                    "threshold": 206.9644,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 0
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
                                 }
                             }
                         },
@@ -47,90 +149,6 @@
                 },
                 ">": {
                     "label": 1
-                }
-            }
-        },
-        ">": {
-            "feature": "PPE",
-            "threshold": 0.163161126984127,
-            "children": {
-                "<=": {
-                    "feature": "MDVP:Shimmer(dB)",
-                    "threshold": 0.177675,
-                    "children": {
-                        "<=": {
-                            "feature": "PPE",
-                            "threshold": 0.10688903703703705,
-                            "children": {
-                                "<=": {
-                                    "label": 0
-                                },
-                                ">": {
-                                    "feature": "RPDE",
-                                    "threshold": 0.3934506153846154,
-                                    "children": {
-                                        "<=": {
-                                            "label": 1
-                                        },
-                                        ">": {
-                                            "label": 0
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        ">": {
-                            "feature": "RPDE",
-                            "threshold": 0.46680207692307696,
-                            "children": {
-                                "<=": {
-                                    "label": 0
-                                },
-                                ">": {
-                                    "feature": "RPDE",
-                                    "threshold": 0.544573,
-                                    "children": {
-                                        "<=": {
-                                            "label": 0
-                                        },
-                                        ">": {
-                                            "label": 1
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                ">": {
-                    "feature": "Shimmer:DDA",
-                    "threshold": 0.061410000000000006,
-                    "children": {
-                        "<=": {
-                            "feature": "Shimmer:DDA",
-                            "threshold": 0.03202,
-                            "children": {
-                                "<=": {
-                                    "label": 1
-                                },
-                                ">": {
-                                    "feature": "spread1",
-                                    "threshold": -5.651945166666667,
-                                    "children": {
-                                        "<=": {
-                                            "label": 0
-                                        },
-                                        ">": {
-                                            "label": 1
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        ">": {
-                            "label": 1
-                        }
-                    }
                 }
             }
         }

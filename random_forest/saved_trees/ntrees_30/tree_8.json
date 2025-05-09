@@ -1,22 +1,22 @@
 {
-    "feature": "MDVP:Shimmer",
-    "threshold": 0.0295001935483871,
+    "feature": "Shimmer:APQ5",
+    "threshold": 0.017664285714285712,
     "children": {
         "<=": {
-            "feature": "spread1",
-            "threshold": -6.179722117021276,
+            "feature": "MDVP:PPQ",
+            "threshold": 0.0023313636363636358,
             "children": {
                 "<=": {
-                    "feature": "MDVP:Flo(Hz)",
-                    "threshold": 136.34789130434783,
+                    "feature": "MDVP:RAP",
+                    "threshold": 0.0014625,
                     "children": {
                         "<=": {
                             "feature": "MDVP:Fhi(Hz)",
-                            "threshold": 242.87465625,
+                            "threshold": 205.85828125,
                             "children": {
                                 "<=": {
-                                    "feature": "MDVP:Shimmer",
-                                    "threshold": 0.01546869565217391,
+                                    "feature": "RPDE",
+                                    "threshold": 0.49373722222222227,
                                     "children": {
                                         "<=": {
                                             "label": 1
@@ -32,39 +32,12 @@
                             }
                         },
                         ">": {
-                            "feature": "spread1",
-                            "threshold": -7.193772571428572,
+                            "feature": "NHR",
+                            "threshold": 0.008754375,
                             "children": {
                                 "<=": {
-                                    "label": 0
-                                },
-                                ">": {
-                                    "feature": "MDVP:Fo(Hz)",
-                                    "threshold": 215.77149999999997,
-                                    "children": {
-                                        "<=": {
-                                            "label": 1
-                                        },
-                                        ">": {
-                                            "label": 0
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                ">": {
-                    "feature": "MDVP:RAP",
-                    "threshold": 0.0027029166666666664,
-                    "children": {
-                        "<=": {
-                            "feature": "spread2",
-                            "threshold": 0.23770085185185189,
-                            "children": {
-                                "<=": {
-                                    "feature": "D2",
-                                    "threshold": 2.250463466666667,
+                                    "feature": "MDVP:Shimmer",
+                                    "threshold": 0.016992,
                                     "children": {
                                         "<=": {
                                             "label": 0
@@ -78,16 +51,97 @@
                                     "label": 1
                                 }
                             }
+                        }
+                    }
+                },
+                ">": {
+                    "feature": "NHR",
+                    "threshold": 0.02455152173913043,
+                    "children": {
+                        "<=": {
+                            "feature": "MDVP:Fo(Hz)",
+                            "threshold": 152.76538235294115,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:Fhi(Hz)",
+                                    "threshold": 211.69438095238098,
+                                    "children": {
+                                        "<=": {
+                                            "label": 1
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "feature": "Shimmer:APQ5",
+                                    "threshold": 0.012141538461538462,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                }
+                            }
                         },
                         ">": {
-                            "label": 1
+                            "feature": "spread1",
+                            "threshold": -5.774689249999999,
+                            "children": {
+                                "<=": {
+                                    "label": 0
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
                         }
                     }
                 }
             }
         },
         ">": {
-            "label": 1
+            "feature": "spread1",
+            "threshold": -5.082161046153846,
+            "children": {
+                "<=": {
+                    "feature": "D2",
+                    "threshold": 2.490339972222223,
+                    "children": {
+                        "<=": {
+                            "label": 1
+                        },
+                        ">": {
+                            "feature": "NHR",
+                            "threshold": 0.031327999999999995,
+                            "children": {
+                                "<=": {
+                                    "feature": "MDVP:PPQ",
+                                    "threshold": 0.0034233333333333333,
+                                    "children": {
+                                        "<=": {
+                                            "label": 0
+                                        },
+                                        ">": {
+                                            "label": 1
+                                        }
+                                    }
+                                },
+                                ">": {
+                                    "label": 1
+                                }
+                            }
+                        }
+                    }
+                },
+                ">": {
+                    "label": 1
+                }
+            }
         }
     }
 }

@@ -14,30 +14,18 @@ K_FOLD_SIZE=10
 MAX_DEPTH=5 # maximal_depth
 MIN_INFO_GAIN=1e-5 # minimal_gain
 
-# ===== Main Function =====
-def main():
-    ##### choose dataset #####
-    filename = f"../datasets/{DATASET_NAME}.csv" # <<<<===== changing point 
-    base = os.path.basename(filename)     
-    basename = os.path.splitext(base)[0]
-
-    # Load dataset and preprocess it
-    data = load_and_preprocess_data(filename)
-    
-    # Apply stratified k-fold cross-validation
-    fold_data = cross_validation(data, k_fold=K_FOLD_SIZE)
-
-    # Train and evaluate Random Forest
-    ntrees_list, metrics = evaluate_random_forest(fold_data, K_FOLD_SIZE, basename)
-    
-    # Plot evaluation metrics
-    plot_metrics(basename, ntrees_list, metrics, save_dir="plots")
 
 # ===== Preprocessing =====
-def load_and_preprocess_data(filepath):
+def load_and_preprocess_data():
     # Load CSV and rename target column
-    data = pd.read_csv(filepath)
+    data = pd.read_csv(f"../datasets/{DATASET_NAME}.csv")
     data = data.rename(columns={"class": "label"})
+
+    # === parkinsons --> customize datset ===
+    if DATASET_NAME=="parkinsons":
+        # change last column as label
+        data.rename(columns={"Diagnosis": "label"}, inplace=True)
+
 
     # Process each column by its suffix
     for col in data.columns:
@@ -87,8 +75,24 @@ def bootstrap_sample(X, y):
     return X_sample, y_sample
 
 
+# ===== Main Function =====
+def main():
+    # Load dataset and preprocess it
+    data = load_and_preprocess_data()
+    
+    # Apply stratified k-fold cross-validation
+    fold_data = cross_validation(data, k_fold=K_FOLD_SIZE)
+
+    # Train and evaluate Random Forest
+    ntrees_list, metrics = evaluate_random_forest(fold_data, K_FOLD_SIZE)
+    
+    # Plot evaluation metrics
+    plot_metrics(ntrees_list, metrics, save_dir="plots")
+
+
+
 # ===== Evaluation & Plotting =====
-def evaluate_random_forest(fold_data, k_fold, basename):
+def evaluate_random_forest(fold_data, k_fold):
     ntrees_list = [1, 5, 10, 20, 30, 40, 50]
     acc_list, prec_list, rec_list, f1_list = [], [], [], []
 
@@ -154,7 +158,7 @@ def evaluate_random_forest(fold_data, k_fold, basename):
 
 
     # Save to Excel
-    result.to_excel(f"result/{basename}.xlsx")
+    result.to_excel(f"table/{DATASET_NAME}.xlsx")
     return ntrees_list, [acc_list, prec_list, rec_list, f1_list]
 
 
@@ -407,7 +411,7 @@ def f1_score_manual(y_true, y_pred):
     return 2 * p * r / (p + r) if (p + r) > 0 else 0.0
 
 ##################################### plot the metrics ##################################### 
-def plot_metrics(basename, ntrees_list, metrics, save_dir):
+def plot_metrics(ntrees_list, metrics, save_dir):
     titles = ["Accuracy", "Precision", "Recall", "F1Score"]
     
     os.makedirs(save_dir, exist_ok=True)
@@ -415,14 +419,13 @@ def plot_metrics(basename, ntrees_list, metrics, save_dir):
     for metric, title in zip(metrics, titles):
         plt.figure(figsize=(6, 4))
         plt.plot(ntrees_list, metric, marker='o')
-        plt.title(f"{basename.capitalize()} Dataset_{title} vs ntrees")
+        plt.title(f"{DATASET_NAME.capitalize()} Dataset_{title} vs ntrees")
         plt.xlabel("ntrees")
         plt.ylabel(title)
         plt.grid(True)
         
-        # 저장 파일명: basename_accuracy.png 등
-        save_path = os.path.join(save_dir, f"{basename}_{title.lower()}.png")
-        plt.savefig(save_path)
+        # filename: datasetname_accuracy.png 등
+        plt.savefig(f"plots/{DATASET_NAME}_{title}.png")
         plt.close()
 
 
