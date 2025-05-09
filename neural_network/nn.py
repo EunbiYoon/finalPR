@@ -13,7 +13,7 @@ DATASET_NAME = "credit_approval"  # Name of the dataset
 K_FOLD_SIZE= 10
 DEBUG_MODE = True         # If True, run debugging routine at the end
 TRAIN_MODE = "mini-batch"    # Choose "batch" or "mini-batch"
-BATCH_SIZE = 32
+BATCH_SIZE = 256
 ALPHA=0.1
 
 # === Stopping Criteria ===
@@ -22,10 +22,10 @@ M_SIZE = 2000
 J_SIZE=0.1
 
 # === Hyper Parameter ===
-LAMBDA_REG=[0.000001]
-HIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]
-# LAMBDA_REG=[0.1, 0.001, 0.000001]
-# HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]
+#LAMBDA_REG=[0.000001]
+#HIDDEN_LAYER=[[64,32,16,8]]
+LAMBDA_REG=[0.1, 0.001, 0.000001]
+HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]
 # parkinsons
 # LAMBDA_REG=[5, 1, 0.5, 0.1]
 # HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]

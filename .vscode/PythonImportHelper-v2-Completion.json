@@ -120,6 +120,15 @@
         "documentation": {}
     },
     {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
         "label": "os,sys",
         "kind": 6,
         "isExtraImport": true,
@@ -239,6 +248,24 @@
         "importPath": "ensemble_algorithm.en",
         "description": "ensemble_algorithm.en",
         "peekOfCode": "def run_nn_single_fold(X_train, y_train, X_test):\n    class NeuralNetwork:\n        def __init__(self, layer_sizes, alpha=0.01, lambda_reg=0.0):\n            self.layer_sizes = layer_sizes\n            self.alpha = alpha\n            self.lambda_reg = lambda_reg\n            self.weights = self.initialize_weights()\n        def initialize_weights(self):\n            weights = []\n            for i in range(len(self.layer_sizes) - 1):",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "my_accuracy",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def my_accuracy(y_true, y_pred):\n    correct = np.sum(np.array(y_true) == np.array(y_pred))\n    return correct / len(y_true)\n# === F1 Score Calculation ===\ndef my_f1_score(y_true, y_pred):\n    y_true = np.array(y_true)\n    y_pred = np.array(y_pred)\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))",
+        "detail": "ensemble_algorithm.en",
+        "documentation": {}
+    },
+    {
+        "label": "my_f1_score",
+        "kind": 2,
+        "importPath": "ensemble_algorithm.en",
+        "description": "ensemble_algorithm.en",
+        "peekOfCode": "def my_f1_score(y_true, y_pred):\n    y_true = np.array(y_true)\n    y_pred = np.array(y_pred)\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    if tp == 0:\n        return 0.0\n    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0\n    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0",
         "detail": "ensemble_algorithm.en",
         "documentation": {}
     },
@@ -405,66 +432,84 @@
         "documentation": {}
     },
     {
-        "label": "LogisticRegression",
-        "kind": 6,
-        "importPath": "logistic_regression.reg",
-        "description": "logistic_regression.reg",
-        "peekOfCode": "class LogisticRegression:\n    def __init__(self, learning_rate=0.01, epochs=1000):\n        self.learning_rate = learning_rate\n        self.epochs = epochs\n    def fit(self, X, y):\n        n_samples, n_features = X.shape\n        self.w = np.zeros((n_features, 1))  # initialize weights\n        self.b = 0.0                        # initialize bias\n        for _ in range(self.epochs):\n            linear_model = np.dot(X, self.w) + self.b",
-        "detail": "logistic_regression.reg",
-        "documentation": {}
-    },
-    {
         "label": "my_accuracy",
         "kind": 2,
-        "importPath": "logistic_regression.reg",
-        "description": "logistic_regression.reg",
-        "peekOfCode": "def my_accuracy(y_true, y_pred):\n    correct = np.sum(y_true == y_pred)\n    return correct / len(y_true)\n# === F1 Score Calculation ===\ndef my_f1_score(y_true, y_pred):\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    if tp == 0:\n        return 0.0",
-        "detail": "logistic_regression.reg",
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def my_accuracy(y_true, y_pred):\n    correct = np.sum(y_true.flatten() == y_pred.flatten())\n    return correct / len(y_true)\n# === Macro F1 Score Calculation for Multiclass ===\ndef my_f1_score(y_true, y_pred):\n    labels = np.unique(y_true)\n    f1_scores = []\n    for label in labels:\n        tp = np.sum((y_true == label) & (y_pred == label))\n        fp = np.sum((y_true != label) & (y_pred == label))",
+        "detail": "linear_regression.reg",
         "documentation": {}
     },
     {
         "label": "my_f1_score",
         "kind": 2,
-        "importPath": "logistic_regression.reg",
-        "description": "logistic_regression.reg",
-        "peekOfCode": "def my_f1_score(y_true, y_pred):\n    tp = np.sum((y_true == 1) & (y_pred == 1))\n    fp = np.sum((y_true == 0) & (y_pred == 1))\n    fn = np.sum((y_true == 1) & (y_pred == 0))\n    if tp == 0:\n        return 0.0\n    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0\n    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0\n    if precision + recall == 0:\n        return 0.0",
-        "detail": "logistic_regression.reg",
-        "documentation": {}
-    },
-    {
-        "label": "sigmoid",
-        "kind": 2,
-        "importPath": "logistic_regression.reg",
-        "description": "logistic_regression.reg",
-        "peekOfCode": "def sigmoid(z):\n    z = np.clip(z, -500, 500)  # prevent overflow in np.exp()\n    return 1 / (1 + np.exp(-z))\n# === Logistic Regression from Scratch ===\nclass LogisticRegression:\n    def __init__(self, learning_rate=0.01, epochs=1000):\n        self.learning_rate = learning_rate\n        self.epochs = epochs\n    def fit(self, X, y):\n        n_samples, n_features = X.shape",
-        "detail": "logistic_regression.reg",
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def my_f1_score(y_true, y_pred):\n    labels = np.unique(y_true)\n    f1_scores = []\n    for label in labels:\n        tp = np.sum((y_true == label) & (y_pred == label))\n        fp = np.sum((y_true != label) & (y_pred == label))\n        fn = np.sum((y_true == label) & (y_pred != label))\n        precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0\n        recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0\n        f1 = 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0.0",
+        "detail": "linear_regression.reg",
         "documentation": {}
     },
     {
         "label": "load_dataset",
         "kind": 2,
-        "importPath": "logistic_regression.reg",
-        "description": "logistic_regression.reg",
-        "peekOfCode": "def load_dataset(DATASET_NAME):\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    if DATASET_NAME == \"parkinsons\":\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME==\"rice\":\n        df[\"label\"] = df[\"label\"].astype(\"category\").cat.codes\n    if 'label' not in df.columns:\n        if 'Diagnosis' in df.columns:\n            df = df.rename(columns={'Diagnosis': 'label'})\n            print(\"🛈 Renamed 'Diagnosis' to 'label' for compatibility.\")",
-        "detail": "logistic_regression.reg",
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def load_dataset(DATASET_NAME):\n    df = pd.read_csv(f\"../datasets/{DATASET_NAME}.csv\")\n    if DATASET_NAME == \"parkinsons\":\n        df.rename(columns={\"Diagnosis\": \"label\"}, inplace=True)\n    elif DATASET_NAME == \"rice\":\n        df[\"label\"] = df[\"label\"].astype(\"category\").cat.codes\n    if 'label' not in df.columns:\n        raise ValueError(\"Dataset must contain a 'label' column.\")\n    y = df['label'].copy()\n    X = df.drop(columns=['label'])",
+        "detail": "linear_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "normalize_by_train",
+        "kind": 2,
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def normalize_by_train(X_train_df, X_test_df):\n    X_train = X_train_df.copy()\n    X_test = X_test_df.copy()\n    for col in X_train.columns:\n        if col.endswith(\"_num\"):\n            mean = X_train[col].mean()\n            std = X_train[col].std()\n            X_train[col] = (X_train[col] - mean) / std\n            X_test[col] = (X_test[col] - mean) / std\n        elif col.endswith(\"_cat\"):",
+        "detail": "linear_regression.reg",
         "documentation": {}
     },
     {
         "label": "stratified_k_fold_split",
         "kind": 2,
-        "importPath": "logistic_regression.reg",
-        "description": "logistic_regression.reg",
-        "peekOfCode": "def stratified_k_fold_split(X, y, k):\n    df = pd.DataFrame(X)\n    df['label'] = y.ravel()\n    class_0 = df[df['label'] == 0].sample(frac=1).reset_index(drop=True)\n    class_1 = df[df['label'] == 1].sample(frac=1).reset_index(drop=True)\n    folds = []\n    for i in range(k):\n        c0 = class_0.iloc[int(len(class_0)*i/k):int(len(class_0)*(i+1)/k)]\n        c1 = class_1.iloc[int(len(class_1)*i/k):int(len(class_1)*(i+1)/k)]\n        test_df = pd.concat([c0, c1]).sample(frac=1).reset_index(drop=True)",
-        "detail": "logistic_regression.reg",
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def stratified_k_fold_split(X, y, k):\n    df = X.copy()\n    df['label'] = y.ravel()\n    folds = []\n    for i in range(k):\n        test_df = df.iloc[i::k]\n        train_df = df.drop(test_df.index)\n        folds.append((train_df.reset_index(drop=True), test_df.reset_index(drop=True)))\n    return folds\n# === Train Multinomial Linear Regression model ===",
+        "detail": "linear_regression.reg",
         "documentation": {}
     },
     {
-        "label": "evaluate",
+        "label": "train_multinomial_linear",
         "kind": 2,
-        "importPath": "logistic_regression.reg",
-        "description": "logistic_regression.reg",
-        "peekOfCode": "def evaluate(DATASET_NAME, k=5):\n    X, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X, y, k=K_FOLD_SIZE)\n    acc_list = []\n    f1_list = []\n    for i, (train_df, test_df) in enumerate(folds):\n        X_train = train_df.drop(columns=['label']).values\n        y_train = train_df['label'].values.reshape(-1, 1)\n        X_test = test_df.drop(columns=['label']).values\n        y_test = test_df['label'].values.reshape(-1, 1)",
-        "detail": "logistic_regression.reg",
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def train_multinomial_linear(X, y, num_classes, lr=0.0001, epochs=1000, epsilon=1e-6):\n    n_samples, n_features = X.shape\n    W = np.zeros((n_features, num_classes))\n    b = np.zeros((num_classes,))\n    Y_onehot = np.eye(num_classes)[y.reshape(-1)]\n    prev_loss = float('inf')\n    for epoch in range(epochs):\n        logits = np.dot(X, W) + b\n        error = logits - Y_onehot\n        error = np.clip(error, -1e3, 1e3)  # overflow 방지",
+        "detail": "linear_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "predict_linear",
+        "kind": 2,
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def predict_linear(X, W, b):\n    logits = np.dot(X, W) + b\n    return np.argmax(logits, axis=1)\n# === Evaluation with K-Fold Cross-Validation ===\ndef evaluate_multinomial_linear(DATASET_NAME, K_FOLD=5):\n    X_df, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X_df, y, K_FOLD)\n    acc_list, f1_list = [], []\n    for i, (train_df, test_df) in enumerate(folds):\n        y_train = train_df[\"label\"].values.reshape(-1, 1)",
+        "detail": "linear_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "evaluate_multinomial_linear",
+        "kind": 2,
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "def evaluate_multinomial_linear(DATASET_NAME, K_FOLD=5):\n    X_df, y = load_dataset(DATASET_NAME)\n    folds = stratified_k_fold_split(X_df, y, K_FOLD)\n    acc_list, f1_list = [], []\n    for i, (train_df, test_df) in enumerate(folds):\n        y_train = train_df[\"label\"].values.reshape(-1, 1)\n        y_test = test_df[\"label\"].values.reshape(-1, 1)\n        X_train_df = train_df.drop(columns=[\"label\"])\n        X_test_df = test_df.drop(columns=[\"label\"])\n        X_train_df, X_test_df = normalize_by_train(X_train_df, X_test_df)",
+        "detail": "linear_regression.reg",
+        "documentation": {}
+    },
+    {
+        "label": "K_FOLD_SIZE",
+        "kind": 5,
+        "importPath": "linear_regression.reg",
+        "description": "linear_regression.reg",
+        "peekOfCode": "K_FOLD_SIZE = 10\n# === Accuracy Calculation ===\ndef my_accuracy(y_true, y_pred):\n    correct = np.sum(y_true.flatten() == y_pred.flatten())\n    return correct / len(y_true)\n# === Macro F1 Score Calculation for Multiclass ===\ndef my_f1_score(y_true, y_pred):\n    labels = np.unique(y_true)\n    f1_scores = []\n    for label in labels:",
+        "detail": "linear_regression.reg",
         "documentation": {}
     },
     {
@@ -562,7 +607,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
+        "peekOfCode": "DATASET_NAME = \"credit_approval\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -571,7 +616,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]",
+        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -580,7 +625,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]",
+        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -589,7 +634,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "BATCH_SIZE = 32\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]\n# LAMBDA_REG=[0.1, 0.001, 0.000001]",
+        "peekOfCode": "BATCH_SIZE = 256\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -598,7 +643,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]\n# LAMBDA_REG=[0.1, 0.001, 0.000001]\n# HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]",
+        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -607,7 +652,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "M_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\nLAMBDA_REG=[0.000001]\nHIDDEN_LAYER=[[64,32,16,8],[22, 64, 32, 8]]\n# LAMBDA_REG=[0.1, 0.001, 0.000001]\n# HIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]",
+        "peekOfCode": "M_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },

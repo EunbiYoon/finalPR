@@ -252,6 +252,26 @@ def run_nn_single_fold(X_train, y_train, X_test):
     model.fit(X_train, y_train, batch_size=BATCH_SIZE, max_iter=M_SIZE)
     return model.predict(X_test).tolist()
 
+# === Accuracy Calculation ===
+def my_accuracy(y_true, y_pred):
+    correct = np.sum(np.array(y_true) == np.array(y_pred))
+    return correct / len(y_true)
+
+# === F1 Score Calculation ===
+def my_f1_score(y_true, y_pred):
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
+    tp = np.sum((y_true == 1) & (y_pred == 1))
+    fp = np.sum((y_true == 0) & (y_pred == 1))
+    fn = np.sum((y_true == 1) & (y_pred == 0))
+    if tp == 0:
+        return 0.0
+    precision = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+    recall = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+    if precision + recall == 0:
+        return 0.0
+    return 2 * (precision * recall) / (precision + recall)
+
 
 # === Main Ensemble Logic ===
 def ensemble_main(DATASET_NAME):
@@ -291,9 +311,8 @@ def ensemble_main(DATASET_NAME):
     df_final = pd.DataFrame(sorted(final_preds), columns=["Index", "FinalEnsemble"])
     df_final['TrueLabel'] = df_final['Index'].apply(lambda i: y[i][0])
 
-    from sklearn.metrics import accuracy_score, f1_score
-    acc = accuracy_score(df_final['TrueLabel'], df_final['FinalEnsemble'])
-    f1 = f1_score(df_final['TrueLabel'], df_final['FinalEnsemble'])
+    acc = my_accuracy(df_final['TrueLabel'], df_final['FinalEnsemble'])
+    f1 = my_f1_score(df_final['TrueLabel'], df_final['FinalEnsemble'])
 
     print(f"✅ Accuracy: {acc:.4f}")
     print(f"✅ F1 Score: {f1:.4f}")
