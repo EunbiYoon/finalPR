@@ -776,7 +776,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DATASET_NAME = \"heart_disease\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1",
+        "peekOfCode": "DATASET_NAME = \"digits\"  # Name of the dataset\nK_FOLD_SIZE= 10\nDEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -785,7 +785,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]",
+        "peekOfCode": "DEBUG_MODE = True         # If True, run debugging routine at the end\nTRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n### digits",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -794,7 +794,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]",
+        "peekOfCode": "TRAIN_MODE = \"mini-batch\"    # Choose \"batch\" or \"mini-batch\"\nBATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n### digits\nLAMBDA_REG=[0.1, 0.001, 0.000001]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -803,7 +803,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "BATCH_SIZE = 128\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]",
+        "peekOfCode": "BATCH_SIZE = 64\nALPHA=0.1\n# === Stopping Criteria ===\nSTOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n### digits\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -812,7 +812,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]",
+        "peekOfCode": "STOP_CRITERIA = \"M\"\nM_SIZE = 50            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n### digits\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n### parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]",
         "detail": "neural_network.nn",
         "documentation": {}
     },
@@ -821,7 +821,7 @@
         "kind": 5,
         "importPath": "neural_network.nn",
         "description": "neural_network.nn",
-        "peekOfCode": "M_SIZE = 2000            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n#LAMBDA_REG=[0.000001]\n#HIDDEN_LAYER=[[64,32,16,8]]\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n# parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]",
+        "peekOfCode": "M_SIZE = 50            \nJ_SIZE=0.1\n# === Hyper Parameter ===\n### digits\nLAMBDA_REG=[0.1, 0.001, 0.000001]\nHIDDEN_LAYER=[[64,32,16,8,4],[64,32,16,8],[64,32,16],[64,32],[64],[32]]\n### parkinsons\n# LAMBDA_REG=[5, 1, 0.5, 0.1]\n# HIDDEN_LAYER=[[22, 64, 64, 32, 1],[22, 64, 32, 1],[22, 32, 1]]\n# === FILE_NAME Setting ===",
         "detail": "neural_network.nn",
         "documentation": {}
     },

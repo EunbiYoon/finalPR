@@ -65,8 +65,22 @@ cd decision_tree
 python dt.py
 ```
 
-### ✅ Step 8: Change Settings in Each Script.
-Dataset name, K fold size, Hyper Parameter, Stopping Criteria are located on the top of the all script. Please change to try different dataset or other settings. Below is the example in random_forest/tree.py
+### ✅ Step 8: Run Ensemble Algorithm (Extra Credit 3)
+
+```bash
+cd ensemble_algorithm
+python en.py
+```
+
+### ✅ Step 9: Run New Algorithm (Extra Credit 4)
+
+```bash
+cd linear_regression
+python reg.py
+```
+
+### ✅ Step 10: Change Settings in Each Script.
+Dataset name, Hyper Parameter, Stopping Criteria, K fold size, etc are located on the top of the all script after importing libraries. Please change to try different dataset or other settings. Below is the example in random_forest/tree.py
 ```bash
 DATASET_NAME="heart_disease"
 K_FOLD_SIZE=10
