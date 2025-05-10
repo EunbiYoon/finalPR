@@ -4,54 +4,58 @@
 
 📦 HOMEWORK 1 – kNN & Decision Tree
 
-Contents:
-datasets/
-  ├── car.csv       # Car Evaluation Dataset (ZIP 제공)
-  ├── iris.csv      # Iris Dataset (추가 성능 비교용)
-  ├── wdbc.csv      # Wisconsin Breast Cancer Dataset (ZIP 제공)
-  ├── wine.csv      # Wine Dataset (추가 성능 비교용)
-HW1.py              # 주 실행 파일
-README.txt          # 실행 안내 문서
+CONTENTS:
+HW1.py          # The homework file, contains answers
+README.txt      # Instructions file
 
-Execution Format:
-python HW1.py <mode> <dataset> <hw> --k <k> --normalize <0|1> --func <func> --limit <0|1>
+INSTRUCTIONS:
+The general format to run the homework is in the following format:
+python HW1.py <mode> <dataset> <hw> --k <k> --normalize <normalize> --func <func> --limit <limit>
 
-Parameters:
-- mode (required): knn, knearestneighbors, decisiontree, dt
-- dataset: wdbc, car, or custom CSV path
-- hw: 0 (custom run) or 1 (homework Q1/Q2 전용 실행)
-- --k: KNN의 k 값 (default: 3)
-- --normalize: 정규화 여부 (default: 1)
-- --func: 정보 이득 계산 방식 (entropy, gini)
-- --limit: 트리 깊이 제한 (default: 0 → 무제한)
+REQUIRED PARAMETERS:
+  mode (1): what ML alg to use (options: (knn, knearestneighbors) OR (decisiontree, decisiontreeclassifier, dt))
+  dataset (2): dataset to use (default: [route to custom dataset]; options: wdbc, car, [route to custom dataset])
+    ASSUMPTION: last column is the label
+  hw (3): answers questions from section of homework (default: 0; options: 0, 1)
+    NOTE: If this is run, it only runs the datasets used in the respective problems.
+      EX: Enabling this with mode=knn runs Q1 problems with wdbc, mode=dt runs Q2 problems with car
 
-Sample Commands:
+OPTIONAL PARAMETERS:
+  k: number of neighbors in kNN (default: 3; options: 1, 3, 5, 7, ...)
+  normalize: whether to normalize data (default: 1; options: 0, 1)
+  func: information gain function to use (default: entropy; options: entropy, gini)
+  limit: limit the depth of the decision tree from QE.2 (default: 0; options: 0, 1)
+  random_state: random state, used for shuffling apps when hw=0 (default: 42; options: 0, 1, 2, 3, ...)
+
+Sample Runs:
 python HW1.py knn wdbc 1
 python HW1.py decisiontree car 1
-python HW1.py knn wdbc 0 --k 5 --normalize 0
+python HW1.py knn wdbc 0 --knn 5 --normalize 0
+python HW1.py knn wdbc 0 --knn 17 --normalize 1
+python HW1.py decisiontree car 0 --func entropy --limit 0
+python HW1.py decisiontree car 0 --func gini --limit 0
 python HW1.py decisiontree car 0 --func entropy --limit 1
 
 ---
 
 📦 HOMEWORK 2 – Naive Bayes
 
-Contents:
-COMPSCI_589___HW2.pdf       # 제출용 PDF 보고서
-figure-q3.png               # Q3 결과 그래프
-hw2.py                      # 주 실행 파일
-utils.py                    # CSV 및 평가 함수 모듈
-README.txt                  # 실행 안내 문서
-train-*.csv, test-*.csv     # 긍정/부정 리뷰 학습/테스트 세트
+CONTENTS:
+COMPSCI_589___HW2.pdf       # Report generated from LaTeX
+figure-q3.png               # Generated graph in question 3
+hw2.py                      # Primary file, includes Multinomial Naive Bayes
+README.txt                  # Instructions
+utils.py                    # File used to read CSVs and calculate metrics
 
-Execution Format:
-python main.py --runs <n> --question <n|all> --debug <0|1>
+INSTRUCTIONS:
+python main.py --runs <runs> --question <question> --debug <debug>
 
-Parameters:
-- --runs: 시뮬레이션 반복 횟수 (default: 1)
-- --question: 실행할 과제 문항 (1, 2, 3, 4, 6, or all)
-- --debug: 디버깅 출력 여부
+OPTIONAL PARAMETERS:
+  runs: number of simulations for questions (default: 1)
+  question: what question to run (default: all; options: 1, 2, 3, 4, 6, all)
+  debug: prints additional information (default: 0)
 
-Sample Commands:
+Sample Runs:
 python main.py
 python main.py --runs 10 --question 3
 python main.py --runs 5 --question 1 --debug 1
@@ -60,28 +64,27 @@ python main.py --runs 5 --question 1 --debug 1
 
 📦 HOMEWORK 3 – Random Forest & Stratified K-Fold
 
-Contents:
-datasets/
-  ├── wdbc.csv      # Main dataset 1
-  ├── loan.csv      # Main dataset 2
-  ├── raisin.csv    # Bonus dataset 1
-  ├── titanic.csv   # Bonus dataset 2
-hw3.py              # 주 실행 파일
-README.txt          # 실행 안내 문서
+CONTENTS:
+hw3.py              # Python code, implementation of random forest
+README.txt          # Instructions file
 
-Execution Format:
+INSTRUCTIONS:
 python hw3.py <data> <ntrees> --k <k> --mode <mode> --msfs <msfs> --md <md> --random_state <random_state>
 
-Parameters:
-- data (required): wdbc, loan, raisin, titanic, or path to CSV
-- ntrees (required): Random Forest의 트리 개수
-- --k: K-fold 수 (default: 5)
-- --mode: 정보 이득 계산 방법 ('entropy' or 'gini')
-- --msfs: 최소 샘플 수 for split (default: -1 → 무제한)
-- --md: 최대 트리 깊이 (default: -1 → 무제한)
-- --random_state: 시드 값
+REQUIRED PARAMETERS:
+  data (1): path to the CSV data file (options: wdbc, loan, raisin, titanic, or custom path)
+    ASSUMPTION: CSV has a column 'label' for target variable
+    ASSUMPTION: CSV attributes end with '_cat' for categorical or '_num' for numeric
+  ntrees (2): number of trees in the Random Forest
 
-Sample Commands:
+OPTIONAL PARAMETERS:
+  --k: number of folds for Stratified K-Fold (default: 5)
+  --mode: method for calculating information gain (default: entropy; options: entropy, gini)
+  --msfs: minimum entries for a split (default: -1)
+  --md: maximum tree depth (default: -1)
+  --random_state: random seed (default: 42)
+
+Sample Runs:
 python hw3.py wdbc 10
 python hw3.py loan 50 --msfs 10 --md 3
 python hw3.py datasets/xyz.csv 5 --k 3 --md 4 --random_state 1000
@@ -90,29 +93,28 @@ python hw3.py datasets/xyz.csv 5 --k 3 --md 4 --random_state 1000
 
 📦 HOMEWORK 4 – Neural Networks
 
-Contents:
-datasets/
-  ├── wdbc.csv      # Main dataset 1
-  ├── loan.csv      # Main dataset 2
-  ├── raisin.csv    # Bonus dataset 1
-  ├── titanic.csv   # Bonus dataset 2
-hw4.py              # 주 실행 파일
-hw4_source.pdf      # HW4 보고서 PDF
-README.txt          # 실행 안내 문서
+CONTENTS:
+hw4.py              # Python code, implementation of neural network
+hw4_source.pdf      # PDF of written HW4
+README.txt          # Instructions file
 
-Execution Format:
+INSTRUCTIONS:
 python hw4.py <mode> --lc_exp <lc_exp> --layer_sizes <layer_sizes> --epochs <epochs> --lamb <lamb> --lr <lr> --verbose <verbose>
 
-Parameters:
-- mode (required): verify, wdbc, loan, raisin, titanic, or path to CSV
-- --lc_exp: 학습 곡선 생성 여부 (0 or 1)
-- --layer_sizes: 히든 및 출력층 구조 (ex. 64 32 1)
-- --epochs: 반복 학습 수 (default: 2000)
-- --lamb: 정규화 파라미터 λ (default: 0.01)
-- --lr: 학습률 (default: 0.5)
-- --verbose: 디버깅 정보 출력 (0 or 1)
+REQUIRED:
+  mode (1): selects between verifying correctness or training on dataset
+    ASSUMPTION: CSV has a 'label' column
+    ASSUMPTION: attribute names end with '_cat' or '_num'
 
-Sample Commands:
+OPTIONAL:
+  --lc_exp: whether to run learning curve experiment (0 or 1)
+  --layer_sizes: list of layer sizes (e.g., 64 32 1)
+  --epochs: number of training iterations (default: 2000)
+  --lamb: regularization parameter (default: 0.01)
+  --lr: learning rate (default: 0.5)
+  --verbose: show training logs (0 or 1)
+
+Sample Runs:
 python hw4.py verify
 python hw4.py wdbc --epochs 1738 --layer_sizes 5 1 --lamb 0 --lr 0.2
 python hw4.py loan --lc_exp 1
