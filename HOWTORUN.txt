@@ -1,20 +1,12 @@
-==== HOMEWORK 1 (kNN + DECISION TREES) ====
-CONTENTS:
-datasets/
-  car.csv       Car dataset, originally provided in ZIP
-  iris.csv      Iris dataset, additional dataset used to evaluate performance
-  wdbc.csv      Breast Cancer dataset, originally provided in ZIP
-  wine.csv      Wine tasting dataset, additional dataset used to evaluate performance
-HW1.py          The homework file, contains answers
-README.txt      Instructions file
+Below is the general instructions on how to run the algorithms below. Most of the implementations are the same,
+with some slight tweaks for this project.
 
+------------------
 
-
-INSTRUCTIONS:
-The general format to run the homework is in the following format:
-
+The general format to run the kNN algorithm is:
 python HW1.py <mode> <dataset> <hw> --k <k> --normalize <normalize> --func <func> --limit <limit>
 
+PARAMETERS:
   REQUIRED PARAMETERS:
     mode (1): what ML alg to use (options: (knn, knearestneighbors) OR (decisiontree, decisiontreeclassifier, dt))
     dataset (2): dataset to use (default: [route to custom dataset]; options: wdbc, car, [route to custom dataset])
@@ -30,80 +22,16 @@ python HW1.py <mode> <dataset> <hw> --k <k> --normalize <normalize> --func <func
     random_state: random state, used for shuffling apps when hw=0 (default: 42; options: 0, 1, 2, 3, ...)
 
 Sample Runs:
-  Run Q1 Problems from HW
-    python HW1.py knn wdbc 1
-  Run Q2 + QE Problems from HW
-    python HW1.py decisiontree car 1
-  
-  Run a kNN algorithm with k=5 and without normalization
-    python HW1.py knn wdbc 0 --knn 5 --normalize 0
-  Run a kNN algorithm with k=17 and with normalization
-    python HW1.py knn wdbc 0 --knn 17 --normalize 1
-  
-  Run a decision tree with entrop function and no stopping heuristic (Q2)
-    python HW1.py decisiontree car 0 --func entropy --limit 0
-  Run a decision tree with gini coefficient and no stopping heuristic (QE.1)
-    python HW1.py decisiontree car 0 --func gini --limit 0
-  Run a decision tree with entropy function and a stopping heuristic (QE.2)
-    python HW1.py decisiontree car 0 --func entropy --limit 1
+  Run a kNN algorithm with k=5 and without normalization on rice dataset
+    python HW1.py knn datasets/rice.csv 0 --knn 5 --normalize 0
+  Run a kNN algorithm with k=17 and with normalization on credit
+    python HW1.py knn datasets/credit_approval.csv 0 --knn 17 --normalize 1
 
 
+-----------------
 
-==== HOMEWORK 2 (NAIVE BAYES) ====
-CONTENTS:
-COMPSCI_589___HW2.pdf       Report generated from LaTeX. This is the PDF submission you see in the Gradescope.
-figure-q3.png               Generated graph in question 3, as seen in the HW.
-hw2.py                      Primary file, includes Multinomial Naive Bayes implementation.
-README.txt                  Instructions, self-explanatory.
-test-negative.csv           CSV file containing test cases of negative reviews.
-test-positive.csv           CSV file containing test cases of positive reviews.
-train-negative.csv          CSV file containing train cases of negative reviews.
-train-positive.csv          CSV file containing train cases of positive reviews.
-utils.py                    File used to read CSVs and calculate metrics.
-
-
-
-INSTRUCTIONS:
-The general format to run the homework is in the following format:
-
-python main.py --runs <runs> --question <question> --debug <debug>
-
-  REQUIRED PARAMETERS:
-    None
-  OPTIONAL PARAMETERS:
-    runs: number of simulations for questions (default: 1; options: 1, 2, 3, ... [questions in the homework are answered with 10 simulations])
-    question: what question to run from the homework (default: all; options: 1, 2, 3, 4, 6, all)
-    debug: prints additional information and computed values (default: 0; options: 0, 1 [not recommended if running multiple simulations and/or all questions])
-
-Sample Runs:
-  Run all questions in the HW with just one simulation per question, no debugging info
-    python main.py
-      (OR)
-    python main.py --runs 1 --question all --debug 0
-  Run question 3 from the HW with 10 runs per question (what was done in the HW)
-    python main.py --runs 10 --question 3
-  Run question 1 from the HW with 5 runs per question with debugging
-    python main.py --runs 5 --question 1 --debug 1
-
-
-
-==== HOMEWORK 3 (RANDOM FOREST + STRAT K-FOLD) ====
-CONTENTS:
-datasets/
-  loan.csv          Loan Eligibility Prediction dataset, second of two primary datasets
-  raisin.csv        Raisin dataset, first of two bonus datasets
-  titanic.csv       Titanic Survival dataset, second of two bonus datasets
-  wdbc.csv          Wisconsin Breast Cancer dataset, first of two primary datasets
-hw3.py              Python code, implementation of random forest & other code.
-README.txt          Instructions file
-
-
-
-INSTRUCTIONS:
-The general format to run the homework is in the following format:
+The general format to run the random forest model is:
   python hw3.py <data> <ntrees> --k <k> --mode <mode> --msfs <msfs> --md <md> --random_state <random_state>
-
-
 
 PARAMETERS:
   REQUIRED PARAMETERS:
@@ -119,34 +47,20 @@ PARAMETERS:
     --random_state: random state in random forests/stratified k-fold (default: 42; options: [any integer])
 
 
-
 SAMPLE RUNS:
-  Run a stratified k-fold random forest classifier on Wisconsin Breast Cancer data with 10 trees in RFs.
+  Run a stratified k-fold random forest classifier on Parkinsons data with 10 trees in RFs.
   (defaults: 5 folds, entropy used for information gain, no minimum size for split, no max depth in trees, and random state = 42)
-    python hw3.py wdbc 10
-  Run on loan dataset with 50 trees, minimum size of 10 to split, and maximum depth of 3.
-    python hw3.py loan 50 --msfs 10 --md 3
+    python hw3.py datasets/parkinsons.csv 10
+  Run on credit dataset with 50 trees, minimum size of 10 to split, and maximum depth of 3.
+    python hw3.py datasets/credit_approval.csv 50 --msfs 10 --md 3
   Run on custom dataset xyz with 5 trees, 3 folds, maximum depth of 4, and random state of 1000
   (assume that file is named xyz.csv and is in datasets/ folder)
     python hw3.py datasets/xyz.csv 5 --k 3 --md 4 --random_state 1000
 
 
+----------------
 
-==== HOMEWORK 4 (NEURAL NETWORKS) ====
-CONTENTS:
-datasets/
-  loan.csv          Loan Eligibility Prediction dataset, second of two primary datasets
-  raisin.csv        Raisin dataset, first of two bonus datasets
-  titanic.csv       Titanic Survival dataset, second of two bonus datasets
-  wdbc.csv          Wisconsin Breast Cancer dataset, first of two primary datasets
-hw4.py              Python code, implementation of neural net & other code.
-hw4_source.pdf      PDF of written HW4 questions.
-README.txt          Instructions file
-
-
-
-INSTRUCTIONS:
-The general format to run the homework is in the following format:
+The general format to run the neural network is in the following format:
   python hw4.py <mode> --lc_exp <lc_exp> --layer_sizes <layer_sizes> --epochs <epochs> --lamb <lamb> --lr <lr> --verbose <verbose>
 
 
@@ -171,11 +85,11 @@ PARAMETERS:
 SAMPLE RUNS:
   Ensure correctness of the forward/backpropagation algorithms, according to results in backprop_example_1 and 2.
     python hw4.py verify
-  Run the stratified k-fold neural net on the Wisconsin Breast Cancer data with 1738 iterations, a neuron architecture of [30 5 1], no regularization, and a learning rate of 0.2.
+  Run the stratified k-fold neural net on the credit approval data with 1738 iterations, a neuron architecture of [30 5 1], no regularization, and a learning rate of 0.2.
   (note: there are 30 attributes in the wdbc dataset, so the input layer has 30 neurons)
-    python hw4.py wdbc --epochs 1738 --layer_sizes 5 1 --lambda 0 --lr 0.2
-  Run and generate a graph of the cost based on training on different amounts of training set in the Loan dataset (with all defaults).
-    python hw4.py loan --lc_exp 1
+    python hw4.py datasets/credit_approval.csv --epochs 1738 --layer_sizes 5 1 --lamb 0 --lr 0.2
+  Run and generate a graph of the cost based on training on different amounts of training set in the rice dataset (with all defaults).
+    python hw4.py datasets/rice.csv --lc_exp 1
   Run the stratified k-fold neural net on a custom dataset xyz with 2000 iterations, lambda = 0.05, and a learning rate of 0.15.
   (assuming that the file is named xyz.csv and is in the datasets/ folder)
-    python hw4.py datasets/xyz.csv --lambda 0.05 --lr 0.15
+    python hw4.py datasets/xyz.csv --lamb 0.05 --lr 0.15

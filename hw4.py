@@ -380,7 +380,7 @@ class Metrics:
     """
     return np.mean(y_test == y_pred)
 
-  def precision(y_test, y_pred):
+  def precision(self, y_test, y_pred):
     """
     Calculate precision.
 
@@ -399,7 +399,7 @@ class Metrics:
       precisions.append(tp / (tp + fp) if (tp + fp) != 0 else 0.0)
     return np.mean(precisions)
 
-  def recall(y_test, y_pred):
+  def recall(self, y_test, y_pred):
     """
     Calculate recall.
 
@@ -439,7 +439,7 @@ class StratifiedKFold:
   def __init__(self, k=5, ):
     self.k = k
   
-  def stratified_k_fold(self, X, y, k=5, random_state=42, layer_sizes=None, epochs=1000, lamb=0.2, lr=0.01):
+  def stratified_k_fold(self, X, y, k=10, random_state=42, layer_sizes=None, epochs=1000, lamb=0.2, lr=0.01):
     """
     Perform Stratified K-Fold cross-validation for Neural Network.
 
@@ -460,7 +460,7 @@ class StratifiedKFold:
     y = pd.Series(y).reset_index(drop=True)
     proportions = y.value_counts(normalize=True)
     y = y.values.reshape(-1, 1)
-    layer_sizes = [X.shape[1]] + (layer_sizes if layer_sizes is not None else [3, 1])  # default one hidden layer with 3 neurons and output layer with 1 neuron
+    layer_sizes = [X.shape[1]] + (layer_sizes if layer_sizes is not None else [4, 1])  # default one hidden layer with 3 neurons and output layer with 1 neuron
     
     fold_indices = {label: [] for label in proportions.index}
     for i in range(len(y)):
@@ -514,7 +514,7 @@ def preprocessing(df):
   Preprocess the input data X - normalize the data and convert categorical variables to numerical.
 
   Args:
-    X (pd.DataFrame): attributes
+    df (pd.DataFrame): attributes
   
   Returns:
     np.array: normalized and preprocessed data
@@ -541,7 +541,7 @@ if __name__ == "__main__":
   parser.add_argument('--lc_exp', type=int, default=0, help='Performs problem 6 of creating the graph learning curve (default: 0 [False])')
   parser.add_argument('--layer_sizes', type=int, nargs='+', default=None, help='List of integers representing the number of neurons in each layer (e.g. 5 4 1 for a neural net with 5 neurons in the first hidden layer, 4 in the second hidden layer, and 1 in the output layer)')
   parser.add_argument('--epochs', type=int, default=2000, help='Number of epochs for training (default: 2000)')
-  parser.add_argument('--k', type=int, default=5, help='Number of folds for Stratified K-Fold cross-validation (default: 5)')
+  parser.add_argument('--k', type=int, default=10, help='Number of folds for Stratified K-Fold cross-validation (default: 5)')
   parser.add_argument('--lamb', type=float, default=0.01, help='Regularization parameter (default: 0.01)')
   parser.add_argument('--lr', type=float, default=0.5, help='Learning rate for the update (default: 0.5)')
   parser.add_argument('--verbose', type=int, default=0, help='Enable verbose output for debugging (warning: this will print a lot of lines; default: 0 [False])')
@@ -638,6 +638,9 @@ if __name__ == "__main__":
   skf = StratifiedKFold(k=5)
   X = df.iloc[:, :-1]
   y = df.iloc[:, -1]
+  mapping = {label: i for i, label in enumerate(np.unique(y))}
+  y = y.map(mapping)
+  print(y)
   metrics = skf.stratified_k_fold(X, y, k=args.k, random_state=42, layer_sizes=args.layer_sizes, epochs=args.epochs, lamb=args.lamb, lr=args.lr)
   print(f"Average accuracy: {np.mean([m[0] for m in metrics])}")
   print(f"Average precision: {np.mean([m[1] for m in metrics])}")

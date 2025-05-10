@@ -453,7 +453,7 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Stratified K-Fold Random Forest Classifier")
   parser.add_argument('data', type=str, help='Path to the CSV data file')
   parser.add_argument('ntrees', type=int, help='Number of trees in the Random Forest')
-  parser.add_argument('--k', type=int, default=5, help='Number of folds for Stratified K-Fold')
+  parser.add_argument('--k', type=int, default=10, help='Number of folds for Stratified K-Fold')
   parser.add_argument('--mode', type=str, choices=['entropy', 'gini'], default='entropy', help='Method for calcuating information gain')
   parser.add_argument('--msfs', type=int, default=-1, help='Minimum entries in a node for a split to occur in a decision tree')
   parser.add_argument('--md', type=int, default=-1, help='Maximum depth of the trees')
@@ -479,10 +479,34 @@ if __name__ == "__main__":
   
   X = df.drop(columns=['label'])
   y = df['label']
-  skf = StratifiedKFold(k=5, ntrees=ntrees)
-  metrics = skf.stratified_k_fold(X, y, k=5, ntrees=ntrees, random_state=random_state, mode='entropy', minimal_size_for_split=minimal_size_for_split, max_depth=max_depth)
-  print(f"Average accuracy: {np.mean([m[0] for m in metrics])}")
-  print(f"Average precision: {np.mean([m[1] for m in metrics])}")
-  print(f"Average recall: {np.mean([m[2] for m in metrics])}")
-  print(f"Average F1-score: {np.mean([m[3] for m in metrics])}")
-  print(f"Full Metrics: {metrics}\n")
+  mapping = {label: i for i, label in enumerate(np.unique(y))}
+  y = y.map(mapping).astype('category')
+  if ntrees > 1:
+    skf = StratifiedKFold(k=10, ntrees=ntrees)
+    metrics = skf.stratified_k_fold(X, y, k=10, ntrees=ntrees, random_state=random_state, mode='entropy', minimal_size_for_split=minimal_size_for_split, max_depth=max_depth)
+    print(f"Average accuracy: {np.mean([m[0] for m in metrics])}")
+    print(f"Average precision: {np.mean([m[1] for m in metrics])}")
+    print(f"Average recall: {np.mean([m[2] for m in metrics])}")
+    print(f"Average F1-score: {np.mean([m[3] for m in metrics])}")
+    print(f"Full Metrics: {metrics}\n")
+  else:
+    ntrees_list = [5, 10, 20, 30, 40, 50]
+    accuracies = []
+    f1s = []
+    
+    for ntrees in ntrees_list:
+      skf = StratifiedKFold(k=10, ntrees=ntrees)
+      metrics = skf.stratified_k_fold(X, y, k=10, ntrees=ntrees, random_state=random_state, mode='entropy', minimal_size_for_split=minimal_size_for_split, max_depth=max_depth)
+      accuracies.append(np.mean([m[0] for m in metrics]))
+      f1s.append(np.mean([m[3] for m in metrics]))
+      print(f"Average accuracy for {ntrees} trees: {np.mean([m[0] for m in metrics])}")
+      print(f"Average F1-score for {ntrees} trees: {np.mean([m[3] for m in metrics])}")
+      print(f"Full Metrics for {ntrees} trees: {metrics}\n")
+
+    plt.plot(ntrees_list, f1s, label='F1-Score')
+    plt.xlabel('Number of Trees')
+    plt.ylabel('F1 Score (10-Fold CV)')
+    plt.title('Rice: F1 Score vs Number of Trees')
+    plt.xticks(ntrees_list)
+    plt.grid()
+    plt.show()

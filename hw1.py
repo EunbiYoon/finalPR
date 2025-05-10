@@ -36,36 +36,111 @@ class kNearestNeighbors:
     def mixed_distance(self, row1, row2, num_cols, cat_cols):
         num_dist = self.euclidean_distance(row1[num_cols].values, row2[num_cols].values)
         cat_dist = self.hamming_distance(row1[cat_cols].values, row2[cat_cols].values)
-        return num_dist + cat_dist  # You can weigh them differently if desired
+        return num_dist + cat_dist
 
     def kNN(self, train, test, k=3, normalize=True, verbose=False, cache=None):
+        label = train.columns[-1]
+        mapping = {val: idx for idx, val in enumerate(train[label].unique())}
+        train[label] = train[label].map(mapping)
+        test[label] = test[label].map(mapping)
         num_cols = [col for col in train.columns if col.endswith('_num')]
         cat_cols = [col for col in train.columns if col.endswith('_cat')]
-        label_col = train.columns[-1]
 
-        if normalize:
+        if normalize and cache is None:
             train = self.normalize_features(train.copy())
             test = self.normalize_features(test.copy())
-
         y_pred = np.zeros(len(test))
-        for i, (_, test_row) in enumerate(test.iterrows()):
-            distances = []
-            for _, train_row in train.iterrows():
-                distance = self.mixed_distance(test_row, train_row, num_cols, cat_cols)
-                distances.append((distance, train_row[label_col]))
-            distances.sort(key=lambda x: x[0])
-            neighbors = [label for _, label in distances[:k]]
+        for i in range(len(test)):
+            if cache is not None:
+                distances = cache[i]
+            else:
+                distances = []
+                test_row = test.iloc[i]
+                for idx, train_row in train.iterrows():
+                    dist = self.mixed_distance(test_row, train_row, num_cols, cat_cols)
+                    distances.append((dist, train_row[label]))
+                distances.sort(key=lambda x: x[0])
+            
+            neighbors = [label for idx, label in distances[:k]]
             y_pred[i] = max(set(neighbors), key=neighbors.count)
 
         return y_pred
 
+
     def accuracy(self, y_test, y_pred):
-        return np.mean(y_test == y_pred)
+      """
+      Calculate accuracy.
+
+      Args:
+        y_test (np.array): actual
+        y_pred (np.array): predicted
+      
+      Returns:
+        float: accuracy
+      """
+      return np.mean(y_test == y_pred)
+
+    def precision(self, y_test, y_pred):
+      """
+      Calculate precision.
+
+      Args:
+        y_test (np.array): actual
+        y_pred (np.array): predicted
+      
+      Returns:
+        float: precision
+      """
+      classes = np.unique(y_pred)
+      precisions = []
+      for label in classes:
+        tp = np.sum((y_test == label) & (y_pred == label))
+        fp = np.sum((y_test != label) & (y_pred == label))
+        precisions.append(tp / (tp + fp) if (tp + fp) != 0 else 0.0)
+      return np.mean(precisions)
+
+    def recall(self, y_test, y_pred):
+      """
+      Calculate recall.
+
+      Args:
+        y_test (np.array): actual
+        y_pred (np.array): predicted
+      
+      Returns:
+        float: recall
+      """
+      classes = np.unique(y_pred)
+      recalls = []
+      for label in classes:
+        tp = np.sum((y_test == label) & (y_pred == label))
+        fn = np.sum((y_test == label) & (y_pred != label))
+        recalls.append(tp / (tp + fn) if (tp + fn) != 0 else 0.0)
+      return np.mean(recalls)
+
+    def f_score(self, y_test, y_pred, beta=1):
+      """
+      Calculate F-score.
+
+      Args:
+        y_test (np.array): actual
+        y_pred (np.array): predicted
+        beta (float): beta parameter (default: 1, for F1 score)
+      
+      Returns:
+        float: F-score
+      """
+      p = self.precision(y_test, y_pred)
+      r = self.recall(y_test, y_pred)
+      return (1 + beta**2) * p * r / ((beta**2 * p) + r) if ((beta**2 * p) + r) != 0 else 0.0
 
     def precompute_distances(self, train, test, normalize=True):
         num_cols = [col for col in train.columns if col.endswith('_num')]
         cat_cols = [col for col in train.columns if col.endswith('_cat')]
-        label_col = train.columns[-1]
+        label = train.columns[-1]
+        mapping = {val: idx for idx, val in enumerate(train[label].unique())}
+        train[label] = train[label].map(mapping)
+        test[label] = test[label].map(mapping)
 
         if normalize:
             train = self.normalize_features(train.copy())
@@ -76,7 +151,7 @@ class kNearestNeighbors:
             distances = []
             for _, train_row in train.iterrows():
                 distance = self.mixed_distance(test_row, train_row, num_cols, cat_cols)
-                distances.append((distance, train_row[label_col]))
+                distances.append((distance, train_row[label]))
             distances.sort(key=lambda x: x[0])
             dist_mtx[i] = np.array(distances)
         return dist_mtx
@@ -210,19 +285,50 @@ class DecisionTree:
     y_pred = np.array(y_pred)
     return y_pred
 
-  def accuracy(self, y_test, y_pred):
+def stratified_k_fold_knn(df, k_folds=5, k_values=[3, 5, 7, 9, 11, 13, 15], normalize=True, random_state=42):
     """
-    Calculate accuracy between true and predicted classes.
+    Perform Stratified K-Fold CV using custom kNN with distance caching.
 
     Args:
-      y_test (np.array): true values
-      y_pred (np.array): predicted values
-    
-    Return:
-      float: accuracy of the predictions
+      df (pd.DataFrame): DataFrame with features and last column as labels
+      k_folds (int): Number of folds
+      k_values (list of int): List of k values to evaluate
+      normalize (bool): Whether to normalize data
+      random_state (int): Random seed
+
+    Returns:
+      dict: {k: [fold_accuracies]} for each value of k
     """
-    return np.mean(y_test == y_pred)
-  
+    df = shuffle(df, random_state=random_state).reset_index(drop=True)
+    y = df.iloc[:, -1]
+
+    class_indices = {label: [] for label in y.unique()}
+    for idx, label in y.items():
+        class_indices[label].append(idx)
+
+    folds = [[] for _ in range(k_folds)]
+    for indices in class_indices.values():
+        for i, idx in enumerate(indices):
+            folds[i % k_folds].append(idx)
+
+    knn = kNearestNeighbors()
+    results = {k: [] for k in k_values}
+    for fold_idx in range(k_folds):
+        print(f"Fold {fold_idx + 1}/{k_folds}")
+        test_idx = folds[fold_idx]
+        train_idx = [idx for j in range(k_folds) if j != fold_idx for idx in folds[j]]
+        train_df = df.iloc[train_idx].reset_index(drop=True)
+        test_df = df.iloc[test_idx].reset_index(drop=True)
+        cache = knn.precompute_distances(train_df, test_df, normalize=normalize)
+        y_true = test_df.iloc[:, -1].to_numpy()
+        for k in k_values:
+            y_pred = knn.kNN(train_df, test_df, k=k, normalize=normalize, cache=cache)
+            acc = knn.accuracy(y_true, y_pred)
+            f1 = knn.f_score(y_true, y_pred, beta=1)
+            results[k].append((acc, f1))
+            print(f"  k = {k}: Accuracy = {acc:.4f}, F1 = {f1:.4f}")
+    return results
+
 if __name__ == "__main__":
   # Read command line arguments
   # REQUIRED PARAMETERS:
@@ -249,7 +355,7 @@ if __name__ == "__main__":
   args = parser.parse_args()
   mode = args.mode
   dataset = args.dataset
-  hw = bool(args.hw)
+  hw = args.hw
   k = args.k
   normalize = bool(args.normalize)
   func = args.func
@@ -262,7 +368,7 @@ if __name__ == "__main__":
     dataset = "datasets/car.csv"
   
   if mode.lower() == "knearestneighbors" or mode.lower() == "knn":
-    if hw:
+    if hw == 1:
       print("======== kNN HOMEWORK QUESTIONS ========")
       
       print("==== Q1.1 ====")
@@ -351,6 +457,15 @@ if __name__ == "__main__":
       plt.grid()
       plt.show()
       print("\n\n")
+    elif hw == 2:
+      print("======== Stratified K-Fold CV for kNN ========")
+      df = pd.read_csv(dataset)
+      k_range = range(1, 52, 2)
+      results = stratified_k_fold_knn(df, k_folds=10, k_values=k_range, normalize=True)
+      
+      for k in k_range:
+        print(f"k = {k}: Mean Accuracy = {np.mean(results[k][0]):.4f}, Std = {np.std(results[k][0]):.4f}")
+        print(f"k = {k}: Mean F1 = {np.mean(results[k][1]):.4f}, Std = {np.std(results[k][1]):.4f}")
     else:
       if dataset == "datasets/wdbc.csv":
         print("reading...")
@@ -556,6 +671,13 @@ if __name__ == "__main__":
       acc = decision_tree.accuracy(test_y.to_numpy(), y_pred)
       print(f"Accuracy: {acc}")
       print("\n\n")
+  elif hw and args.hw == 2:
+    print("==== Stratified K-Fold CV for kNN ====")
+    wdbc_df = read_wdbc()
+    accuracies = stratified_k_fold_knn(wdbc_df, k_folds=5, k_neighbors=5, normalize=True)
+    print("Fold Accuracies:", accuracies)
+    print("Mean Accuracy:", np.mean(accuracies))
+
   else:
     raise ValueError("Invalid mode. Please choose either 'knearestneighbors' or 'decisiontreeclassifier'.")
   
